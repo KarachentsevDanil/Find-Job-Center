@@ -43,9 +43,11 @@
     <Compile Include="Leases\Contracts\ILeaseService.cs" />
     <Compile Include="Leases\LeaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Robots\Contracts\IRobotFeedbackService.cs" />
+    <Compile Include="Robots\Contracts\IRobotModelFeedbackService.cs" />
+    <Compile Include="Robots\Contracts\IRobotModelService.cs" />
     <Compile Include="Robots\Contracts\IRobotService.cs" />
-    <Compile Include="Robots\RobotFeedbackService.cs" />
+    <Compile Include="Robots\RobotModelFeedbackService.cs" />
+    <Compile Include="Robots\RobotModelService.cs" />
     <Compile Include="Robots\RobotService.cs" />
     <Compile Include="Specializations\Contracts\ISpecializationService.cs" />
     <Compile Include="Specializations\SpecializationService.cs" />

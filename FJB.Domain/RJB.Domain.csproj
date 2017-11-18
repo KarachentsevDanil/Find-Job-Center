@@ -56,15 +56,15 @@
     <Compile Include="Entities\Leases\Lease.cs" />
     <Compile Include="Entities\Leases\LeaseStatus.cs" />
     <Compile Include="Entities\Leases\RobotLease.cs" />
-    <Compile Include="Entities\Robots\RobotFeedback.cs" />
+    <Compile Include="Entities\Robots\RobotModelFeedback.cs" />
     <Compile Include="Entities\Robots\Rating.cs" />
+    <Compile Include="Entities\Robots\RobotModel.cs" />
     <Compile Include="Entities\Users\Client.cs" />
     <Compile Include="Entities\Users\Company.cs" />
     <Compile Include="Entities\Robots\Robot.cs" />
-    <Compile Include="Entities\Robots\RobotSkill.cs" />
+    <Compile Include="Entities\Robots\RobotSpecialization.cs" />
     <Compile Include="Entities\Specializations\SkillLevel.cs" />
     <Compile Include="Entities\Specializations\Specialization.cs" />
-    <Compile Include="Entities\Specializations\SubSpecialization.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

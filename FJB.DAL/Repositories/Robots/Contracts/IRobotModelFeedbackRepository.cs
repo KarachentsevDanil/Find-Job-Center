@@ -2,7 +2,7 @@
 
 namespace FJB.DAL.Repositories.Robots.Contracts
 {
-    public interface IRobotFeedbackRepository : IRjbRepository<RobotFeedback>
+    public interface IRobotModelFeedbackRepository : IRjbRepository<RobotModelFeedback>
     {
     }
 }

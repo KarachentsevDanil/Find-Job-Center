@@ -23,28 +23,33 @@ namespace FJB.DAL.Context
                 .WithMany(x=> x.Robots)
                 .HasForeignKey(x=> x.CompanyId);
 
-            modelBuilder.Entity<RobotSkill>()
-                .HasKey(t => new { t.RobotId, t.SubSpecializationId });
+            modelBuilder.Entity<Robot>()
+                .HasRequired(x => x.RobotModel)
+                .WithMany(x => x.Robots)
+                .HasForeignKey(x => x.RobotModelId);
 
-            modelBuilder.Entity<RobotSkill>()
-                .HasRequired(x => x.Robot)
-                .WithMany(x => x.RobotSkills)
-                .HasForeignKey(x => x.RobotId);
+            modelBuilder.Entity<RobotModelSpecialization>()
+                .HasKey(t => new { t.RobotModelId, t.SpecializationId });
 
-            modelBuilder.Entity<RobotSkill>()
-                .HasRequired(x => x.SubSpecialization)
-                .WithMany(t=> t.Robots)
-                .HasForeignKey(x => x.SubSpecializationId);
+            modelBuilder.Entity<RobotModelSpecialization>()
+                .HasRequired(x => x.RobotModel)
+                .WithMany(x => x.RobotModelSpecializations)
+                .HasForeignKey(x => x.RobotModelId);
 
-            modelBuilder.Entity<RobotFeedback>()
+            modelBuilder.Entity<RobotModelSpecialization>()
+                .HasRequired(x => x.Specialization)
+                .WithMany(t=> t.RobotModels)
+                .HasForeignKey(x => x.SpecializationId);
+
+            modelBuilder.Entity<RobotModelFeedback>()
                 .HasKey(x => x.RobotFeedbackId);
 
-            modelBuilder.Entity<RobotFeedback>()
-                .HasRequired(x => x.Robot)
-                .WithMany(x => x.RobotFeedbacks)
-                .HasForeignKey(x => x.RobotId);
+            modelBuilder.Entity<RobotModelFeedback>()
+                .HasRequired(x => x.RobotModel)
+                .WithMany(x => x.RobotModelFeedbacks)
+                .HasForeignKey(x => x.RobotModelId);
 
-            modelBuilder.Entity<RobotFeedback>()
+            modelBuilder.Entity<RobotModelFeedback>()
                 .HasRequired(x => x.Client)
                 .WithMany()
                 .HasForeignKey(x => x.ClientId);
@@ -79,13 +84,10 @@ namespace FJB.DAL.Context
             modelBuilder.Entity<Specialization>()
                 .HasKey(x => x.SpecializationId);
 
-            modelBuilder.Entity<SubSpecialization>()
-                .HasKey(x => x.SubSpecializationId);
-
-            modelBuilder.Entity<SubSpecialization>()
-                .HasRequired(t => t.Specialization)
-                .WithMany(t=> t.SubSpecializations)
-                .HasForeignKey(t => t.SubSpecializationId);
+            modelBuilder.Entity<Specialization>()
+                .HasOptional(x => x.ParentSpecialization)
+                .WithMany(x=> x.SubSpecializations)
+                .HasForeignKey(x=> x.ParentSpecializationId);
         }
 
         public void MapUser(DbModelBuilder modelBuilder)

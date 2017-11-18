@@ -18,6 +18,8 @@ namespace FJB.Domain.Entities.Users
 
         public byte[] Photo { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public ICollection<Robot> Robots { get; set; }
     }
 }

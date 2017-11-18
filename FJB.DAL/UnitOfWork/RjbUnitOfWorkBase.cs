@@ -18,11 +18,11 @@ namespace FJB.DAL.UnitOfWork
             _dbContext = dbContext;
         }
 
-        public IRjbRepository<SubSpecialization> SubSpecializations { get; set; }
+        public IRobotModelRepository RobotModels { get; set; }
         public ISpecializationRepository Specializations { get; set; }
         public ILeaseRepository Leases { get; set; }
         public IRobotRepository Robots { get; set; }
-        public IRobotFeedbackRepository RobotFeedbacks { get; set; }
+        public IRobotModelFeedbackRepository RobotFeedbacks { get; set; }
         public IClientRepository Clients { get; set; }
         public ICompanyRepository Companies { get; set; }
     }

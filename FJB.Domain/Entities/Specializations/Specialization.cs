@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FJB.Domain.Entities.Robots;
 
 namespace FJB.Domain.Entities.Specializations
 {
@@ -8,6 +9,12 @@ namespace FJB.Domain.Entities.Specializations
 
         public string Name { get; set; }
 
-        public ICollection<SubSpecialization> SubSpecializations { get; set; }
+        public int? ParentSpecializationId { get; set; }
+
+        public virtual Specialization ParentSpecialization { get; set; }
+
+        public ICollection<Specialization> SubSpecializations { get; set; }
+        
+        public virtual ICollection<RobotModelSpecialization> RobotModels { get; set; }
     }
 }

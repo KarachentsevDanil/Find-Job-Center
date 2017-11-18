@@ -27,14 +27,13 @@ namespace FJB.DAL.Context
         public DbSet<RobotLease> RobotsLease { get; set; }
 
         public DbSet<Robot> Robots { get; set; }
+        public DbSet<RobotModel> RobotModels { get; set; }
 
-        public DbSet<RobotFeedback> RobotFeedbacks { get; set; }
+        public DbSet<RobotModelFeedback> RobotFeedbacks { get; set; }
 
-        public DbSet<RobotSkill> RobotSkills { get; set; }
+        public DbSet<RobotModelSpecialization> RobotModelSpecializations { get; set; }
 
         public DbSet<Specialization> Specializations { get; set; }
-
-        public DbSet<SubSpecialization> SubSpecializations { get; set; }
 
         public DbSet<Client> Clients { get; set; }
 

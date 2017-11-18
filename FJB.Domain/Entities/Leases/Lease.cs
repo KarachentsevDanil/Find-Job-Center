@@ -15,13 +15,13 @@ namespace FJB.Domain.Entities.Leases
 
         public DateTime? EndDate { get; set; }
 
-        public bool IsLeaseEnd { get; set; }
-
         public string Feedback { get; set; }
 
         public Rating Rating { get; set; }
 
         public LeaseStatus Status { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public virtual Client Client { get; set; }
 

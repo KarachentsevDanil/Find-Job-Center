@@ -1,4 +1,5 @@
 ﻿using FJB.DAL.UnitOfWork.Contracts;
+using FJB.Domain.Entities.Users;
 using RJB.BLL.Users.Contracts;
 
 namespace RJB.BLL.Users
@@ -10,6 +11,18 @@ namespace RJB.BLL.Users
         public CompanyService(IRjbUnitOfWorkBase unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public void AddCompany(Company company)
+        {
+            _unitOfWork.Companies.Add(company);
+            _unitOfWork.Commit();
+        }
+
+        public void UpdateCompany(Company company)
+        {
+            _unitOfWork.Companies.Update(company);
+            _unitOfWork.Commit();
         }
     }
 }

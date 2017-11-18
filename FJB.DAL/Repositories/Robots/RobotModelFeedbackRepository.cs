@@ -4,7 +4,7 @@ using FJB.Domain.Entities.Robots;
 
 namespace FJB.DAL.Repositories.Robots
 {
-    public class RobotFeedBackRepository : RjbRepository<RobotFeedback>, IRobotFeedbackRepository
+    public class RobotFeedBackRepository : RjbRepository<RobotModelFeedback>, IRobotModelFeedbackRepository
     {
         private RjbDbContext _dbContext;
 

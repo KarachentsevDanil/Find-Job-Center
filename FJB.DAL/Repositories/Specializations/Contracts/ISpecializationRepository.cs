@@ -2,7 +2,7 @@
 
 namespace FJB.DAL.Repositories.Specializations.Contracts
 {
-    public interface ISpecializationRepository : IRjbRepository<Specialization>
+    public interface ISpecializationRepository : IRjbRepository<Specialization>, IItemRepository<Specialization>
     {
     }
 }
