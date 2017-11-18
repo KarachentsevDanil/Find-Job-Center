@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FJB.DAL.UnitOfWork.Contracts;
+﻿using FJB.DAL.UnitOfWork.Contracts;
+using FJB.Domain.Entities.Robots;
 using RJB.BLL.Robots.Contracts;
 
 namespace RJB.BLL.Robots
@@ -15,6 +11,18 @@ namespace RJB.BLL.Robots
         public RobotModelService(IRjbUnitOfWorkBase unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public void AddRobotModel(RobotModel robotModel)
+        {
+            _unitOfWork.RobotModels.Add(robotModel);
+            _unitOfWork.Commit();
+        }
+
+        public void UpdateRobotModel(RobotModel robotModel)
+        {
+            _unitOfWork.RobotModels.Update(robotModel);
+            _unitOfWork.Commit();
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FJB.Domain.Entities.Robots;
 
 namespace RJB.BLL.Robots.Contracts
 {
     public interface IRobotModelService
     {
+        void AddRobotModel(RobotModel robotModel);
+
+        void UpdateRobotModel(RobotModel robotModel);
     }
 }

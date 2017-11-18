@@ -10,6 +10,12 @@ namespace FJB.Domain.Entities.Users
 
         public string FullName { get; set; }
 
+        public string Username { get; set; }
+
+        public byte[] Password { get; set; }
+        
+        public Role Role { get; set; }
+
         public DateTime? DateOfBirthday  { get; set; }
 
         public byte[] Photo { get; set; }

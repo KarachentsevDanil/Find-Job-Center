@@ -8,6 +8,10 @@ namespace FJB.Domain.Entities.Users
     {
         public int CompanyId { get; set; }
 
+        public string Email { get; set; }
+
+        public byte[] Password { get; set; }
+
         public string Name { get; set; }
 
         public string Address { get; set; }

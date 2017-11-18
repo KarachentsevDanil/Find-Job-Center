@@ -3,12 +3,10 @@ using FJB.Domain.Entities.Leases;
 using FJB.Domain.Entities.Robots;
 using FJB.Domain.Entities.Specializations;
 using FJB.Domain.Entities.Users;
-using FJB.Domain.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FJB.DAL.Context
 {
-    public partial class RjbDbContext : IdentityDbContext<ApplicationUser>
+    public partial class RjbDbContext : DbContext
     {
         //TODO Move connection string to app config
         public RjbDbContext()

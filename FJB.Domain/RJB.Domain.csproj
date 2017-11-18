@@ -65,7 +65,7 @@
     <Compile Include="Entities\Robots\RobotSpecialization.cs" />
     <Compile Include="Entities\Specializations\SkillLevel.cs" />
     <Compile Include="Entities\Specializations\Specialization.cs" />
-    <Compile Include="Identity\ApplicationUser.cs" />
+    <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
