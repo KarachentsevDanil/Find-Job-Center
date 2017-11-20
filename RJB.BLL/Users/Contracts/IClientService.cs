@@ -9,7 +9,7 @@ namespace RJB.BLL.Users.Contracts
         void UpdateClient(Client client);
 
         bool IsClientExist(Client client);
-
-        bool IsPasswordCorrect(Client client);
+        
+        Client GetClientByUsername(string username);
     }
 }

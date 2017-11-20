@@ -9,7 +9,7 @@ namespace RJB.BLL.Users.Contracts
         void UpdateCompany(Company company);
 
         bool IsCompanyExist(Company company);
-
-        bool IsPasswordCorrect(Company company);
+        
+        Company GetCompanyByNameOrEmail(string name);
     }
 }

@@ -30,10 +30,5 @@ namespace RJB.BLL.Users
         {
             return _unitOfWork.Companies.GetAll().Any(x => x.Email == company.Email || x.Name == company.Name);
         }
-
-        public bool IsPasswordCorrect(Company company)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

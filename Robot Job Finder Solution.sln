@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Presentation", "5. Prese
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rjb.WebApplication", "Rjb.WebApplication\Rjb.WebApplication.csproj", "{F412EDBD-75F0-44B2-9B4A-3460D6C5EDAF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Server", "4.Server", "{E0FAE28B-CB32-49D3-9CE7-0522FE1214F6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Server", "4. Server", "{E0FAE28B-CB32-49D3-9CE7-0522FE1214F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJF.WebService", "RJF.WebService\RJF.WebService.csproj", "{91726CDA-D272-45BE-8F78-0029DCB42E87}"
 EndProject

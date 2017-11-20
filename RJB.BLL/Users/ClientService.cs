@@ -30,10 +30,5 @@ namespace RJB.BLL.Users
         {
             return _unitOfWork.Clients.GetAll().Any(x => x.Username == client.Username);
         }
-
-        public bool IsPasswordCorrect(Client client)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

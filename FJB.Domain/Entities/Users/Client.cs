@@ -12,7 +12,7 @@ namespace FJB.Domain.Entities.Users
 
         public string Username { get; set; }
 
-        public byte[] Password { get; set; }
+        public string Password { get; set; }
         
         public Role Role { get; set; }
 

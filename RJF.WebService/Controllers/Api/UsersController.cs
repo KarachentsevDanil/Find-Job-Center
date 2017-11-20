@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using FJB.Domain.Entities.Users;
-using Newtonsoft.Json;
 using RJB.BLL.Users.Contracts;
+using RJF.WebService.Models;
 
 namespace RJF.WebService.Controllers.Api
 {
@@ -22,14 +20,22 @@ namespace RJF.WebService.Controllers.Api
         }
 
         [System.Web.Mvc.HttpPost]
-        public HttpResponseMessage ClientLogin([FromBody] Client client)
+        public HttpResponseMessage ClientLogin([FromBody] UserLoginModel loginModel)
         {
             try
             {
-                if (!_clientService.IsPasswordCorrect(client))
+                var client = _clientService.GetClientByUsername(loginModel.UserName);
+
+                if (loginModel.Password == client.Password)
                 {
-                    var cookie = new HttpCookie("AuthorizationCookie", JsonConvert.SerializeObject(client));
-                    HttpContext.Current.Response.Cookies.Add(cookie);
+                    CurrentUser.User = new CurrentUserViewModel
+                    {
+                        Name = client.FullName,
+                        IsClient = true,
+                        Role = client.Role,
+                        UserId = client.ClientId
+                    };
+
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }
 
@@ -61,14 +67,21 @@ namespace RJF.WebService.Controllers.Api
         }
 
         [System.Web.Mvc.HttpPost]
-        public HttpResponseMessage CompanyLogin([FromBody] Company company)
+        public HttpResponseMessage CompanyLogin([FromBody] UserLoginModel loginModel)
         {
             try
             {
-                if (!_companyService.IsPasswordCorrect(company))
+                var company = _companyService.GetCompanyByNameOrEmail(loginModel.UserName);
+
+                if (loginModel.Password == company.Password)
                 {
-                    var cookie = new HttpCookie("AuthorizationCookie", JsonConvert.SerializeObject(company));
-                    HttpContext.Current.Response.Cookies.Add(cookie);
+                    CurrentUser.User = new CurrentUserViewModel
+                    {
+                        Name = company.Name,
+                        IsClient = false,
+                        UserId = company.CompanyId
+                    };
+
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }
 
@@ -97,6 +110,17 @@ namespace RJF.WebService.Controllers.Api
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
+        }
+
+        public HttpResponseMessage LogOff()
+        {
+            CurrentUser.User = null;
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        public HttpResponseMessage GetCurrentUser()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, CurrentUser.User);
         }
     }
 }
