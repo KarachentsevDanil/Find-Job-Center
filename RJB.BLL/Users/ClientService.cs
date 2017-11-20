@@ -1,4 +1,5 @@
-﻿using FJB.DAL.UnitOfWork.Contracts;
+﻿using System.Linq;
+using FJB.DAL.UnitOfWork.Contracts;
 using FJB.Domain.Entities.Users;
 using RJB.BLL.Users.Contracts;
 
@@ -23,6 +24,16 @@ namespace RJB.BLL.Users
         {
             _unitOfWork.Clients.Update(client);
             _unitOfWork.Commit();
+        }
+
+        public bool IsClientExist(Client client)
+        {
+            return _unitOfWork.Clients.GetAll().Any(x => x.Username == client.Username);
+        }
+
+        public bool IsPasswordCorrect(Client client)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

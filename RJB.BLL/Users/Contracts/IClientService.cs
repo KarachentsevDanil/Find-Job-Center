@@ -7,5 +7,9 @@ namespace RJB.BLL.Users.Contracts
         void AddClient(Client client);
 
         void UpdateClient(Client client);
+
+        bool IsClientExist(Client client);
+
+        bool IsPasswordCorrect(Client client);
     }
 }

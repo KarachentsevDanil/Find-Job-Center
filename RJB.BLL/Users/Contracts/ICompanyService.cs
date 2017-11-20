@@ -7,5 +7,9 @@ namespace RJB.BLL.Users.Contracts
         void AddCompany(Company company);
 
         void UpdateCompany(Company company);
+
+        bool IsCompanyExist(Company company);
+
+        bool IsPasswordCorrect(Company company);
     }
 }

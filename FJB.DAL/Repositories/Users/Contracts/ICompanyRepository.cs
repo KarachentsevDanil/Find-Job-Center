@@ -2,7 +2,7 @@
 
 namespace FJB.DAL.Repositories.Users.Contracts
 {
-    public interface ICompanyRepository : IRjbRepository<Company>
+    public interface ICompanyRepository : IRjbRepository<Company>, IItemRepository<Company>
     {
     }
 }

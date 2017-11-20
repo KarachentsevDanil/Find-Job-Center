@@ -1,4 +1,6 @@
-﻿using FJB.DAL.UnitOfWork.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using FJB.DAL.UnitOfWork.Contracts;
 using FJB.Domain.Entities.Robots;
 using RJB.BLL.Robots.Contracts;
 
@@ -11,6 +13,11 @@ namespace RJB.BLL.Robots
         public RobotModelService(IRjbUnitOfWorkBase unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<RobotModel> GetRobotModels()
+        {
+            return _unitOfWork.RobotModels.GetAll().OrderBy(x => x.Name).ToList();
         }
 
         public void AddRobotModel(RobotModel robotModel)

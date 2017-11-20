@@ -7,6 +7,8 @@ namespace FJB.Domain.Entities.Robots
     {
         public int RobotModelId { get; set; }
 
+        public string Name { get; set; }
+
         public string Description { get; set; }
 
         public DateTime? ReleaseYear { get; set; }

@@ -4,11 +4,11 @@ using FJB.Domain.Entities.Robots;
 
 namespace FJB.DAL.Repositories.Robots
 {
-    public class RobotFeedBackRepository : RjbRepository<RobotModelFeedback>, IRobotModelFeedbackRepository
+    public class RobotModelFeedbackRepository : RjbRepository<RobotModelFeedback>, IRobotModelFeedbackRepository
     {
         private RjbDbContext _dbContext;
 
-        public RobotFeedBackRepository(RjbDbContext dbContext) : base(dbContext)
+        public RobotModelFeedbackRepository(RjbDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
