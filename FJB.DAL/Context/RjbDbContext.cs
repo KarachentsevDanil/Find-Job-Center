@@ -11,7 +11,7 @@ namespace FJB.DAL.Context
         //TODO Move connection string to app config
         public RjbDbContext()
             : base(@"data source=(LocalDb)\MSSQLLocalDB;
-                        initial catalog=IdentityBlogEntities;
+                        initial catalog=RobotJobFinderDb;
                         integrated security=True;MultipleActiveResultSets=True;
                         App=EntityFramework")
         {
@@ -25,6 +25,7 @@ namespace FJB.DAL.Context
         public DbSet<RobotLease> RobotsLease { get; set; }
 
         public DbSet<Robot> Robots { get; set; }
+
         public DbSet<RobotModel> RobotModels { get; set; }
 
         public DbSet<RobotModelFeedback> RobotFeedbacks { get; set; }

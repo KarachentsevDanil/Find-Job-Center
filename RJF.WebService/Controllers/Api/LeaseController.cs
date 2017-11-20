@@ -18,7 +18,7 @@ namespace RJF.WebService.Controllers.Api
         }
 
         [System.Web.Mvc.HttpPost]
-        public HttpResponseMessage AddRobot([FromBody] Lease lease)
+        public HttpResponseMessage CreateLease([FromBody] Lease lease)
         {
             try
             {

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web.Http;
 using FJB.Domain.Entities.Robots;
 using RJB.BLL.Robots.Contracts;
+using RJF.WebService.Models;
 
 namespace RJF.WebService.Controllers.Api
 {
@@ -59,11 +60,12 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        public HttpResponseMessage GetRobotsOnSpecificDateRange(DateTime startDate, DateTime endDate, int specializationId)
+        [System.Web.Mvc.HttpPost]
+        public HttpResponseMessage GetRobotsOnSpecificDateRange([FromBody] SearchRobotModel model)
         {
             try
             {
-                var robots = _robotService.GetAllAvailableRobots(startDate, endDate, specializationId);
+                var robots = _robotService.GetAllAvailableRobots(model.StartDate, model.EndDate, model.SpecializationId);
                 return Request.CreateResponse(HttpStatusCode.Created, robots);
             }
             catch (Exception e)

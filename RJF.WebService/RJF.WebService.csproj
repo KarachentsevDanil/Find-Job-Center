@@ -180,6 +180,7 @@
     <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Models\CurrentUserViewModel.cs" />
     <Compile Include="Models\LeaseViewModel.cs" />
+    <Compile Include="Models\SearchRobotModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
