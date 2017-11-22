@@ -155,9 +155,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeasesController.cs" />
+    <Compile Include="Controllers\RobotsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,10 +201,20 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Users\RegisterClient.cshtml" />
+    <Content Include="Views\Leases\AddLease.cshtml" />
+    <Content Include="Views\Leases\EditLease.cshtml" />
+    <Content Include="Views\Leases\Leases.cshtml" />
+    <Content Include="Views\Leases\LeaseDetails.cshtml" />
+    <Content Include="Views\Robots\AddRobot.cshtml" />
+    <Content Include="Views\Robots\AddRobotModel.cshtml" />
+    <Content Include="Views\Robots\CompanyRobots.cshtml" />
+    <Content Include="Views\Users\RegisterCompany.cshtml" />
+    <Content Include="Views\Robots\_Robots.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
