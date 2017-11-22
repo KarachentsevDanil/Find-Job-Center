@@ -30,5 +30,10 @@ namespace RJB.BLL.Users
         {
             return _unitOfWork.Clients.GetAll().Any(x => x.Username == client.Username);
         }
+
+        public Client GetClientByUsername(string username)
+        {
+            return _unitOfWork.Clients.GetItemByExpression(x => x.Username == username);
+        }
     }
 }

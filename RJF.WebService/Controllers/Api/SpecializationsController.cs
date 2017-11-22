@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using FJB.Domain.Entities.Specializations;
-using FJB.Domain.Entities.Users;
-using Newtonsoft.Json;
 using RJB.BLL.Specializations.Contracts;
 
 namespace RJF.WebService.Controllers.Api

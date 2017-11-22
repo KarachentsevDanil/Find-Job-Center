@@ -1,6 +1,6 @@
 ﻿using FJB.Domain.Entities.Users;
 
-namespace RJF.WebService.Models
+namespace RJB.BLL.Models
 {
     public class CurrentUserViewModel
     {

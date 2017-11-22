@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FJB.Domain.Entities.Users;
+using RJB.BLL.Models;
 using RJB.BLL.Users.Contracts;
 using RJF.WebService.Models;
 
@@ -19,7 +20,7 @@ namespace RJF.WebService.Controllers.Api
             _companyService = companyService;
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage ClientLogin([FromBody] UserLoginModel loginModel)
         {
             try
@@ -47,7 +48,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage RegisterClient([FromBody] Client client)
         {
             try
@@ -66,7 +67,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage CompanyLogin([FromBody] UserLoginModel loginModel)
         {
             try
@@ -93,7 +94,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage RegisterCompany([FromBody] Company company)
         {
             try
@@ -112,15 +113,17 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetCurrentUser()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, CurrentUser.User);
+        }
+
+        [HttpPost]
         public HttpResponseMessage LogOff()
         {
             CurrentUser.User = null;
             return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
-        public HttpResponseMessage GetCurrentUser()
-        {
-            return Request.CreateResponse(HttpStatusCode.OK, CurrentUser.User);
         }
     }
 }

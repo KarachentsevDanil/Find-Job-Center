@@ -86,9 +86,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\FJB.Domain\RJB.Domain.csproj">
+    <ProjectReference Include="..\FJB.Domain\RJF.Domain.csproj">
       <Project>{274c4614-8d28-41ca-bdfd-bbdcdb2a83bb}</Project>
-      <Name>RJB.Domain</Name>
+      <Name>RJF.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

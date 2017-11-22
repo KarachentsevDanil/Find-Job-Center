@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Web.Http;
 using FJB.Domain.Entities.Leases;
 using RJB.BLL.Leases.Contracts;
-using RJF.WebService.Models;
+using RJB.BLL.Models;
 
 namespace RJF.WebService.Controllers.Api
 {
@@ -63,7 +63,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        public HttpResponseMessage GetLeaseOfClients(int clientId)
+        public HttpResponseMessage GetLeaseOfClient(int clientId)
         {
             try
             {

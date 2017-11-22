@@ -30,5 +30,10 @@ namespace RJB.BLL.Users
         {
             return _unitOfWork.Companies.GetAll().Any(x => x.Email == company.Email || x.Name == company.Name);
         }
+
+        public Company GetCompanyByNameOrEmail(string name)
+        {
+            return _unitOfWork.Companies.GetItemByExpression(x => x.Email == name);
+        }
     }
 }

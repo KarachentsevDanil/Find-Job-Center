@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RJF.WebService.Models
+namespace RJB.BLL.Models
 {
     public class SearchRobotModel
     {

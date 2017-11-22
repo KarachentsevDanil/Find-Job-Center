@@ -3,8 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FJB.Domain.Entities.Robots;
+using RJB.BLL.Models;
 using RJB.BLL.Robots.Contracts;
-using RJF.WebService.Models;
 
 namespace RJF.WebService.Controllers.Api
 {
@@ -19,7 +19,7 @@ namespace RJF.WebService.Controllers.Api
             _robotModelService = robotModelService;
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage AddRobot([FromBody] Robot robot, [FromBody] int count)
         {
             try
@@ -33,7 +33,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage AddRobotModel([FromBody] RobotModel robotModel)
         {
             try
@@ -60,7 +60,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage GetRobotsOnSpecificDateRange([FromBody] SearchRobotModel model)
         {
             try

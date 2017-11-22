@@ -1,4 +1,6 @@
-﻿namespace RJF.WebService.Models
+﻿using RJB.BLL.Models;
+
+namespace RJF.WebService.Models
 {
     public static class CurrentUser
     {

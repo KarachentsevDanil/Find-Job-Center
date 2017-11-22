@@ -178,10 +178,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentUser.cs" />
-    <Compile Include="Models\CurrentUserViewModel.cs" />
-    <Compile Include="Models\LeaseViewModel.cs" />
-    <Compile Include="Models\SearchRobotModel.cs" />
-    <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -229,17 +225,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FJB.DAL\RJB.DAL.csproj">
+    <ProjectReference Include="..\FJB.DAL\RJF.DAL.csproj">
       <Project>{289AC48C-B1B3-4336-BE04-2FF4568FBBDA}</Project>
-      <Name>RJB.DAL</Name>
+      <Name>RJF.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FJB.Domain\RJB.Domain.csproj">
+    <ProjectReference Include="..\FJB.Domain\RJF.Domain.csproj">
       <Project>{274c4614-8d28-41ca-bdfd-bbdcdb2a83bb}</Project>
-      <Name>RJB.Domain</Name>
+      <Name>RJF.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RJB.BLL\RJB.BLL.csproj">
+    <ProjectReference Include="..\RJB.BLL\RJF.BLL.csproj">
       <Project>{3d276651-7744-49cc-8e09-e3053f8c0ee9}</Project>
-      <Name>RJB.BLL</Name>
+      <Name>RJF.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
