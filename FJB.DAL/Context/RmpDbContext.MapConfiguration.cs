@@ -63,7 +63,7 @@ namespace FJB.DAL.Context
             modelBuilder.Entity<Lease>()
                 .HasRequired(t => t.Client)
                 .WithMany(t => t.Leases)
-                .HasForeignKey(t => t.Client);
+                .HasForeignKey(t => t.ClientId);
 
             modelBuilder.Entity<RobotLease>()
                 .HasKey(t => t.RobotLeaseId);

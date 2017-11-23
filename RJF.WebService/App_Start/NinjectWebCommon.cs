@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
@@ -17,6 +18,7 @@ using FJB.DAL.Repositories.Users;
 using FJB.DAL.Repositories.Users.Contracts;
 using FJB.DAL.UnitOfWork;
 using FJB.DAL.UnitOfWork.Contracts;
+using Ninject.Web.WebApi;
 using RJB.BLL.Leases;
 using RJB.BLL.Leases.Contracts;
 using RJB.BLL.Robots;
@@ -66,6 +68,7 @@ namespace RJF.WebService.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
                 return kernel;
             }
             catch

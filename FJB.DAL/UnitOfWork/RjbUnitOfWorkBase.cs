@@ -13,8 +13,23 @@ namespace FJB.DAL.UnitOfWork
     {
         private readonly RjbDbContext _dbContext;
 
-        public RjbUnitOfWorkBase(RjbDbContext dbContext) : base(dbContext)
+        public RjbUnitOfWorkBase(RjbDbContext dbContext,
+            IRobotModelRepository robotModelRepository,
+            ISpecializationRepository specializationRepository,
+            ILeaseRepository leaseRepository,
+            IRobotRepository robotRepository,
+            IRobotModelFeedbackRepository robotModelFeedback,
+            IClientRepository clientRepository,
+            ICompanyRepository companyRepository) : base(dbContext)
         {
+            RobotModels = robotModelRepository;
+            Specializations = specializationRepository;
+            Leases = leaseRepository;
+            Robots = robotRepository;
+            RobotFeedbacks = robotModelFeedback;
+            Clients = clientRepository;
+            Companies = companyRepository;
+
             _dbContext = dbContext;
         }
 
