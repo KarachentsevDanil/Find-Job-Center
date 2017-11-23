@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FJB.Domain.Entities.Robots;
 
 namespace FJB.Domain.Entities.Specializations
@@ -7,6 +8,7 @@ namespace FJB.Domain.Entities.Specializations
     {
         public int SpecializationId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public int? ParentSpecializationId { get; set; }

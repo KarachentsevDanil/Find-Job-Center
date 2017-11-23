@@ -11,7 +11,7 @@ namespace HttpClientExtenctions.RequestHelpers
     {
         private static string RobotsUrl = "robot/";
 
-        public static bool AddRobot(Robot robot)
+        public static bool AddRobot(RobotViewModel robot)
         {
             try
             {

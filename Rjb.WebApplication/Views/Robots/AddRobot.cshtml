@@ -1,7 +1,68 @@
-﻿
+﻿@using Rjb.WebApplication.Models
+@model RJB.BLL.Models.RobotViewModel
 @{
-    ViewBag.Title = "AddLease";
+    ViewBag.Title = "Add Robot";
 }
 
-<h2>AddLease</h2>
+<h2>@ViewBag.Title.</h2>
 
+<script>
+    $("select").select2({
+        placeholder: {
+            id: "-1",
+            placeholder: "Select an option"
+        }
+    });
+</script>
+
+@using (Html.BeginForm("AddRobot", "Robots", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h4>Create a new robot.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Company</label>
+        <div class="col-md-6 ">
+            <p>@CurrentUser.User.Name</p>
+            <input id="CompanyId" name="CompanyId" value="@CurrentUser.User.UserId" type="hidden"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Robot Model</label>
+        <div class="col-md-6 ">
+            <select id="RobotModelId" name="RobotModelId" required>
+                <option value="-1" selected="selected">Select an option</option>
+                @foreach (var robotModel in Model.RobotModels)
+                {
+                    <option value="@robotModel.RobotModelId">@robotModel.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.PricePerHour,
+            new { @class = "col-md-2 col-md-offset-2 control-label" })
+        <div class="col-md-6 ">
+            @Html.TextBoxFor(m => m.PricePerHour, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Count,
+            new { @class = "col-md-2 col-md-offset-2 control-label" })
+        <div class="col-md-6 ">
+            <input class="form-control" id="Count" name="Count" type="number"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-5 col-md-4">
+            <input type="submit" class="form-control btn btn-default" value="Add robot" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -20,11 +20,11 @@ namespace RJF.WebService.Controllers.Api
         }
 
         [HttpPost]
-        public HttpResponseMessage AddRobot([FromBody] Robot robot, [FromBody] int count)
+        public HttpResponseMessage AddRobot([FromBody] RobotViewModel robot)
         {
             try
             {
-                _robotService.AddRobots(robot, count);
+                _robotService.AddRobots(robot, robot.Count);
                 return Request.CreateResponse(HttpStatusCode.Created);
             }
             catch (Exception e)

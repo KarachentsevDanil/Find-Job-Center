@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FJB.Domain.Entities.Robots
 {
@@ -7,6 +8,7 @@ namespace FJB.Domain.Entities.Robots
     {
         public int RobotModelId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }

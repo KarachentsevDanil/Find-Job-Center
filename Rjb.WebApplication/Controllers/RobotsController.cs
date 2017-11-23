@@ -28,7 +28,7 @@ namespace Rjb.WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRobot(Robot robot)
+        public ActionResult AddRobot(RobotViewModel robot)
         {
             var isSuccess = RobotsRequestHelper.AddRobot(robot);
 

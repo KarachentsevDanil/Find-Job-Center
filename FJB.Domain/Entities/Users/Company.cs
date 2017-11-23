@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FJB.Domain.Entities.Robots;
 
 namespace FJB.Domain.Entities.Users
@@ -8,10 +9,13 @@ namespace FJB.Domain.Entities.Users
     {
         public int CompanyId { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
+        [Required]
         public string Password { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string Address { get; set; }

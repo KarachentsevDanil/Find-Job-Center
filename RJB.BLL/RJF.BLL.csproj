@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +45,8 @@
     <Compile Include="Leases\LeaseService.cs" />
     <Compile Include="Models\CurrentUserViewModel.cs" />
     <Compile Include="Models\LeaseViewModel.cs" />
+    <Compile Include="Models\RobotModelViewModel.cs" />
+    <Compile Include="Models\RobotViewModel.cs" />
     <Compile Include="Models\SearchRobotModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

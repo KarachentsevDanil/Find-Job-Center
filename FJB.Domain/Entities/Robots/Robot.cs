@@ -1,6 +1,7 @@
 ﻿using FJB.Domain.Entities.Leases;
 using FJB.Domain.Entities.Users;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FJB.Domain.Entities.Robots
 {
@@ -24,6 +25,7 @@ namespace FJB.Domain.Entities.Robots
 
         public int RobotModelId { get; set; }
 
+        [Required]
         public double PricePerHour { get; set; }
 
         public bool IsDeleted { get; set; }
