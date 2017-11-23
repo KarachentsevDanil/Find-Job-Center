@@ -9,7 +9,7 @@ namespace HttpClientExtenctions.RequestHelpers
 {
     public static class RobotsRequestHelper
     {
-        private static string RobotsUrl = "robot/";
+        private static string RobotsUrl = "/api/robot/";
 
         public static bool AddRobot(RobotViewModel robot)
         {
@@ -41,10 +41,10 @@ namespace HttpClientExtenctions.RequestHelpers
         {
             try
             {
-                var robots = HttpClientHelper.GetResult<List<RobotModel>>(string.Concat(RobotsUrl, "GetRobotsModel"));
+                var robots = HttpClientHelper.GetResult<List<RobotModel>>(string.Concat(RobotsUrl, "GetRobotModel"));
                 return robots;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Enumerable.Empty<RobotModel>();
             }

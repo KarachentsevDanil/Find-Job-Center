@@ -8,7 +8,7 @@ namespace HttpClientExtenctions.RequestHelpers
 {
     public static class LeasesRequestHelper
     {
-        private static string LeasesUrl = "lease/";
+        private static string LeasesUrl = "/api/lease/";
 
         public static bool CreateLease(Lease lease)
         {

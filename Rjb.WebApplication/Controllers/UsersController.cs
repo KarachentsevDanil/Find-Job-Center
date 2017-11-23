@@ -6,6 +6,8 @@ using RJB.BLL.Models;
 
 namespace Rjb.WebApplication.Controllers
 {
+
+    [AllowAnonymous]
     public class UsersController : Controller
     {
 
@@ -48,7 +50,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("Registration", "Registration failed.");
-                return RedirectToAction("Register", ModelState);
+                return RedirectToAction("RegisterClient", ModelState);
             }
 
             return RedirectToAction("Login");
@@ -78,7 +80,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("Registration", "Registration failed.");
-                return RedirectToAction("Register", ModelState);
+                return RedirectToAction("RegisterCompany", ModelState);
             }
 
             return RedirectToAction("Login");

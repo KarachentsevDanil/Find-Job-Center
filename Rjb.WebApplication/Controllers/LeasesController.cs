@@ -11,6 +11,8 @@ using RJB.BLL.Models;
 
 namespace Rjb.WebApplication.Controllers
 {
+
+    [AllowAnonymous]
     public class LeasesController : Controller
     {
         public ActionResult AddLease()

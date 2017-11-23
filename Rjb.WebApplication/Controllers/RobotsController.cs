@@ -7,18 +7,29 @@ using RJB.BLL.Models;
 
 namespace Rjb.WebApplication.Controllers
 {
+
+    [AllowAnonymous]
     public class RobotsController : Controller
     {
         public ActionResult AddRobot()
         {
             var robotModels = RobotsRequestHelper.GetRobotsModel();
-            return View(robotModels);
+            var robotModel = new RobotViewModel()
+            {
+                RobotModels = robotModels
+            };
+
+            return View(robotModel);
         }
 
         public ActionResult AddRobotModel()
         {
             var specializations = SpecializationsRequestHelper.GetAllSpecializations();
-            return View(specializations);
+            var robotModel = new RobotModelViewModel()
+            {
+                Specializations = specializations
+            };
+            return View(robotModel);
         }
 
         public ActionResult CompanyRobots()

@@ -8,7 +8,7 @@ namespace HttpClientExtenctions.RequestHelpers
 {
     public static class SpecializationsRequestHelper
     {
-        private static string SpecializationUrl = "specializations/";
+        private static string SpecializationUrl = "/api/specializations/";
 
         public static bool AddSpecialization(Specialization specialization)
         {

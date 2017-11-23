@@ -7,7 +7,7 @@ namespace HttpClientExtenctions.RequestHelpers
 {
     public static class UsersRequestHelper
     {
-        private static string UserUrl = "users/";
+        private static string UserUrl = "/api/users/";
 
         public static bool ClientLogin(UserLoginModel loginModel)
         {
