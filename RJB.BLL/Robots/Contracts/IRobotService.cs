@@ -14,7 +14,7 @@ namespace RJB.BLL.Robots.Contracts
 
         IEnumerable<Robot> GetRobotsBySpecializationName(string specialization);
 
-        IEnumerable<Robot> GetRobotsOfCompany(int companyId);
+        IEnumerable<Robot> GetRobotsOfCompany(int companyId, out int totalCount);
 
         IEnumerable<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId);
     }

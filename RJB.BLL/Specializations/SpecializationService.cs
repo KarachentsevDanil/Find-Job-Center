@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FJB.DAL.UnitOfWork.Contracts;
+using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Specializations;
 using RJB.BLL.Specializations.Contracts;
 
@@ -30,7 +31,8 @@ namespace RJB.BLL.Specializations
 
         public IEnumerable<Specialization> GetSpecializationsByName(string name)
         {
-            return _unitOfWork.Specializations.GetItemsByExpression(x => string.Equals(x.Name, name, StringComparison.CurrentCultureIgnoreCase));
+            var filterParams = new FilterParams<Specialization>(x => string.Equals(x.Name, name, StringComparison.CurrentCultureIgnoreCase));
+            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
         }
 
         public Specialization GetSpecializationById(int id)
@@ -40,17 +42,20 @@ namespace RJB.BLL.Specializations
 
         public IEnumerable<Specialization> GetChildSpecializationsByParentId(int id)
         {
-            return _unitOfWork.Specializations.GetItemsByExpression(x => x.ParentSpecializationId == id);
+            var filterParams = new FilterParams<Specialization>(x => x.ParentSpecializationId == id);
+            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
         }
 
         public IEnumerable<Specialization> GetSpecializationsByIds(int[] ids)
         {
-            return _unitOfWork.Specializations.GetItemsByExpression(x => ids.Contains(x.SpecializationId));
+            var filterParams = new FilterParams<Specialization>(x => ids.Contains(x.SpecializationId));
+            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
         }
 
         public IEnumerable<Specialization> GetRootSpecializations()
         {
-            return _unitOfWork.Specializations.GetItemsByExpression(x => !x.ParentSpecializationId.HasValue);
+            var filterParams = new FilterParams<Specialization>(x => !x.ParentSpecializationId.HasValue);
+            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
         }
     }
 }

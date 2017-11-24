@@ -13,6 +13,8 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult Login()
         {
+            UsersRequestHelper.LogOff();
+            CurrentUser.User = null;
             return View();
         }
 

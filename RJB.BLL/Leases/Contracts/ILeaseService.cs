@@ -10,7 +10,7 @@ namespace RJB.BLL.Leases.Contracts
 
         Lease GetLeaseDetailById(int leaseId);
 
-        IEnumerable<Lease> GetLeasesOfClient(int clientId);
+        IEnumerable<Lease> GetLeasesOfClient(int clientId, out int totalCount);
 
         void UpdateLease(Lease lease);
     }

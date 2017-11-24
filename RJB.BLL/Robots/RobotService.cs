@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FJB.DAL.UnitOfWork.Contracts;
+using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Robots;
 using RJB.BLL.Robots.Contracts;
 
@@ -37,28 +38,26 @@ namespace RJB.BLL.Robots
 
         public IEnumerable<Robot> GetRobotsBySpecializationIds(int[] specializationIds)
         {
-            return _unitOfWork.Robots
-                .GetItemsByExpression(x =>
-                    x.RobotModel.RobotModelSpecializations.Any(s => specializationIds.Contains(s.SpecializationId)));
+            var robotFilterParams = new FilterParams<Robot>(x => x.RobotModel.RobotModelSpecializations.Any(s => specializationIds.Contains(s.SpecializationId)));
+            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
         }
 
         public IEnumerable<Robot> GetRobotsBySpecializationName(string specialization)
         {
-            return _unitOfWork.Robots
-                .GetItemsByExpression(x =>
-                    x.RobotModel.RobotModelSpecializations.Any(s => string.Equals(s.Specialization.Name, specialization, StringComparison.CurrentCultureIgnoreCase)));
+            var robotFilterParams = new FilterParams<Robot>(x => x.RobotModel.RobotModelSpecializations.Any(s => string.Equals(s.Specialization.Name, specialization, StringComparison.CurrentCultureIgnoreCase)));
+            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
         }
 
         public IEnumerable<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId)
         {
-            return _unitOfWork.Robots
-                .GetItemsByExpression(x =>
-                    !x.RobotLeases.Any(s => s.Lease.StartDate < endDate && s.Lease.EndDate < startDate));
+            var robotFilterParams = new FilterParams<Robot>(x =>!x.RobotLeases.Any(s => s.Lease.StartDate < endDate && s.Lease.EndDate < startDate));
+            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
         }
 
-        public IEnumerable<Robot> GetRobotsOfCompany(int companyId)
+        public IEnumerable<Robot> GetRobotsOfCompany(int companyId, out int totalCount)
         {
-            return _unitOfWork.Robots.GetItemsByExpression(x => x.CompanyId == companyId);
+            var robotFilterParams = new FilterParams<Robot>(x => x.CompanyId == companyId);
+            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams, out totalCount);
         }
     }
 }

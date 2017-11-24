@@ -91,8 +91,15 @@ namespace RJF.WebService.Controllers.Api
         {
             try
             {
-                var robots = _robotService.GetRobotsOfCompany(companyId);
-                return Request.CreateResponse(HttpStatusCode.OK, robots);
+                int totalCount;
+                var robots = _robotService.GetRobotsOfCompany(companyId, out totalCount);
+                var result = new CollectionResult<Robot>
+                {
+                    Collection = robots,
+                    TotalCount = totalCount
+                };
+
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception e)
             {

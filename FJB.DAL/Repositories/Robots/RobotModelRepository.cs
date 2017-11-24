@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using FJB.DAL.Context;
 using FJB.DAL.Repositories.Robots.Contracts;
+using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Robots;
 
 namespace FJB.DAL.Repositories.Robots
@@ -17,9 +18,20 @@ namespace FJB.DAL.Repositories.Robots
             _dbContext = dbContext;
         }
 
-        public IEnumerable<RobotModel> GetItemsByExpression(Expression<Func<RobotModel, bool>> expression)
+        public IEnumerable<RobotModel> GetItemsByExpression(FilterParams<RobotModel> filterParams)
         {
-            return _dbContext.RobotModels.Where(expression).AsEnumerable();
+            return _dbContext.RobotModels.Where(filterParams.Expression).AsEnumerable();
+        }
+
+        public IEnumerable<RobotModel> GetItemsByExpression(FilterParams<RobotModel> filterParams, out int totalCount)
+        {
+            var robots = _dbContext.RobotModels.Where(filterParams.Expression);
+            totalCount = robots.Count();
+
+            return robots
+                .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
+                .Take(filterParams.PageSize)
+                .AsEnumerable();
         }
 
         public RobotModel GetItemByExpression(Expression<Func<RobotModel, bool>> expression)

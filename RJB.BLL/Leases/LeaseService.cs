@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FJB.DAL.UnitOfWork.Contracts;
 using FJB.Domain.Entities.Leases;
+using FJB.Domain.Entities.Params;
 using RJB.BLL.Leases.Contracts;
 
 namespace RJB.BLL.Leases
@@ -26,9 +27,10 @@ namespace RJB.BLL.Leases
             return _unitOfWork.Leases.GetItemByExpression(x => x.LeaseId == leaseId);
         }
 
-        public IEnumerable<Lease> GetLeasesOfClient(int clientId)
+        public IEnumerable<Lease> GetLeasesOfClient(int clientId, out int totalCount)
         {
-            return _unitOfWork.Leases.GetItemsByExpression(x => x.ClientId == clientId);
+            var leaseFilterParams = new FilterParams<Lease>(x => x.ClientId == clientId);
+            return _unitOfWork.Leases.GetItemsByExpression(leaseFilterParams, out totalCount);
         }
 
         public void UpdateLease(Lease lease)

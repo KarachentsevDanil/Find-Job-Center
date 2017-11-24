@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Rjb.WebApplication.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,9 +21,26 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (CurrentUser.User == null)
+                    {
+                        <li class="pull-right">@Html.ActionLink("Login", "Login", "Users")</li>
+                    }
+                    else
+                    {
+                        if (CurrentUser.User.IsClient)
+                        {
+                            <li>@Html.ActionLink("Search for robots", "AddLease", "Leases")</li>
+                            <li>@Html.ActionLink("My Leases", "MyLeases", "Leases")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("My robots", "CompanyRobots", "Robots")</li>
+                            <li>@Html.ActionLink("Add robot", "AddRobot", "Robots")</li>
+                            <li>@Html.ActionLink("Add robot model", "AddRobotModel", "Robots")</li>
+                        }
+
+                        <li class="pull-right">@Html.ActionLink("Log off", "Login", "Users")</li>
+                    }
                 </ul>
             </div>
         </div>

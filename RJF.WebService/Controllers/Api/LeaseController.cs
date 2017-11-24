@@ -67,8 +67,15 @@ namespace RJF.WebService.Controllers.Api
         {
             try
             {
-                var lease = _leaseService.GetLeasesOfClient(clientId);
-                return Request.CreateResponse(HttpStatusCode.OK, lease);
+                int totalCount;
+                var lease = _leaseService.GetLeasesOfClient(clientId, out totalCount);
+                var result = new CollectionResult<Lease>
+                {
+                    Collection = lease,
+                    TotalCount = totalCount
+                };
+
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception e)
             {

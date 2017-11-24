@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using FJB.DAL.Context;
 using FJB.DAL.Repositories.Users.Contracts;
+using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Users;
 
 namespace FJB.DAL.Repositories.Users
@@ -17,9 +18,20 @@ namespace FJB.DAL.Repositories.Users
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Company> GetItemsByExpression(Expression<Func<Company, bool>> expression)
+        public IEnumerable<Company> GetItemsByExpression(FilterParams<Company> filterParams)
         {
-            return _dbContext.Companies.Where(expression).AsEnumerable();
+            return _dbContext.Companies.Where(filterParams.Expression).AsEnumerable();
+        }
+
+        public IEnumerable<Company> GetItemsByExpression(FilterParams<Company> filterParams, out int totalCount)
+        {
+            var companies = _dbContext.Companies.Where(filterParams.Expression);
+            totalCount = companies.Count();
+
+            return companies
+                .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
+                .Take(filterParams.PageSize)
+                .AsEnumerable();
         }
 
         public Company GetItemByExpression(Expression<Func<Company, bool>> expression)

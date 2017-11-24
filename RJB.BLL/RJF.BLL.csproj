@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Leases\Contracts\ILeaseService.cs" />
     <Compile Include="Leases\LeaseService.cs" />
+    <Compile Include="Models\CollectionResult.cs" />
     <Compile Include="Models\CurrentUserViewModel.cs" />
     <Compile Include="Models\LeaseViewModel.cs" />
     <Compile Include="Models\RobotModelViewModel.cs" />

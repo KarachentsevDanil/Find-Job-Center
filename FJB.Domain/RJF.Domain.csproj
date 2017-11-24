@@ -76,6 +76,7 @@
     <Compile Include="Entities\Leases\Lease.cs" />
     <Compile Include="Entities\Leases\LeaseStatus.cs" />
     <Compile Include="Entities\Leases\RobotLease.cs" />
+    <Compile Include="Entities\Params\FilterParams.cs" />
     <Compile Include="Entities\Robots\RobotModelFeedback.cs" />
     <Compile Include="Entities\Robots\Rating.cs" />
     <Compile Include="Entities\Robots\RobotModel.cs" />
