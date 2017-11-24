@@ -25,7 +25,6 @@ namespace FJB.DAL.Repositories.Users
         public Client GetItemByExpression(Expression<Func<Client, bool>> expression)
         {
             return _dbContext.Clients.FirstOrDefault(expression);
-
         }
     }
 }

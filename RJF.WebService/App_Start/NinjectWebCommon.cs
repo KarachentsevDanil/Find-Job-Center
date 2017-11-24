@@ -84,7 +84,7 @@ namespace RJF.WebService.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<RjbDbContext>().To<RjbDbContext>();
+            kernel.Bind<RjbDbContext>().To<RjbDbContext>().InSingletonScope();
 
             kernel.Bind<ILeaseService>().To<LeaseService>();
             kernel.Bind<IRobotModelFeedbackService>().To<RobotModelFeedbackService>();
