@@ -12,6 +12,7 @@ namespace FJB.Domain.Entities.Users
         public int ClientId { get; set; }
 
         [Required]
+        [Display(Name = "Client_FullName", ResourceType = typeof(Resourses.Entities))]
         public string FullName { get; set; }
 
         [Required]

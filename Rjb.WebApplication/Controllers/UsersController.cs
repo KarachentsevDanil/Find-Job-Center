@@ -41,7 +41,7 @@ namespace Rjb.WebApplication.Controllers
 
             CurrentUser.User = UsersRequestHelper.GetCurrentUser();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MyLeases", "Leases");
         }
 
         [HttpPost]

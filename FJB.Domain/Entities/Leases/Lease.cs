@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FJB.Domain.Entities.Robots;
 using FJB.Domain.Entities.Users;
 using Newtonsoft.Json;
@@ -13,8 +14,10 @@ namespace FJB.Domain.Entities.Leases
         
         public int ClientId { get; set; }
 
+        [Display(Name = "Lease_StartDate", ResourceType = typeof(Resourses.Entities))]
         public DateTime StartDate { get; set; }
 
+        [Display(Name = "Lease_EndDate", ResourceType = typeof(Resourses.Entities))]
         public DateTime EndDate { get; set; }
 
         public string Feedback { get; set; }
