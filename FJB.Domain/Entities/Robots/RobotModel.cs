@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Robots
 {
+    [JsonObject(IsReference = true)]
     public class RobotModel
     {
         public int RobotModelId { get; set; }
@@ -16,10 +18,10 @@ namespace FJB.Domain.Entities.Robots
         public DateTime? ReleaseYear { get; set; }
 
         public byte[] Photo { get; set; }
+        
+        public virtual ICollection<Robot> Robots { get; set; }
 
-        public ICollection<Robot> Robots { get; set; }
-
-        public ICollection<RobotModelSpecialization> RobotModelSpecializations { get; set; }
+        public virtual ICollection<RobotModelSpecialization> RobotModelSpecializations { get; set; }
 
         public virtual ICollection<RobotModelFeedback> RobotModelFeedbacks { get; set; }
     }

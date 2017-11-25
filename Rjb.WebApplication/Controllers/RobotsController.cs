@@ -1,6 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using FJB.Domain.Entities.Robots;
+using FJB.Domain.Entities.Specializations;
 using HttpClientExtenctions.RequestHelpers;
 using Rjb.WebApplication.Models;
 using RJB.BLL.Models;
@@ -35,7 +37,7 @@ namespace Rjb.WebApplication.Controllers
         public ActionResult CompanyRobots()
         {
             var robots = RobotsRequestHelper.GetRobotsByOfCompany(CurrentUser.User.UserId);
-            return View(robots);
+            return View(robots.Collection);
         }
 
         [HttpPost]
@@ -53,8 +55,17 @@ namespace Rjb.WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRobotModel(RobotModel robotModel)
+        public ActionResult AddRobotModel(RobotModelViewModel robotModel)
         {
+            robotModel.RobotModelSpecializations = new List<RobotModelSpecialization>
+            {
+                new RobotModelSpecialization
+                {
+                    SpecializationId = robotModel.SpecializationId,
+                    SkillLevel = SkillLevel.High
+                }
+            };
+
             var isSuccess = RobotsRequestHelper.AddRobotModel(robotModel);
 
             if (!isSuccess)

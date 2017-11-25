@@ -1,7 +1,31 @@
-﻿
-@{
-    ViewBag.Title = "AddLease";
-}
+﻿@model IEnumerable<FJB.Domain.Entities.Robots.Robot>
 
-<h2>AddLease</h2>
-
+<div class="container">          
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Model</th>
+            <th>Price per hour</th>
+            <th>Description</th>
+            <th>Specialization</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var robot in Model)
+        {
+            <tr>
+                <td>#@robot.RobotId</td>
+                <td>@robot.RobotModel.Name</td>
+                <td>@robot.RobotModel.Description</td>
+                <td>@robot.PricePerDay</td>
+                <td>@(robot.RobotModel.RobotModelSpecializations.FirstOrDefault()?.Specialization?.Name)</td>
+                <td>
+                    <button class="btn btn-xs btn-info">Details</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

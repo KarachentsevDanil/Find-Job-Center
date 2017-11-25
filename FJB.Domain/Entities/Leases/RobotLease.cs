@@ -1,7 +1,9 @@
 ﻿using FJB.Domain.Entities.Robots;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Leases
 {
+    [JsonObject(IsReference = true)]
     public class RobotLease
     {
         public int RobotLeaseId { get; set; }

@@ -29,9 +29,10 @@ namespace FJB.DAL.Repositories.Robots
             totalCount = robots.Count();
 
             return robots
+                .OrderBy(x => x.Name)
                 .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
                 .Take(filterParams.PageSize)
-                .AsEnumerable();
+                .ToList();
         }
 
         public RobotModel GetItemByExpression(Expression<Func<RobotModel, bool>> expression)

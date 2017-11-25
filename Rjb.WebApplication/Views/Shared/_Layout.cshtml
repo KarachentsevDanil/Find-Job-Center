@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -52,6 +55,18 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+
+
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/Scripts/i18n/en.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("select").select2();
+        });
+    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -6,15 +6,6 @@
 
 <h2>@ViewBag.Title.</h2>
 
-<script>
-    $("select").select2({
-        placeholder: {
-            id: "-1",
-            placeholder: "Select an option"
-        }
-    });
-</script>
-
 @using (Html.BeginForm("AddRobotModel", "Robots", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <h4>Create a new robot model.</h4>
@@ -38,10 +29,9 @@
     </div>
 
     <div class="form-group">
-        <label class="col-md-2 control-label">Specialization</label>
+        <label class="col-md-2 col-md-offset-2 control-label">Specialization</label>
         <div class="col-md-6 ">
-            <select id="SpecializationId" name="SpecializationId" required>
-                <option value="-1" selected="selected">Select an option</option>
+            <select id="SpecializationId" class="form-control" name="SpecializationId" required>
                 @foreach (var specialization in Model.Specializations)
                 {
                     <option value="@specialization.SpecializationId">@specialization.Name</option>
@@ -51,7 +41,7 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-5 col-md-4">
+        <div class="col-md-offset-4 col-md-4">
             <input type="submit" class="form-control btn btn-default" value="Add robot model" />
         </div>
     </div>

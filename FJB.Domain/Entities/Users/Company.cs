@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using FJB.Domain.Entities.Robots;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Users
 {
+    [JsonObject(IsReference = true)]
     public class Company
     {
         public int CompanyId { get; set; }

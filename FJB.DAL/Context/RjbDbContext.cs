@@ -40,6 +40,8 @@ namespace FJB.DAL.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer(new RjbDbInitializer());
+
             base.OnModelCreating(modelBuilder);
 
             MapRobot(modelBuilder);

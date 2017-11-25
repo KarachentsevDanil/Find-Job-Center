@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using FJB.Domain.Entities.Leases;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Users
 {
+    [JsonObject(IsReference = true)]
     public class Client
     {
         public int ClientId { get; set; }

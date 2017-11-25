@@ -1,0 +1,45 @@
+﻿@using Rjb.WebApplication.Models
+@model IEnumerable<RJB.BLL.Models.LeaseModel>
+
+<h2>Leases of @CurrentUser.User.Name</h2>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Robots</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Feedback</th>
+                <th>Rating</th>
+                <th>Total Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lease in Model)
+            {
+                <tr>
+                    <td>#@lease.LeaseId</td>
+                    <td>
+                        @foreach (var robot in lease.RobotLeases.Select(x => x.Robot))
+                        {
+                            <p>Company: @robot.Company.Name</p>
+                            <p>Model: @robot.RobotModel.Name</p>
+                            <p>Price: @robot.PricePerDay</p>
+                        }
+                    </td>
+                    <td>@lease.StartDate</td>
+                    <td>@lease.EndDate</td>
+                    <td>@lease.Feedback</td>
+                    <td>@lease.Rating.ToString()</td>
+                    <td>@lease.TotalPrice</td>
+                    <td>
+                        @Html.ActionLink("Details", "LeaseDetails", "Leases", new { leaseId = lease.LeaseId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

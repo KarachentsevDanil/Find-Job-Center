@@ -20,6 +20,9 @@ namespace RJF.WebService
 
             var formatters = GlobalConfiguration.Configuration.Formatters;
             formatters.Remove(formatters.XmlFormatter);
+
+            //formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+            //    = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     }
 }

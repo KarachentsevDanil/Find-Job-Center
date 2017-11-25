@@ -29,9 +29,10 @@ namespace FJB.DAL.Repositories.Users
             totalCount = companies.Count();
 
             return companies
+                .OrderByDescending(x => x.CompanyId)
                 .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
                 .Take(filterParams.PageSize)
-                .AsEnumerable();
+                .ToList();
         }
 
         public Company GetItemByExpression(Expression<Func<Company, bool>> expression)

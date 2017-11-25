@@ -46,6 +46,7 @@
     <Compile Include="Models\CollectionResult.cs" />
     <Compile Include="Models\CurrentUserViewModel.cs" />
     <Compile Include="Models\LeaseViewModel.cs" />
+    <Compile Include="Models\LeaseModel.cs" />
     <Compile Include="Models\RobotModelViewModel.cs" />
     <Compile Include="Models\RobotViewModel.cs" />
     <Compile Include="Models\SearchRobotModel.cs" />

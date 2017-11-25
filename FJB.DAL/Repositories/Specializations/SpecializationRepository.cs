@@ -20,7 +20,7 @@ namespace FJB.DAL.Repositories.Specializations
 
         public IEnumerable<Specialization> GetItemsByExpression(FilterParams<Specialization> filterParams)
         {
-            return _dbContext.Specializations.Where(filterParams.Expression).AsEnumerable();
+            return _dbContext.Specializations.Where(filterParams.Expression).ToList();
         }
 
         public IEnumerable<Specialization> GetItemsByExpression(FilterParams<Specialization> filterParams, out int totalCount)
@@ -29,9 +29,10 @@ namespace FJB.DAL.Repositories.Specializations
             totalCount = specializations.Count();
 
             return specializations
+                .OrderBy(x => x.Name)
                 .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
                 .Take(filterParams.PageSize)
-                .AsEnumerable();
+                .ToList();
         }
 
         public Specialization GetItemByExpression(Expression<Func<Specialization, bool>> expression)

@@ -29,9 +29,10 @@ namespace FJB.DAL.Repositories.Users
             totalCount = clients.Count();
 
             return clients
+                .OrderByDescending(x => x.ClientId)
                 .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
                 .Take(filterParams.PageSize)
-                .AsEnumerable();
+                .ToList();
         }
 
         public Client GetItemByExpression(Expression<Func<Client, bool>> expression)

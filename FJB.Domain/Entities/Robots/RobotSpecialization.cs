@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using FJB.Domain.Entities.Specializations;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Robots
 {
+    [JsonObject(IsReference = true)]
     public class RobotModelSpecialization
     {
         [Key]
@@ -16,6 +18,7 @@ namespace FJB.Domain.Entities.Robots
 
         public SkillLevel SkillLevel { get; set; }
 
+        [JsonIgnore]
         public RobotModel RobotModel { get; set; }
 
         public Specialization Specialization { get; set; }

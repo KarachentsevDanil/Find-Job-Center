@@ -38,7 +38,7 @@ namespace FJB.DAL.Context
 
             modelBuilder.Entity<RobotModelSpecialization>()
                 .HasRequired(x => x.Specialization)
-                .WithMany(t=> t.RobotModels)
+                .WithMany()
                 .HasForeignKey(x => x.SpecializationId);
 
             modelBuilder.Entity<RobotModelFeedback>()

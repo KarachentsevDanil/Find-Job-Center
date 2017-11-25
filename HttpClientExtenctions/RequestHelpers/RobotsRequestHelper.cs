@@ -41,7 +41,7 @@ namespace HttpClientExtenctions.RequestHelpers
         {
             try
             {
-                var robots = HttpClientHelper.GetResult<List<RobotModel>>(string.Concat(RobotsUrl, "GetRobotModel"));
+                var robots = HttpClientHelper.GetResult<List<RobotModel>>(string.Concat(RobotsUrl, "GetRobotsModel"));
                 return robots;
             }
             catch (Exception ex)
@@ -76,16 +76,16 @@ namespace HttpClientExtenctions.RequestHelpers
             }
         }
 
-        public static IEnumerable<RobotModel> GetRobotsByOfCompany(int companyId)
+        public static CollectionResult<Robot> GetRobotsByOfCompany(int companyId)
         {
             try
             {
-                var robots = HttpClientHelper.GetResult<List<RobotModel>>(string.Concat(RobotsUrl, $"GetRobotsByOfCompany?companyId={companyId}"));
+                var robots = HttpClientHelper.GetResult<CollectionResult<Robot>>(string.Concat(RobotsUrl, $"GetRobotsByOfCompany?companyId={companyId}"));
                 return robots;
             }
-            catch (Exception)
+            catch (Exception exp)
             {
-                return Enumerable.Empty<RobotModel>();
+                return new CollectionResult<Robot>();
             }
         }
     }

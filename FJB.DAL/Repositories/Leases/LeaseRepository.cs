@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using FJB.DAL.Context;
@@ -29,9 +30,14 @@ namespace FJB.DAL.Repositories.Leases
             totalCount = items.Count();
 
             return items
+                .Include(x=> x.RobotLeases)
+                .Include(x => x.RobotLeases.Select(p=> p.Robot))
+                .Include(x => x.RobotLeases.Select(p => p.Robot.Company))
+                .Include(x => x.RobotLeases.Select(p => p.Robot.RobotModel))
+                .OrderByDescending(x => x.LeaseId)
                 .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
                 .Take(filterParams.PageSize)
-                .AsEnumerable();
+                .ToList();
         }
 
         public Lease GetItemByExpression(Expression<Func<Lease, bool>> expression)

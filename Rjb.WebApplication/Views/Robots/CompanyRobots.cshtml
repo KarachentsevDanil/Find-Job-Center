@@ -1,7 +1,10 @@
-﻿
+﻿@using Rjb.WebApplication.Models
+@model IEnumerable<FJB.Domain.Entities.Robots.Robot>
+
 @{
-    ViewBag.Title = "AddLease";
+    ViewBag.Title = "Company Robots";
 }
 
-<h2>AddLease</h2>
+<h2>Robots of @CurrentUser.User.Name</h2>
 
+@Html.Partial("_Robots", Model)

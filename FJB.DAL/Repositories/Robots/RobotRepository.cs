@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using FJB.DAL.Context;
@@ -20,7 +21,7 @@ namespace FJB.DAL.Repositories.Robots
 
         public IEnumerable<Robot> GetItemsByExpression(FilterParams<Robot> filterParams)
         {
-            return _dbContext.Robots.Where(filterParams.Expression).AsEnumerable();
+            return _dbContext.Robots.Where(filterParams.Expression).ToList();
         }
 
         public IEnumerable<Robot> GetItemsByExpression(FilterParams<Robot> filterParams, out int totalCount)
@@ -29,9 +30,13 @@ namespace FJB.DAL.Repositories.Robots
             totalCount = robots.Count();
 
             return robots
+                .Include(x=> x.RobotModel)
+                .Include(x => x.RobotModel.RobotModelSpecializations)
+                .Include(x => x.RobotModel.RobotModelSpecializations.Select(p => p.Specialization))
+                .OrderByDescending(x => x.RobotId)
                 .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
                 .Take(filterParams.PageSize)
-                .AsEnumerable();
+                .ToList();
         }
 
         public Robot GetItemByExpression(Expression<Func<Robot, bool>> expression)

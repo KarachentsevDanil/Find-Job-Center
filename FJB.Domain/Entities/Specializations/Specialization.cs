@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using FJB.Domain.Entities.Robots;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Specializations
 {
+    [JsonObject(IsReference = true)]
     public class Specialization
     {
         public int SpecializationId { get; set; }
@@ -16,7 +18,5 @@ namespace FJB.Domain.Entities.Specializations
         public virtual Specialization ParentSpecialization { get; set; }
 
         public ICollection<Specialization> SubSpecializations { get; set; }
-        
-        public virtual ICollection<RobotModelSpecialization> RobotModels { get; set; }
     }
 }

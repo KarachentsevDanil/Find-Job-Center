@@ -1,8 +1,10 @@
 ﻿using System;
 using FJB.Domain.Entities.Users;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Robots
 {
+    [JsonObject(IsReference = true)]
     public class RobotModelFeedback
     {
         public int RobotFeedbackId { get; set; }

@@ -36,11 +36,11 @@ namespace HttpClientExtenctions.RequestHelpers
             }
         }
 
-        public static Lease GetLeaseDetails(int leaseId)
+        public static LeaseModel GetLeaseDetails(int leaseId)
         {
             try
             {
-                var lease = HttpClientHelper.GetResult<Lease>(string.Concat(LeasesUrl, $"GetLeaseDetails?leaseId={leaseId}"));
+                var lease = HttpClientHelper.GetResult<LeaseModel>(string.Concat(LeasesUrl, $"GetLeaseDetails?leaseId={leaseId}"));
                 return lease;
             }
             catch (Exception e)
@@ -49,11 +49,11 @@ namespace HttpClientExtenctions.RequestHelpers
             }
         }
 
-        public static List<Lease> GetLeaseOfClient(int clientId)
+        public static CollectionResult<LeaseModel> GetLeaseOfClient(int clientId)
         {
             try
             {
-                var lease = HttpClientHelper.GetResult<List<Lease>>(string.Concat(LeasesUrl, $"GetLeaseOfClient?clientId={clientId}"));
+                var lease = HttpClientHelper.GetResult<CollectionResult<LeaseModel>>(string.Concat(LeasesUrl, $"GetLeaseOfClient?clientId={clientId}"));
                 return lease;
             }
             catch (Exception e)

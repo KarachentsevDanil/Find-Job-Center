@@ -2,9 +2,11 @@
 using FJB.Domain.Entities.Users;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace FJB.Domain.Entities.Robots
 {
+    [JsonObject(IsReference = true)]
     public class Robot
     {
         public Robot()
@@ -16,7 +18,7 @@ namespace FJB.Domain.Entities.Robots
         {
             RobotModelId = robot.RobotModelId;
             CompanyId = robot.CompanyId;
-            PricePerHour = robot.PricePerHour;
+            PricePerDay = robot.PricePerDay;
         }
 
         public int RobotId { get; set; }
@@ -26,7 +28,7 @@ namespace FJB.Domain.Entities.Robots
         public int RobotModelId { get; set; }
 
         [Required]
-        public double PricePerHour { get; set; }
+        public double PricePerDay { get; set; }
 
         public bool IsDeleted { get; set; }
 
