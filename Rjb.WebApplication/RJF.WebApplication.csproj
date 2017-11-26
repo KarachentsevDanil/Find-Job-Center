@@ -181,6 +181,8 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.structure.css" />
     <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\semantic.css" />
+    <Content Include="Content\semantic.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -344,6 +346,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\semantic.js" />
+    <Content Include="Scripts\semantic.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -15,36 +15,37 @@
 
         <div class="tab-content">
             <div id="client" class="tab-pane fade in active">
-
                 <section id="clientLoginForm">
-                    @using (Html.BeginForm("LoginClient", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("LoginClient", "Users", FormMethod.Post, new { role = "form" }))
                     {
                         @Html.AntiForgeryToken()
-                        <h4>Use a local account to log in.</h4>
-                        <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+
+                        <div class="col-sm-6" style="margin-top: 5px">
+                            <div class="ui form">
+                                <h3>Sign in to your account</h3>
+                                <div class="field">
+                                    <label>Username</label>
+                                    <div class="ui left icon input">
+                                        <input type="text" name="UserName" id="UserName" placeholder="Username" required>
+                                        <i class="user icon"></i>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Password</label>
+                                    <div class="ui left icon input">
+                                        <input type="password" name="Password" id="Password" placeholder="Password" required>
+                                        <i class="lock icon"></i>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="ui blue submit button">Login</button>
+
+                                <p>
+                                    @Html.ActionLink("Register as a new client", "RegisterClient")
+                                </p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Log in" class="btn btn-default" />
-                            </div>
-                        </div>
-                        <p>
-                            @Html.ActionLink("Register as a new client", "RegisterClient")
-                        </p>
                     }
                 </section>
             </div>
@@ -54,31 +55,32 @@
                     @using (Html.BeginForm("LoginCompany", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
-                        <h4>Use a local account to log in.</h4>
-                        <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        <div class="col-sm-6" style="margin-top: 5px">
+                            <div class="ui form">
+                                <h3>Sign in to your account</h3>
+                                <div class="field">
+                                    <label>Username</label>
+                                    <div class="ui left icon input">
+                                        <input type="text" name="UserName" id="UserName" placeholder="Username" required>
+                                        <i class="user icon"></i>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Password</label>
+                                    <div class="ui left icon input">
+                                        <input type="password" name="Password" id="Password" placeholder="Password" required>
+                                        <i class="lock icon"></i>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="ui blue submit button">Login</button>
+
+                                <p>
+                                    @Html.ActionLink("Register new company", "RegisterCompany")
+                                </p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Log in" class="btn btn-default" />
-                            </div>
-                        </div>
-                        <p>
-                            @Html.ActionLink("Register new company", "RegisterCompany")
-                        </p>
                     }
                 </section>
             </div>

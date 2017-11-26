@@ -66,17 +66,9 @@ namespace HttpClientExtenctions.RequestHelpers
             return HttpClientHelper.GetResult<CurrentUserViewModel>(string.Concat(UserUrl, "GetCurrentUser"));
         }
 
-        public static bool LogOff()
+        public static void LogOff()
         {
-            try
-            {
-                HttpClientHelper.Post(string.Concat(UserUrl, "RegisterCompany"));
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            HttpClientHelper.Post(string.Concat(UserUrl, "LogOff"));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace RJF.WebService.Controllers.Api
             _leaseService = leaseService;
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage CreateLease([FromBody] Lease lease)
         {
             try
@@ -31,7 +31,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public HttpResponseMessage CompleateLease([FromBody] LeaseViewModel leaseModel)
         {
             try
