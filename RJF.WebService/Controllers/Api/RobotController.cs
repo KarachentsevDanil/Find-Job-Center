@@ -106,5 +106,18 @@ namespace RJF.WebService.Controllers.Api
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
+
+        public HttpResponseMessage GetRobotById(int robotId)
+        {
+            try
+            {
+                var robot = _robotService.GetRobotById(robotId);
+                return Request.CreateResponse(HttpStatusCode.OK, robot);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
     }
 }

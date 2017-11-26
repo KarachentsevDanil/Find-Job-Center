@@ -36,7 +36,7 @@
                     <td>@lease.Rating.ToString()</td>
                     <td>@lease.TotalPrice</td>
                     <td>
-                        @Html.ActionLink("Details", "LeaseDetails", "Leases", new { leaseId = lease.LeaseId })
+                        <a href="@Url.Action("LeaseDetails", new { leaseId = lease.LeaseId })" class="btn btn-xs btn-info">Details</a>
                     </td>
                 </tr>
             }

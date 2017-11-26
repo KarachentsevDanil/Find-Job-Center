@@ -10,6 +10,8 @@ namespace RJB.BLL.Robots.Contracts
 
         void UpdateRobot(Robot robot);
 
+        Robot GetRobotById(int robotId);
+
         IEnumerable<Robot> GetRobotsBySpecializationIds(int[] specializationIds);
 
         IEnumerable<Robot> GetRobotsBySpecializationName(string specialization);

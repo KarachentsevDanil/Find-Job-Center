@@ -36,6 +36,11 @@ namespace RJB.BLL.Robots
             _unitOfWork.Commit();
         }
 
+        public Robot GetRobotById(int robotId)
+        {
+            return _unitOfWork.Robots.GetItemByExpression(x => x.RobotId == robotId);
+        }
+
         public IEnumerable<Robot> GetRobotsBySpecializationIds(int[] specializationIds)
         {
             var robotFilterParams = new FilterParams<Robot>(x => x.RobotModel.RobotModelSpecializations.Any(s => specializationIds.Contains(s.SpecializationId)));

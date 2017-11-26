@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using FJB.Domain.Entities.Leases;
 using HttpClientExtenctions.Helpers;
 using RJB.BLL.Models;

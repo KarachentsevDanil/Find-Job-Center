@@ -63,16 +63,29 @@ namespace HttpClientExtenctions.RequestHelpers
             }
         }
 
-        public static IEnumerable<RobotModel> GetRobotsBySpecialization(string name)
+        public static IEnumerable<RobotViewModel> GetRobotsBySpecialization(string name)
         {
             try
             {
-                var robots = HttpClientHelper.GetResult<List<RobotModel>>(string.Concat(RobotsUrl, $"GetRobotsBySpecialization?name={name}"));
+                var robots = HttpClientHelper.GetResult<List<RobotViewModel>>(string.Concat(RobotsUrl, $"GetRobotsBySpecialization?name={name}"));
                 return robots;
             }
             catch (Exception)
             {
-                return Enumerable.Empty<RobotModel>();
+                return Enumerable.Empty<RobotViewModel>();
+            }
+        }
+
+        public static RobotViewModel GetRobotById(int robotId)
+        {
+            try
+            {
+                var robot = HttpClientHelper.GetResult<RobotViewModel>(string.Concat(RobotsUrl, $"GetRobotById?robotId={robotId}"));
+                return robot;
+            }
+            catch (Exception exp)
+            {
+                throw new Exception(exp.Message);
             }
         }
 

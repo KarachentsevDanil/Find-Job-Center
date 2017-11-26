@@ -18,11 +18,11 @@
             <tr>
                 <td>#@robot.RobotId</td>
                 <td>@robot.RobotModel.Name</td>
-                <td>@robot.RobotModel.Description</td>
                 <td>@robot.PricePerDay</td>
+                <td>@robot.RobotModel.Description</td>
                 <td>@(robot.RobotModel.RobotModelSpecializations.FirstOrDefault()?.Specialization?.Name)</td>
                 <td>
-                    <button class="btn btn-xs btn-info">Details</button>
+                    <a href="@Url.Action("RobotDetails", new { robotId = robot.RobotId })" class="btn btn-xs btn-info">Details</a>
                 </td>
             </tr>
         }

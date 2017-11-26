@@ -24,9 +24,14 @@ namespace Rjb.WebApplication.Controllers
             return View(leaseModel);
         }
 
-        public ActionResult EditLease()
+        public ActionResult EditLease(int leaseId)
         {
-            return View();
+            var lease = new LeaseViewModel()
+            {
+                LeaseId = leaseId
+            };
+
+            return View(lease);
         }
 
         public ActionResult MyLeases()
@@ -82,7 +87,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddLease", "Add lease failed.");
-                return RedirectToAction("AddLease", ModelState);
+                return View("AddLease");
             }
 
             return RedirectToAction("MyLeases");
@@ -96,7 +101,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddLease", "Add lease failed.");
-                return RedirectToAction("EditLease", ModelState);
+                return View("EditLease");
             }
 
             return RedirectToAction("MyLeases");

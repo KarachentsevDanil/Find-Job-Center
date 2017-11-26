@@ -1,0 +1,39 @@
+﻿@model RJB.BLL.Models.RobotViewModel
+
+<div class="row">
+    <h2>Robot leases</h2>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Client</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Feedback</th>
+                    <th>Rating</th>
+                    <th>Income</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lease in Model.RobotLeases.Select(x => x.Lease))
+            {
+                    <tr>
+                        <td>#@lease.LeaseId</td>
+                        <td>@lease.Client.FullName</td>
+                        <td>@lease.StartDate</td>
+                        <td>@lease.EndDate</td>
+                        <td>@lease.Feedback</td>
+                        <td>@lease.Rating</td>
+                        <td>
+                            @{
+                                var daysRent = (lease.EndDate - lease.StartDate).Days;
+                                @(daysRent * Model.PricePerDay)
+                            }
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+</div>

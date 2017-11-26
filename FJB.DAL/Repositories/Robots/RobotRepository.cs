@@ -30,7 +30,7 @@ namespace FJB.DAL.Repositories.Robots
             totalCount = robots.Count();
 
             return robots
-                .Include(x=> x.RobotModel)
+                .Include(x => x.RobotModel)
                 .Include(x => x.RobotModel.RobotModelSpecializations)
                 .Include(x => x.RobotModel.RobotModelSpecializations.Select(p => p.Specialization))
                 .OrderByDescending(x => x.RobotId)
@@ -41,7 +41,14 @@ namespace FJB.DAL.Repositories.Robots
 
         public Robot GetItemByExpression(Expression<Func<Robot, bool>> expression)
         {
-            return _dbContext.Robots.FirstOrDefault(expression);
+            return _dbContext.Robots
+                .Include(x => x.RobotModel)
+                .Include(x => x.RobotModel.RobotModelSpecializations)
+                .Include(x => x.RobotModel.RobotModelSpecializations.Select(p => p.Specialization))
+                .Include(x => x.RobotLeases)
+                .Include(x => x.RobotLeases.Select(p => p.Lease))
+                .Include(x => x.RobotLeases.Select(p => p.Lease.Client))
+                .FirstOrDefault(expression);
         }
     }
 }

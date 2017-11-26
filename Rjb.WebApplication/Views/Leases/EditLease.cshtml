@@ -18,6 +18,8 @@
             new { @class = "col-md-2 col-md-offset-2 control-label" })
         <div class="col-md-6 ">
             @Html.TextAreaFor(m => m.Feedback, new { @class = "form-control" })
+
+            <input id="LeaseId" name="LeaseId" value="@Model.LeaseId" type="hidden" />
         </div>
     </div>
 

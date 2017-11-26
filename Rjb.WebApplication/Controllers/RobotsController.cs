@@ -27,7 +27,7 @@ namespace Rjb.WebApplication.Controllers
         public ActionResult AddRobotModel()
         {
             var specializations = SpecializationsRequestHelper.GetAllSpecializations();
-            var robotModel = new RobotModelViewModel()
+            var robotModel = new RobotModelViewModel
             {
                 Specializations = specializations
             };
@@ -40,6 +40,12 @@ namespace Rjb.WebApplication.Controllers
             return View(robots.Collection);
         }
 
+        public ActionResult RobotDetails(int robotId)
+        {
+            var robot = RobotsRequestHelper.GetRobotById(robotId);
+            return View(robot);
+        }
+
         [HttpPost]
         public ActionResult AddRobot(RobotViewModel robot)
         {
@@ -48,10 +54,10 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddRobot", "Add robot failed.");
-                return RedirectToAction("AddRobot", ModelState);
+                return View("AddRobot");
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("CompanyRobots", "Robots");
         }
 
         [HttpPost]
@@ -71,7 +77,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddRobot", "Add robot model failed.");
-                return RedirectToAction("AddRobotModel", ModelState);
+                return View("AddRobotModel");
             }
 
             return RedirectToAction("AddRobot");

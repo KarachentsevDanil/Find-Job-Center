@@ -36,7 +36,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess || !ModelState.IsValid)
             {
                 ModelState.AddModelError("Login", "Login failed.");
-                return RedirectToAction("Login", ModelState);
+                return View("Login");
             }
 
             CurrentUser.User = UsersRequestHelper.GetCurrentUser();
@@ -52,7 +52,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("Registration", "Registration failed.");
-                return RedirectToAction("RegisterClient", ModelState);
+                return View("RegisterClient");
             }
 
             return RedirectToAction("Login");
@@ -66,12 +66,12 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("Login", "Login failed.");
-                return RedirectToAction("Login", ModelState);
+                return View("Login");
             }
 
             CurrentUser.User = UsersRequestHelper.GetCurrentUser();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AddRobot", "Robots");
         }
 
         [HttpPost]
@@ -82,7 +82,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("Registration", "Registration failed.");
-                return RedirectToAction("RegisterCompany", ModelState);
+                return View("RegisterCompany");
             }
 
             return RedirectToAction("Login");
