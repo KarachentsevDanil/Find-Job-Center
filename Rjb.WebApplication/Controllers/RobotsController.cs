@@ -15,7 +15,7 @@ namespace Rjb.WebApplication.Controllers
     {
         public ActionResult AddRobot()
         {
-            var robotModels = RobotsRequestHelper.GetRobotsModel();
+            var robotModels = RobotClientService.GetRobotsModel();
             var robotModel = new RobotViewModel()
             {
                 RobotModels = robotModels
@@ -26,7 +26,7 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult AddRobotModel()
         {
-            var specializations = SpecializationsRequestHelper.GetAllSpecializations();
+            var specializations = SpecializationClientService.GetAllSpecializations();
             var robotModel = new RobotModelViewModel
             {
                 Specializations = specializations
@@ -36,20 +36,20 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult CompanyRobots()
         {
-            var robots = RobotsRequestHelper.GetRobotsByOfCompany(CurrentUser.User.UserId);
+            var robots = RobotClientService.GetRobotsByOfCompany(CurrentUser.User.UserId);
             return View(robots.Collection);
         }
 
         public ActionResult RobotDetails(int robotId)
         {
-            var robot = RobotsRequestHelper.GetRobotById(robotId);
+            var robot = RobotClientService.GetRobotById(robotId);
             return View(robot);
         }
 
         [HttpPost]
         public ActionResult AddRobot(RobotViewModel robot)
         {
-            var isSuccess = RobotsRequestHelper.AddRobot(robot);
+            var isSuccess = RobotClientService.AddRobot(robot);
 
             if (!isSuccess)
             {
@@ -72,7 +72,7 @@ namespace Rjb.WebApplication.Controllers
                 }
             };
 
-            var isSuccess = RobotsRequestHelper.AddRobotModel(robotModel);
+            var isSuccess = RobotClientService.AddRobotModel(robotModel);
 
             if (!isSuccess)
             {
@@ -86,14 +86,14 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult GetRobotsBySpecialization(string specialization)
         {
-            var robots = RobotsRequestHelper.GetRobotsBySpecialization(specialization);
+            var robots = RobotClientService.GetRobotsBySpecialization(specialization);
             return PartialView("_Robots", robots);
         }
 
         [HttpPost]
         public ActionResult GetRobotsOnSpecificDate(SearchRobotModel searchRobotModel)
         {
-            var robots = RobotsRequestHelper.GetRobotsOnSpecificDateRange(searchRobotModel);
+            var robots = RobotClientService.GetRobotsOnSpecificDateRange(searchRobotModel);
             return PartialView("_Robots", robots);
         }
     }

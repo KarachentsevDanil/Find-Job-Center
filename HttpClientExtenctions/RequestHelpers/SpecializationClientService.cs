@@ -6,7 +6,7 @@ using HttpClientExtenctions.Helpers;
 
 namespace HttpClientExtenctions.RequestHelpers
 {
-    public static class SpecializationsRequestHelper
+    public static class SpecializationClientService
     {
         private static string SpecializationUrl = "/api/specializations/";
 

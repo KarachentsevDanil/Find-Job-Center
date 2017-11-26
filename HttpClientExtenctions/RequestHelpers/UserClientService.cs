@@ -5,7 +5,7 @@ using RJB.BLL.Models;
 
 namespace HttpClientExtenctions.RequestHelpers
 {
-    public static class UsersRequestHelper
+    public static class UserClientService
     {
         private static string UserUrl = "/api/users/";
 

@@ -13,7 +13,7 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult Login()
         {
-            UsersRequestHelper.LogOff();
+            UserClientService.LogOff();
             CurrentUser.User = null;
             return View();
         }
@@ -31,7 +31,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult LoginClient(UserLoginModel loginModel)
         {
-            var isSuccess = UsersRequestHelper.ClientLogin(loginModel);
+            var isSuccess = UserClientService.ClientLogin(loginModel);
 
             if (!isSuccess || !ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace Rjb.WebApplication.Controllers
                 return View("Login");
             }
 
-            CurrentUser.User = UsersRequestHelper.GetCurrentUser();
+            CurrentUser.User = UserClientService.GetCurrentUser();
 
             return RedirectToAction("MyLeases", "Leases");
         }
@@ -47,7 +47,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult RegisterClient(Client client)
         {
-            var isSuccess = UsersRequestHelper.RegisterClient(client);
+            var isSuccess = UserClientService.RegisterClient(client);
 
             if (!isSuccess)
             {
@@ -61,7 +61,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult LoginCompany(UserLoginModel loginModel)
         {
-            var isSuccess = UsersRequestHelper.CompanyLogin(loginModel);
+            var isSuccess = UserClientService.CompanyLogin(loginModel);
 
             if (!isSuccess)
             {
@@ -69,7 +69,7 @@ namespace Rjb.WebApplication.Controllers
                 return View("Login");
             }
 
-            CurrentUser.User = UsersRequestHelper.GetCurrentUser();
+            CurrentUser.User = UserClientService.GetCurrentUser();
 
             return RedirectToAction("AddRobot", "Robots");
         }
@@ -77,7 +77,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult RegisterCompany(Company company)
         {
-            var isSuccess = UsersRequestHelper.RegisterCompany(company);
+            var isSuccess = UserClientService.RegisterCompany(company);
 
             if (!isSuccess)
             {

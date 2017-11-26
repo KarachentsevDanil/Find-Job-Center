@@ -15,7 +15,7 @@ namespace Rjb.WebApplication.Controllers
     {
         public ActionResult AddLease()
         {
-            var specializations = SpecializationsRequestHelper.GetAllSpecializations();
+            var specializations = SpecializationClientService.GetAllSpecializations();
             var leaseModel = new LeaseViewModel
             {
                 Specializations = specializations
@@ -36,7 +36,7 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult MyLeases()
         {
-            var customerLease = LeasesRequestHelper.GetLeaseOfClient(CurrentUser.User.UserId);
+            var customerLease = LeaseClientService.GetLeaseOfClient(CurrentUser.User.UserId);
             customerLease.Collection.ForEach(x =>
             {
                 var rentDays = (x.EndDate - x.StartDate).Days;
@@ -48,7 +48,7 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult LeaseDetails(int leaseId)
         {
-            var customerLease = LeasesRequestHelper.GetLeaseDetails(leaseId);
+            var customerLease = LeaseClientService.GetLeaseDetails(leaseId);
             var rentDays = (customerLease.EndDate - customerLease.StartDate).Days;
             customerLease.TotalPrice = rentDays * (int)customerLease.RobotLeases.Sum(r => r.Robot.PricePerDay);
 
@@ -65,7 +65,7 @@ namespace Rjb.WebApplication.Controllers
                 EndDate = leaseModel.EndDate
             };
 
-            var availableRobots = RobotsRequestHelper.GetRobotsOnSpecificDateRange(searchRobotsModel)
+            var availableRobots = RobotClientService.GetRobotsOnSpecificDateRange(searchRobotsModel)
                 .Take(leaseModel.CountRobots)
                 .ToList();
 
@@ -82,7 +82,7 @@ namespace Rjb.WebApplication.Controllers
                 RobotId = x.RobotId
             }));
 
-            var isSuccess = LeasesRequestHelper.CreateLease(lease);
+            var isSuccess = LeaseClientService.CreateLease(lease);
 
             if (!isSuccess)
             {
@@ -96,7 +96,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult CompleateLease(LeaseViewModel lease)
         {
-            var isSuccess = LeasesRequestHelper.CompleateLease(lease);
+            var isSuccess = LeaseClientService.CompleateLease(lease);
 
             if (!isSuccess)
             {

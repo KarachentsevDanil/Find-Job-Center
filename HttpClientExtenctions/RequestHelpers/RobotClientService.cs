@@ -7,7 +7,7 @@ using RJB.BLL.Models;
 
 namespace HttpClientExtenctions.RequestHelpers
 {
-    public static class RobotsRequestHelper
+    public static class RobotClientService
     {
         private static string RobotsUrl = "/api/robot/";
 

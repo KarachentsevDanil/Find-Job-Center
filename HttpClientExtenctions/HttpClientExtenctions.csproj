@@ -55,11 +55,11 @@
   <ItemGroup>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
-    <Compile Include="RequestHelpers\LeasesRequestHelper.cs" />
+    <Compile Include="RequestHelpers\LeaseClientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestHelpers\RobotsRequestHelper.cs" />
-    <Compile Include="RequestHelpers\SpecializationsRequestHelper.cs" />
-    <Compile Include="RequestHelpers\UsersRequestHelper.cs" />
+    <Compile Include="RequestHelpers\RobotClientService.cs" />
+    <Compile Include="RequestHelpers\SpecializationClientService.cs" />
+    <Compile Include="RequestHelpers\UserClientService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FJB.DAL\RJF.DAL.csproj">

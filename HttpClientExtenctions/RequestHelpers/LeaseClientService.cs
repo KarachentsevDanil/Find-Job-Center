@@ -5,7 +5,7 @@ using RJB.BLL.Models;
 
 namespace HttpClientExtenctions.RequestHelpers
 {
-    public static class LeasesRequestHelper
+    public static class LeaseClientService
     {
         private static string LeasesUrl = "/api/lease/";
 
