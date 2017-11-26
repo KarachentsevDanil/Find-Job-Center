@@ -9,36 +9,43 @@
 
 @using (Html.BeginForm("CompleateLease", "Leases", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    <h4>Create a new robot model.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 15px;">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="column" style="margin-top: 5px;">
+            <div class="ui raised segment">
+                <div class="ui blue right ribbon label">
+                    <i class="registered icon"></i>Complete Lease
+                </div>
+                <h3 style="margin-top: -20px;">Complete Lease</h3>
+                
+                <input id="LeaseId" name="LeaseId" value="@Model.LeaseId" type="hidden" />
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Feedback,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.TextAreaFor(m => m.Feedback, new { @class = "form-control" })
+                <div class="ui form">
+                    <div class="field">
+                        <label>Rating</label>
+                        <div class="ui left icon input">
+                            <select id="Rating" class="form-control" name="Rating" required>
+                                <option value="@Rating.Poor">@Rating.Poor.ToString()</option>
+                                <option value="@Rating.Bad">@Rating.Bad.ToString()</option>
+                                <option value="@Rating.Medium">@Rating.Medium.ToString()</option>
+                                <option value="@Rating.Good">@Rating.Good.ToString()</option>
+                                <option value="@Rating.Excelent">@Rating.Excelent.ToString()</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Feedback</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="Feedback" id="Feedback" placeholder="Feedback" required>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="margin-left-center">
+                        <button type="submit" class="ui blue submit button">Complete Lease</button>
+                    </div>
+                </div>
 
-            <input id="LeaseId" name="LeaseId" value="@Model.LeaseId" type="hidden" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-2 col-md-offset-2 control-label">Specialization</label>
-        <div class="col-md-6 ">
-            <select id="Rating" class="form-control" name="Rating" required>
-                <option value="@Rating.Poor">@Rating.Poor.ToString()</option>
-                <option value="@Rating.Bad">@Rating.Bad.ToString()</option>
-                <option value="@Rating.Medium">@Rating.Medium.ToString()</option>
-                <option value="@Rating.Good">@Rating.Good.ToString()</option>
-                <option value="@Rating.Excelent">@Rating.Excelent.ToString()</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-4">
-            <input type="submit" class="form-control btn btn-default" value="Complete lease" />
+            </div>
         </div>
     </div>
 }

@@ -1,18 +1,17 @@
 ﻿@model IEnumerable<FJB.Domain.Entities.Robots.Robot>
 
-<div class="container">          
-    <table class="table table-striped">
-        <thead>
+<table class="ui celled table">
+    <thead>
         <tr>
             <th>Number</th>
             <th>Model</th>
             <th>Price per hour</th>
             <th>Description</th>
             <th>Specialization</th>
-            <th></th>
+            <th style="width: 10%;"></th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         @foreach (var robot in Model)
         {
             <tr>
@@ -21,11 +20,12 @@
                 <td>@robot.PricePerDay</td>
                 <td>@robot.RobotModel.Description</td>
                 <td>@(robot.RobotModel.RobotModelSpecializations.FirstOrDefault()?.Specialization?.Name)</td>
-                <td>
-                    <a href="@Url.Action("RobotDetails", new { robotId = robot.RobotId })" class="btn btn-xs btn-info">Details</a>
+                <td class="center">
+                    <a href="@Url.Action("RobotDetails", new {robotId = robot.RobotId})" class="compact ui button">
+                        Details
+                    </a>
                 </td>
             </tr>
         }
-        </tbody>
-    </table>
-</div>
+    </tbody>
+</table>

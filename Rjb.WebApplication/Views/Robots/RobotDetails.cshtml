@@ -1,55 +1,57 @@
-﻿@using FJB.Domain.Entities.Leases
-@using Rjb.WebApplication.Models
-@model RJB.BLL.Models.RobotViewModel
+﻿@model RJB.BLL.Models.RobotViewModel
 
 @{
     ViewBag.Title = "Robot detils";
 }
+<div class="row" style="margin-top: 55px;">
 
-<h2>Robot #@(Model.RobotId)</h2>
+    <h2>Robot #@(Model.RobotId)</h2>
 
-<div class="form-horizontal">
+    <div class="form-horizontal">
 
-    <div class="form-group">
-        <label class="col-md-2 col-md-offset-2 control-label">Model</label>
-        <div class="col-md-6 ">
-            <p class="form-control-static">
-                @Model.RobotModel.Name
-            </p>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label">Model</label>
+            <div class="col-md-6 ">
+                <p class="form-control-static">
+                    @Model.RobotModel.Name
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label">Specialization</label>
+            <div class="col-md-6 ">
+                <p class="form-control-static">
+                    @foreach (var specialization in Model.RobotModel.RobotModelSpecializations)
+                    {
+                        <span>@specialization.Specialization.Name</span>
+                    }
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label">Price Per Day</label>
+            <div class="col-md-6 ">
+                <p class="form-control-static">
+                    @Model.PricePerDay
+                </p>
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-md-2 col-md-offset-2 control-label">Specialization</label>
-        <div class="col-md-6 ">
-            <p class="form-control-static">
-                @foreach (var specialization in Model.RobotModel.RobotModelSpecializations)
-                {
-                    <span>@specialization.Specialization.Name</span>
-                }
-            </p>
-        </div>
-    </div>
+    <div class="row">
+        @if (Model.RobotLeases.Any())
+        {
+            @Html.Partial("_RobotLeases", Model)
+        }
 
-    <div class="form-group">
-        <label class="col-md-2 col-md-offset-2 control-label">Price Per Day</label>
-        <div class="col-md-6 ">
-            <p class="form-control-static">
-                @Model.PricePerDay
-            </p>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    @if (Model.RobotLeases.Any())
-    {
-        @Html.Partial("_RobotLeases", Model)
-    }
-
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-4">
-            <a href="@Url.Action("CompanyRobots")" class="form-control btn btn-default">Back</a>
+        <div class="form-group" style="margin-top: 10px;">
+            <div class="col-md-offset-5 col-md-4">
+                <a href="@Url.Action("CompanyRobots")" class="compact ui button">
+                    Back
+                </a>
+            </div>
         </div>
     </div>
 </div>

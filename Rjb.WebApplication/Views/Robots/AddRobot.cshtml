@@ -4,53 +4,50 @@
     ViewBag.Title = "Add Robot";
 }
 
-<h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("AddRobot", "Robots", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddRobot", "Robots", FormMethod.Post, new { role = "form" }))
 {
-    <h4>Create a new robot.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <input id="CompanyId" name="CompanyId" value="@CurrentUser.User.UserId" type="hidden" />
 
-    <div class="form-group">
-        <label class="col-md-2 col-md-offset-2 control-label">Company</label>
-        <div class="col-md-6 ">
-            <p class="form-control-static">
-                @CurrentUser.User.Name
-            </p>
-            <input id="CompanyId" name="CompanyId" value="@CurrentUser.User.UserId" type="hidden"/>
-        </div>
-    </div>
+    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 55px;">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="column" style="margin-top: 5px;">
+            <div class="ui raised segment">
+                <div class="ui blue right ribbon label">
+                    <i class="registered icon"></i> Create Robot
+                </div>
+                <h3 style="margin-top: -20px;">Create a new robot</h3>
 
-    <div class="form-group">
-        <label class="col-md-2 col-md-offset-2 control-label">Robot Model</label>
-        <div class="col-md-6 ">
-            <select class="form-control" id="RobotModelId" name="RobotModelId" placeholder="Select an option" required>
-                @foreach (var robotModel in Model.RobotModels)
-                {
-                    <option value="@robotModel.RobotModelId">@robotModel.Name</option>
-                }
-            </select>
-        </div>
-    </div>
-    
-    <div class="form-group">
-        @Html.LabelFor(m => m.PricePerDay,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.TextBoxFor(m => m.PricePerDay, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Count,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            <input class="form-control" id="Count" name="Count" type="number"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-4">
-            <input type="submit" class="form-control btn btn-default" value="Add robot" />
+                <div class="ui form">
+                    <div class="field">
+                        <label>Robot Model</label>
+                        <select class="form-control" id="RobotModelId" name="RobotModelId" placeholder="Select an option" required>
+                            @foreach (var robotModel in Model.RobotModels)
+                            {
+                                <option value="@robotModel.RobotModelId">@robotModel.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Price Per Day</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="PricePerDay" id="PricePerDay" placeholder="Price Per Day" required>
+                            <i class="user icon"></i>
+                        </div>
+                   </div>
+                    <div class="field">
+                        <label>Count</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="Count" id="Count" placeholder="Count" required>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="margin-left-center">
+                        <button type="submit" class="ui blue submit button">Create Robots</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 }

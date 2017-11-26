@@ -4,7 +4,8 @@
 @{
     ViewBag.Title = "Company Robots";
 }
+<div class="raw" style="margin-top: 55px;">
+    <h2>Robots of @CurrentUser.User.Name</h2>
 
-<h2>Robots of @CurrentUser.User.Name</h2>
-
-@Html.Partial("_Robots", Model)
+    @Html.Partial("_Robots", Model)
+</div>

@@ -6,43 +6,49 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("AddRobotModel", "Robots", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddRobotModel", "Robots", FormMethod.Post, new { role = "form" }))
 {
-    <h4>Create a new robot model.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 15px;">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="column" style="margin-top: 5px;">
+            <div class="ui raised segment">
+                <div class="ui blue right ribbon label">
+                    <i class="registered icon"></i> Create Robot Model
+                </div>
+                <h3 style="margin-top: -20px;">Create a new robot model</h3>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        </div>
-    </div>
+                <div class="ui form">
+                    <div class="field">
+                        <label>Specialization</label>
+                        <div class="ui left icon input">
+                            <select id="SpecializationId" class="ui search dropdown" name="SpecializationId" required>
+                                @foreach (var specialization in Model.Specializations)
+                                {
+                                    <option value="@specialization.SpecializationId">@specialization.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Name</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="Name" id="Name" placeholder="Name" required>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Description</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="Description" id="Description" placeholder="Description" required>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="margin-left-center">
+                        <button type="submit" class="ui blue submit button">Create Robot Model</button>
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Description,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-2 col-md-offset-2 control-label">Specialization</label>
-        <div class="col-md-6 ">
-            <select id="SpecializationId" class="form-control" name="SpecializationId" required>
-                @foreach (var specialization in Model.Specializations)
-                {
-                    <option value="@specialization.SpecializationId">@specialization.Name</option>
-                }
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-4">
-            <input type="submit" class="form-control btn btn-default" value="Add robot model" />
+            </div>
         </div>
     </div>
 }

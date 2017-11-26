@@ -5,36 +5,47 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("RegisterClient", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("RegisterClient", "Users", FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.FullName,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Username,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password,
-            new { @class = "col-md-2 col-md-offset-2 control-label" })
-        <div class="col-md-6 ">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-4">
-            <input type="submit" class="form-control btn btn-default" value="Register" />
+    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 15px;">
+        <div class="column" style="margin-top: 5px;">
+            <div class="ui raised segment">
+                <div class="ui blue right ribbon label">
+                    <i class="registered icon"></i> Register Client
+                </div>
+
+                <h3 style="margin-top: -20px;">Register Client</h3>
+                <div class="ui form">
+                    <div class="field">
+                        <label>Full Name</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="FullName" id="FullName" placeholder="Full Name" required>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Username</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="UserName" id="UserName" placeholder="Username" required>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <div class="ui left icon input">
+                            <input type="password" name="Password" id="Password" placeholder="Password" required>
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                    <div class="margin-left-center">
+                        <button type="submit" class="ui blue submit button">Register Client</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 }
