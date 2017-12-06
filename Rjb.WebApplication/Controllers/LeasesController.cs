@@ -36,11 +36,6 @@ namespace Rjb.WebApplication.Controllers
         public ActionResult MyLeases()
         {
             var customerLease = LeaseClientService.GetLeaseOfClient(CurrentUser.User.UserId);
-            customerLease.Collection.ForEach(x =>
-            {
-                var rentDays = (x.EndDate - x.StartDate).Days;
-                x.TotalPrice = rentDays * (int)x.RobotLeases.Sum(r => r.Robot.PricePerDay);
-            });
 
             return View("ClientLeases", customerLease.Collection);
         }

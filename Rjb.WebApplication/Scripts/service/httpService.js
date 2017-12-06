@@ -22,14 +22,22 @@ $('body').on('click', '.search-robot', function () {
         SpecializationId: $('#SpecializationId').val(),
     };
 
+    $.blockUI({
+        message: '<h1>Processing</h1>',
+        css: { border: '3px solid #a00' }
+    });
+
     var params = { url: '/robots/GetRobotsOnSpecificDate', data: data }
-    $.when(infrastructureService.ajaxRequest(params))
+    $.when(ajaxRequest(params))
         .done(function (result) {
             $('.robots-block-container').removeClass('hide');
             $('.robots-block').html(result);
         })
         .fail(function () {
             alert('Error occure when search robots');
+        })
+        .always(function () {
+            $.unblockUI();
         });
 });
 
@@ -52,12 +60,20 @@ $('body').on('click', '.add-lease', function () {
         EndDate: $('#EndDate').val()
     };
 
+    $.blockUI({
+        message: '<h1>Processing</h1>',
+        css: { border: '3px solid #a00' }
+    });
+
     var params = { url: '/Leases/AddLease', data: data }
-    $.when(infrastructureService.ajaxRequest(params))
-        .done(function (result) {
-            window.location = '/Leases/MyLeases'
+    $.when(ajaxRequest(params))
+        .done(function () {
+            window.location = '/Leases/MyLeases';
         })
         .fail(function () {
             alert('Error occure when add lease');
+        })
+        .always(function () {
+            $.unblockUI();
         });
 });

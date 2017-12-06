@@ -48,11 +48,11 @@ namespace HttpClientExtenctions.RequestHelpers
             }
         }
 
-        public static CollectionResult<LeaseModel> GetLeaseOfClient(int clientId)
+        public static CollectionResult<Lease> GetLeaseOfClient(int clientId)
         {
             try
             {
-                var lease = HttpClientHelper.GetResult<CollectionResult<LeaseModel>>(string.Concat(LeasesUrl, $"GetLeaseOfClient?clientId={clientId}"));
+                var lease = HttpClientHelper.GetResult<CollectionResult<Lease>>(string.Concat(LeasesUrl, $"GetLeaseOfClient?clientId={clientId}"));
                 return lease;
             }
             catch (Exception e)

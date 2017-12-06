@@ -21,7 +21,11 @@ namespace FJB.DAL.Repositories.Robots
 
         public IEnumerable<Robot> GetItemsByExpression(FilterParams<Robot> filterParams)
         {
-            return _dbContext.Robots.Where(filterParams.Expression).ToList();
+            return _dbContext.Robots
+                .Include(x => x.RobotModel)
+                .Include(x => x.RobotModel.RobotModelSpecializations)
+                .Include(x => x.RobotModel.RobotModelSpecializations.Select(p => p.Specialization))
+                .Where(filterParams.Expression).ToList();
         }
 
         public IEnumerable<Robot> GetItemsByExpression(FilterParams<Robot> filterParams, out int totalCount)
