@@ -57,28 +57,17 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddLease(LeaseViewModel leaseModel)
         {
-            var searchRobotsModel = new SearchRobotModel
-            {
-                SpecializationId = leaseModel.SpecializationId,
-                StartDate = leaseModel.StartDate,
-                EndDate = leaseModel.EndDate
-            };
-
-            var availableRobots = RobotClientService.GetRobotsOnSpecificDateRange(searchRobotsModel)
-                .Take(leaseModel.CountRobots)
-                .ToList();
-
             var lease = new Lease
             {
                 ClientId = CurrentUser.User.UserId,
                 StartDate = leaseModel.StartDate,
                 EndDate = leaseModel.EndDate,
-                RobotLeases = new List<RobotLease>(leaseModel.CountRobots)
+                RobotLeases = new List<RobotLease>(leaseModel.RobotIds.Length)
             };
-
-            availableRobots.ForEach(x => lease.RobotLeases.Add(new RobotLease
+            
+            leaseModel.RobotIds.ForEach(x => lease.RobotLeases.Add(new RobotLease
             {
-                RobotId = x.RobotId
+                RobotId = x
             }));
 
             var isSuccess = LeaseClientService.CreateLease(lease);
@@ -86,10 +75,13 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddLease", "Add lease failed.");
-                return View("AddLease");
+                var specializations = SpecializationClientService.GetAllSpecializations();
+                leaseModel.Specializations = specializations;
+
+                return View("AddLease", leaseModel);
             }
 
-            return RedirectToAction("MyLeases");
+            return Json(string.Empty);
         }
 
         [HttpPost]
@@ -100,7 +92,7 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddLease", "Add lease failed.");
-                return View("EditLease");
+                return View("EditLease", lease);
             }
 
             return RedirectToAction("MyLeases");

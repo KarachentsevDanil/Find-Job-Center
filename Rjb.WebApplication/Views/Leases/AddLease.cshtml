@@ -5,8 +5,7 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("AddLease", "Leases", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+<div class="form-horizontal">
     <div class="col-sm-6 col-sm-offset-3" style="margin-top: 15px;">
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="column" style="margin-top: 5px;">
@@ -29,13 +28,6 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label>Count Robots</label>
-                        <div class="ui left icon input">
-                            <input type="text" name="CountRobots" id="CountRobots" placeholder="Count Robots" required>
-                            <i class="user icon"></i>
-                        </div>
-                    </div>
-                    <div class="field">
                         <label>Start Date</label>
                         <div class="ui left icon input">
                             <input type="date" name="StartDate" id="StartDate" placeholder="Start Date" required>
@@ -50,15 +42,28 @@
                         </div>
                     </div>
                     <div class="margin-left-center">
-                        <button type="submit" class="ui blue submit button">Search Robots</button>
+                        <button type="submit" class="ui blue submit button search-robot">Search Robots</button>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-}
+</div>
+<div class="row robots-block-container hide">
+    <div class="robots-block">
+
+    </div>
+    <div class="form-group" style="margin-top: 10px;">
+        <div class="col-md-offset-5 col-md-4">
+            <a href="javascript:;" class="compact ui button add-lease">
+                Create Lease
+            </a>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/service/httpService.js"></script>
 }

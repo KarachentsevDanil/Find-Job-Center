@@ -3,6 +3,10 @@
 <table class="ui celled table">
     <thead>
         <tr>
+            @if (ViewBag.IsSearchView)
+            {
+                <th></th>
+            }
             <th>Number</th>
             <th>Model</th>
             <th>Price per hour</th>
@@ -15,6 +19,13 @@
         @foreach (var robot in Model)
         {
             <tr>
+                @if (ViewBag.IsSearchView)
+                {
+                    <td>
+                        <input class="robot-item" type="checkbox" data-robot-id="@robot.RobotId" />
+                    </td>
+                }
+
                 <td>#@robot.RobotId</td>
                 <td>@robot.RobotModel.Name</td>
                 <td>@robot.PricePerDay</td>

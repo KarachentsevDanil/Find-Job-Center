@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJF.Domain", "FJB.Domain\RJF.Domain.csproj", "{274C4614-8D28-41CA-BDFD-BBDCDB2A83BB}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Extensions", "6. Extensions", "{B526A45C-13E5-493A-9D1D-458F72AFDC18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientExtenctions", "HttpClientExtenctions\HttpClientExtenctions.csproj", "{8463DDFC-096C-4822-B01C-FD4BF272DF05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.Mobile", "7.Mobile", "{80E7CB90-559C-4A78-B23F-EC01815E1ED0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

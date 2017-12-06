@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using FJB.Domain.Entities.Robots;
 using FJB.Domain.Entities.Specializations;
@@ -9,7 +8,7 @@ using RJB.BLL.Models;
 
 namespace Rjb.WebApplication.Controllers
 {
-    
+
     public class RobotsController : Controller
     {
         public ActionResult AddRobot()
@@ -53,7 +52,10 @@ namespace Rjb.WebApplication.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddRobot", "Add robot failed.");
-                return View("AddRobot");
+                var robotModels = RobotClientService.GetRobotsModel();
+                robot.RobotModels = robotModels;
+
+                return View("AddRobot", robot);
             }
 
             return RedirectToAction("CompanyRobots", "Robots");
@@ -75,8 +77,11 @@ namespace Rjb.WebApplication.Controllers
 
             if (!isSuccess)
             {
+                var specializations = SpecializationClientService.GetAllSpecializations();
+                robotModel.Specializations = specializations;
+
                 ModelState.AddModelError("AddRobot", "Add robot model failed.");
-                return View("AddRobotModel");
+                return View("AddRobotModel", robotModel);
             }
 
             return RedirectToAction("AddRobot");
@@ -93,6 +98,8 @@ namespace Rjb.WebApplication.Controllers
         public ActionResult GetRobotsOnSpecificDate(SearchRobotModel searchRobotModel)
         {
             var robots = RobotClientService.GetRobotsOnSpecificDateRange(searchRobotModel);
+            ViewBag.IsSearchView = true;
+
             return PartialView("_Robots", robots);
         }
     }

@@ -22,5 +22,7 @@ namespace RJB.BLL.Models
         public Rating Rating { get; set; }
 
         public IEnumerable<Specialization> Specializations { get; set; }
+
+        public int[] RobotIds { get; set; }
     }
 }
