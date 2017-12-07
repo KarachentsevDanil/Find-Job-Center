@@ -55,7 +55,10 @@ namespace RJB.BLL.Robots
 
         public IEnumerable<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId)
         {
-            var robotFilterParams = new FilterParams<Robot>(x =>!x.RobotLeases.Any(s => s.Lease.StartDate < endDate && s.Lease.EndDate < startDate));
+            var robotFilterParams = new FilterParams<Robot>(x =>
+                x.RobotModel.RobotModelSpecializations.Any(p=> p.SpecializationId == specializationId) && 
+                !x.RobotLeases.Any(s => s.Lease.StartDate < endDate && s.Lease.EndDate < startDate));
+
             return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
         }
 

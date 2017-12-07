@@ -3,7 +3,7 @@
 <table class="ui celled table">
     <thead>
         <tr>
-            @if (ViewBag.IsSearchView)
+            @if (ViewBag.IsSearchView ?? false)
             {
                 <th style="width:2%;"></th>
             }
@@ -19,7 +19,7 @@
         @foreach (var robot in Model)
         {
             <tr>
-                @if (ViewBag.IsSearchView)
+                @if (ViewBag.IsSearchView ?? false)
                 {
                     <td>
                         <input class="robot-item" type="checkbox" data-robot-id="@robot.RobotId" />
