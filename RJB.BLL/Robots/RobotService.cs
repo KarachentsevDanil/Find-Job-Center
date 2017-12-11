@@ -57,7 +57,8 @@ namespace RJB.BLL.Robots
         {
             var robotFilterParams = new FilterParams<Robot>(x =>
                 x.RobotModel.RobotModelSpecializations.Any(p=> p.SpecializationId == specializationId) && 
-                !x.RobotLeases.Any(s => s.Lease.StartDate < endDate && s.Lease.EndDate < startDate));
+                !x.RobotLeases.Any(s => s.Lease.StartDate < endDate && s.Lease.StartDate >= startDate
+                && s.Lease.EndDate >= startDate && s.Lease.EndDate <= endDate));
 
             return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
         }
