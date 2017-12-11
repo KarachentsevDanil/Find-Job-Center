@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using FJB.DAL.Context;
@@ -38,6 +39,12 @@ namespace FJB.DAL.Repositories.Robots
         public RobotModel GetItemByExpression(Expression<Func<RobotModel, bool>> expression)
         {
             return _dbContext.RobotModels.FirstOrDefault(expression);
+        }
+
+        public IEnumerable<RobotModel> GetModels()
+        {
+            return _dbContext.RobotModels.Include(x => x.RobotModelSpecializations.Select(p => p.Specialization))
+                .ToList();
         }
     }
 }

@@ -21,8 +21,8 @@
                     <tr>
                         <td>#@lease.LeaseId</td>
                         <td>@lease.Client.FullName</td>
-                        <td>@lease.StartDate</td>
-                        <td>@lease.EndDate</td>
+                        <td>@lease.StartDate.ToShortDateString()</td>
+                        <td>@lease.EndDate.ToShortDateString()</td>
                         <td>@lease.Feedback</td>
                         <td>@lease.Rating</td>
                         <td>

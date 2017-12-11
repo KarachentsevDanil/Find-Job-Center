@@ -69,7 +69,7 @@ namespace Rjb.WebApplication.Controllers
 
             CurrentUser.User = UserClientService.GetCurrentUser();
 
-            return RedirectToAction("AddRobot", "Robots");
+            return RedirectToAction("CompanyRobots", "Robots");
         }
 
         [HttpPost]

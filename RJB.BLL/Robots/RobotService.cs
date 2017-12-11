@@ -57,9 +57,16 @@ namespace RJB.BLL.Robots
         {
             var robotFilterParams = new FilterParams<Robot>(x =>
                 x.RobotModel.RobotModelSpecializations.Any(p=> p.SpecializationId == specializationId) && 
-                !x.RobotLeases.Any(s => s.Lease.StartDate < endDate && s.Lease.EndDate < startDate));
+                !x.RobotLeases.Any(s => s.Lease.StartDate <= endDate && s.Lease.EndDate <= startDate));
 
-            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
+            var robotWithLeases =  _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
+
+            robotFilterParams = new FilterParams<Robot>(x =>
+                x.RobotModel.RobotModelSpecializations.Any(p => p.SpecializationId == specializationId));
+
+            var robotWihoutLeases = _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
+
+            return robotWihoutLeases.Where(x => robotWithLeases.All(p => p.RobotId != x.RobotId)).ToList();
         }
 
         public IEnumerable<Robot> GetRobotsOfCompany(int companyId, out int totalCount)

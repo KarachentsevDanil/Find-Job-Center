@@ -27,7 +27,7 @@
             <label class="col-md-2 col-md-offset-2 control-label">Start Date</label>
             <div class="col-md-6 ">
                 <p class="form-control-static">
-                    @Model.StartDate
+                    @Model.StartDate.ToShortDateString()
                 </p>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <label class="col-md-2 col-md-offset-2 control-label">End Date</label>
             <div class="col-md-6 ">
                 <p class="form-control-static">
-                    @Model.EndDate
+                    @Model.EndDate.ToShortDateString()
                 </p>
             </div>
         </div>
@@ -54,7 +54,7 @@
         {
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-4">
-                    <a href="@Url.Action("EditLease", new { leaseId = Model.LeaseId })" class="form-control btn btn-default">Complteate lease</a>
+                    <a href="@Url.Action("EditLease", new { leaseId = Model.LeaseId })" class="form-control btn btn-default">Complete lease</a>
                 </div>
             </div>
         }

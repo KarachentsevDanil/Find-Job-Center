@@ -37,8 +37,8 @@
                         <p>Price: @robot.PricePerDay</p>
                     }
                 </td>
-                <td>@lease.StartDate</td>
-                <td>@lease.EndDate</td>
+                <td>@lease.StartDate.ToShortDateString()</td>
+                <td>@lease.EndDate.ToShortDateString()</td>
                 <td>@lease.Feedback</td>
                 <td>@lease.Rating.ToString()</td>
                 <td>@totalPrice</td>

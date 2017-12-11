@@ -32,9 +32,18 @@
                 <td>@robot.RobotModel.Description</td>
                 <td>@(robot.RobotModel.RobotModelSpecializations.FirstOrDefault()?.Specialization?.Name)</td>
                 <td class="center">
-                    <a href="@Url.Action("RobotDetails", new {robotId = robot.RobotId})" class="compact ui button">
-                        Details
-                    </a>
+                    @if (ViewBag.IsSearchView ?? false)
+                    {
+                        <a href="javascript:;" class="compact ui button" onclick="window.open('@(Url.Action("RobotDetails", new {robotId = robot.RobotId}))')">
+                            Details
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("RobotDetails", new {robotId = robot.RobotId})" class="compact ui button">
+                            Details
+                        </a>
+                    }
                 </td>
             </tr>
         }

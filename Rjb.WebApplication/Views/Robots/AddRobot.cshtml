@@ -24,7 +24,15 @@
                         <select class="form-control" id="RobotModelId" name="RobotModelId" placeholder="Select an option" required>
                             @foreach (var robotModel in Model.RobotModels)
                             {
-                                <option value="@robotModel.RobotModelId">@robotModel.Name</option>
+                                var specialization = string.Empty;
+
+                                if (robotModel.RobotModelSpecializations != null && robotModel.RobotModelSpecializations.Any())
+                                {
+                                    var specializations = robotModel.RobotModelSpecializations.Select(x => x.Specialization.Name).AsEnumerable();
+                                    specialization = string.Join(" ", specializations);
+                                }
+                                
+                                <option value="@robotModel.RobotModelId">@robotModel.Name @(!string.IsNullOrEmpty(specialization) ? $"({specialization})" : string.Empty)</option>
                             }
                         </select>
                     </div>
@@ -34,7 +42,7 @@
                             <input type="number" name="PricePerDay" id="PricePerDay" placeholder="Price Per Day" required>
                             <i class="user icon"></i>
                         </div>
-                   </div>
+                    </div>
                     <div class="field">
                         <label>Count</label>
                         <div class="ui left icon input">
