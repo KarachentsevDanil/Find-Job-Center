@@ -1,0 +1,5 @@
+1) Setup IIS
+2) Add WebSite to IIS
+3) Get permission to IUSR and IIS-IUSRS to folder of your site
+4) Enable TCP\IP for SQL Server in Sql Configuration
+5) Add permission of sysadmin to users of SQL Server
