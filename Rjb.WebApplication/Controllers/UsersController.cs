@@ -11,7 +11,6 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult Login()
         {
-            UserClientService.LogOff();
             CurrentUser.User = null;
             return View();
         }
@@ -29,15 +28,15 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult LoginClient(UserLoginModel loginModel)
         {
-            var isSuccess = UserClientService.ClientLogin(loginModel);
+            var userViewModel = UserClientService.ClientLogin(loginModel);
 
-            if (!isSuccess || !ModelState.IsValid)
+            if (userViewModel == null || !ModelState.IsValid)
             {
                 ModelState.AddModelError("Login", "Login failed.");
                 return View("Login", loginModel);
             }
 
-            CurrentUser.User = UserClientService.GetCurrentUser();
+            CurrentUser.User = userViewModel;
 
             return RedirectToAction("MyLeases", "Leases");
         }
@@ -59,15 +58,15 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult LoginCompany(UserLoginModel loginModel)
         {
-            var isSuccess = UserClientService.CompanyLogin(loginModel);
+            var userViewModel = UserClientService.CompanyLogin(loginModel);
 
-            if (!isSuccess)
+            if (userViewModel == null)
             {
                 ModelState.AddModelError("Login", "Login failed.");
                 return View("Login", loginModel);
             }
 
-            CurrentUser.User = UserClientService.GetCurrentUser();
+            CurrentUser.User = userViewModel;
 
             return RedirectToAction("CompanyRobots", "Robots");
         }

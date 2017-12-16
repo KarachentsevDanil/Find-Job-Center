@@ -9,16 +9,16 @@ namespace HttpClientExtenctions.RequestHelpers
     {
         private static string UserUrl = "/api/users/";
 
-        public static bool ClientLogin(UserLoginModel loginModel)
+        public static CurrentUserViewModel ClientLogin(UserLoginModel loginModel)
         {
             try
             {
-                HttpClientHelper.PostData(loginModel, string.Concat(UserUrl, "ClientLogin"));
-                return true;
+                var userViewModel = HttpClientHelper.PostDataAndGetResult<UserLoginModel, CurrentUserViewModel>(loginModel, string.Concat(UserUrl, "ClientLogin"));
+                return userViewModel;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 
@@ -35,16 +35,18 @@ namespace HttpClientExtenctions.RequestHelpers
             }
         }
 
-        public static bool CompanyLogin(UserLoginModel loginModel)
+        public static CurrentUserViewModel CompanyLogin(UserLoginModel loginModel)
         {
             try
             {
-                HttpClientHelper.PostData(loginModel, string.Concat(UserUrl, "CompanyLogin"));
-                return true;
+                var userViewModel = 
+                    HttpClientHelper.PostDataAndGetResult<UserLoginModel, CurrentUserViewModel>(loginModel, string.Concat(UserUrl, "CompanyLogin"));
+
+                return userViewModel;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 
@@ -59,16 +61,6 @@ namespace HttpClientExtenctions.RequestHelpers
             {
                 return false;
             }
-        }
-
-        public static CurrentUserViewModel GetCurrentUser()
-        {
-            return HttpClientHelper.GetResult<CurrentUserViewModel>(string.Concat(UserUrl, "GetCurrentUser"));
-        }
-
-        public static void LogOff()
-        {
-            HttpClientHelper.Post(string.Concat(UserUrl, "LogOff"));
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using Newtonsoft.Json;
+using RJB.BLL.Models;
 
 namespace HttpClientExtenctions.Helpers
 {
@@ -9,12 +11,22 @@ namespace HttpClientExtenctions.Helpers
     {
         private static HttpClient _client;
 
+        public static CurrentUserViewModel User;
+
         public static HttpClient Client
         {
             get
             {
                 if (_client != null)
+                {
+                    if (User != null)
+                    {
+                        var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(User.Name + ":" + User.Password));
+                        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", credentials);
+                    }
+
                     return _client;
+                }
 
                 _client = new HttpClient();
 
@@ -25,6 +37,12 @@ namespace HttpClientExtenctions.Helpers
                 catch (Exception)
                 {
                     // Error will be thrown on first attempt to connect
+                }
+
+                if (User != null)
+                {
+                    var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(User.Name + ":" + User.Password));
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", credentials);
                 }
 
                 _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

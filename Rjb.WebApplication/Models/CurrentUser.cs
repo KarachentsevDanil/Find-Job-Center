@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using HttpClientExtenctions.Helpers;
 using Newtonsoft.Json;
 using RJB.BLL.Models;
 
@@ -7,15 +8,18 @@ namespace Rjb.WebApplication.Models
 {
     public static class CurrentUser
     {
+        private static string CookiePathName = "userInfo";
+
         public static CurrentUserViewModel User
         {
             get
             {
-                var userCookie = HttpContext.Current.Request.Cookies["userInfo"];
+                var userCookie = HttpContext.Current.Request.Cookies[CookiePathName];
 
-                if (userCookie != null)
+                if (!string.IsNullOrEmpty(userCookie?.Value))
                 {
-                    return JsonConvert.DeserializeObject<CurrentUserViewModel>(userCookie.Value);
+                    var user = JsonConvert.DeserializeObject<CurrentUserViewModel>(userCookie.Value);
+                    return user;
                 }
 
                 return null;
@@ -24,13 +28,18 @@ namespace Rjb.WebApplication.Models
             {
                 var userInfo = JsonConvert.SerializeObject(value);
 
-                var cookie = new HttpCookie(userInfo)
+                if (string.IsNullOrEmpty(userInfo))
+                {
+                    return;
+                }
+
+                var cookie = new HttpCookie(CookiePathName)
                 {
                     Expires = DateTime.MinValue, 
-                    Name = "userInfo"
+                    Value = userInfo
                 };
 
-                HttpContext.Current.Request.Cookies.Add(cookie);
+                HttpContext.Current.Response.Cookies.Add(cookie);
             }
         }
     }

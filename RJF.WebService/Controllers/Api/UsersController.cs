@@ -5,7 +5,6 @@ using System.Web.Http;
 using FJB.Domain.Entities.Users;
 using RJB.BLL.Models;
 using RJB.BLL.Users.Contracts;
-using RJF.WebService.Models;
 
 namespace RJF.WebService.Controllers.Api
 {
@@ -29,15 +28,16 @@ namespace RJF.WebService.Controllers.Api
 
                 if (loginModel.Password == client.Password)
                 {
-                    CurrentUser.User = new CurrentUserViewModel
+                    var user = new CurrentUserViewModel
                     {
                         Name = client.FullName,
                         IsClient = true,
                         Role = client.Role,
-                        UserId = client.ClientId
+                        UserId = client.ClientId,
+                        Password = client.Password
                     };
 
-                    return Request.CreateResponse(HttpStatusCode.OK);
+                    return Request.CreateResponse(HttpStatusCode.OK, user);
                 }
 
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -76,14 +76,15 @@ namespace RJF.WebService.Controllers.Api
 
                 if (loginModel.Password == company.Password)
                 {
-                    CurrentUser.User = new CurrentUserViewModel
+                    var user = new CurrentUserViewModel
                     {
                         Name = company.Name,
                         IsClient = false,
-                        UserId = company.CompanyId
+                        UserId = company.CompanyId,
+                        Password = company.Password
                     };
 
-                    return Request.CreateResponse(HttpStatusCode.OK);
+                    return Request.CreateResponse(HttpStatusCode.OK, user);
                 }
 
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -111,19 +112,6 @@ namespace RJF.WebService.Controllers.Api
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
-        }
-
-        [HttpGet]
-        public HttpResponseMessage GetCurrentUser()
-        {
-            return Request.CreateResponse(HttpStatusCode.OK, CurrentUser.User);
-        }
-
-        [HttpPost]
-        public HttpResponseMessage LogOff()
-        {
-            CurrentUser.User = null;
-            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

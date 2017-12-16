@@ -3,12 +3,13 @@ using System.Web.Mvc;
 using FJB.Domain.Entities.Robots;
 using FJB.Domain.Entities.Specializations;
 using HttpClientExtenctions.RequestHelpers;
+using Rjb.WebApplication.Attributes;
 using Rjb.WebApplication.Models;
 using RJB.BLL.Models;
 
 namespace Rjb.WebApplication.Controllers
 {
-
+    [Authorization]
     public class RobotsController : Controller
     {
         public ActionResult AddRobot()

@@ -10,7 +10,7 @@ namespace FJB.DAL.Context
     {
         //TODO Move connection string to app config
         public RjbDbContext()
-            : base(@"data source=WS003HRK01\SQLEXPRESS;
+            : base(@"data source=USER-PC\SQLEXPRESS;
                         initial catalog=RobotJobFinderDb;
                         integrated security=True;MultipleActiveResultSets=True;
                         App=EntityFramework")

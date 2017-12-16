@@ -5,9 +5,11 @@ using System.Web.Http;
 using FJB.Domain.Entities.Robots;
 using RJB.BLL.Models;
 using RJB.BLL.Robots.Contracts;
+using RJF.WebService.Attributes;
 
 namespace RJF.WebService.Controllers.Api
 {
+    [BasicAuthentication(false)]
     public class RobotController : ApiController
     {
         private readonly IRobotService _robotService;

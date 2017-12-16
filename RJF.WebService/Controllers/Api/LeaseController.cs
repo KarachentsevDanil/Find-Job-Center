@@ -5,9 +5,11 @@ using System.Web.Http;
 using FJB.Domain.Entities.Leases;
 using RJB.BLL.Leases.Contracts;
 using RJB.BLL.Models;
+using RJF.WebService.Attributes;
 
 namespace RJF.WebService.Controllers.Api
 {
+    [BasicAuthentication(true)]
     public class LeaseController : ApiController
     {
         private readonly ILeaseService _leaseService;

@@ -2,6 +2,6 @@
 {
     public static class Constants
     {
-        public static string BaseUrl = "http://10.35.5.156:809/";
+        public static string BaseUrl = "http://169.254.80.80:808/";
     }
 }

@@ -3,13 +3,14 @@ using System.Linq;
 using System.Web.Mvc;
 using FJB.Domain.Entities.Leases;
 using HttpClientExtenctions.RequestHelpers;
+using Rjb.WebApplication.Attributes;
 using Rjb.WebApplication.Models;
 using RJB.BLL.Models;
 using WebGrease.Css.Extensions;
 
 namespace Rjb.WebApplication.Controllers
 {
-    
+    [Authorization]
     public class LeasesController : Controller
     {
         public ActionResult AddLease()
