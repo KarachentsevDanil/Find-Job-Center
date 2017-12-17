@@ -33,7 +33,7 @@ namespace RJB.BLL.Users
 
         public Company GetCompanyByNameOrEmail(string name)
         {
-            return _unitOfWork.Companies.GetItemByExpression(x => x.Email == name);
+            return _unitOfWork.Companies.GetItemByExpression(x => x.Email == name || x.Name == name);
         }
     }
 }

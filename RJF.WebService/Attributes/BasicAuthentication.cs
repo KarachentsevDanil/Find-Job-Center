@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using RJB.BLL.Models;
@@ -6,7 +10,7 @@ using RJB.BLL.Users.Contracts;
 
 namespace RJF.WebService.Attributes
 {
-    public class BasicAuthenticationAttribute : AuthorizeAttribute
+    public class BasicAuthenticationAttribute : AuthorizationFilterAttribute
     {
         public bool IsUser { get; set; }
 
@@ -15,10 +19,10 @@ namespace RJF.WebService.Attributes
             IsUser = isUser;
         }
 
-        public override void OnAuthorization(AuthorizationContext filterContext)
+        public override void OnAuthorization(HttpActionContext filterContext)
         {
-            var request = filterContext.HttpContext.Request;
-            var authorizationCredentials = request.Headers["Authorization"];
+            var request = filterContext.Request;
+            var authorizationCredentials = request.Headers.Authorization.Parameter;
 
             if (!string.IsNullOrEmpty(authorizationCredentials))
             {
@@ -30,9 +34,9 @@ namespace RJF.WebService.Attributes
                     if (IsUser)
                     {
                         var clientService = DependencyResolver.Current.GetService(typeof(IClientService)) as IClientService;
+                        var client = clientService.GetClientByUsername(parsedCredentials.Name);
 
-                        if (clientService.GetClientByUsername(parsedCredentials.Name).Password ==
-                            parsedCredentials.Password)
+                        if (client.Password == parsedCredentials.Password)
                         {
                             return;
                         }
@@ -40,9 +44,9 @@ namespace RJF.WebService.Attributes
                     else
                     {
                         var companyService = DependencyResolver.Current.GetService(typeof(ICompanyService)) as ICompanyService;
+                        var company = companyService.GetCompanyByNameOrEmail(parsedCredentials.Name);
 
-                        if (companyService.GetCompanyByNameOrEmail(parsedCredentials.Name).Password ==
-                            parsedCredentials.Password)
+                        if (company.Password == parsedCredentials.Password)
                         {
                             return;
                         }
@@ -50,7 +54,7 @@ namespace RJF.WebService.Attributes
                 }
             }
             
-            filterContext.Result = new HttpUnauthorizedResult();
+            filterContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
         }
     }
 }
