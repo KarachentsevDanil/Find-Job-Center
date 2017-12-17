@@ -31,7 +31,7 @@
                                     var specializations = robotModel.RobotModelSpecializations.Select(x => x.Specialization.Name).AsEnumerable();
                                     specialization = string.Join(" ", specializations);
                                 }
-                                
+
                                 <option value="@robotModel.RobotModelId">@robotModel.Name @(!string.IsNullOrEmpty(specialization) ? $"({specialization})" : string.Empty)</option>
                             }
                         </select>
@@ -39,14 +39,14 @@
                     <div class="field">
                         <label>Price Per Day</label>
                         <div class="ui left icon input">
-                            <input type="number" name="PricePerDay" id="PricePerDay" placeholder="Price Per Day" required>
+                            <input type="number" name="PricePerDay" id="PricePerDay" placeholder="Price Per Day" min="1" required>
                             <i class="user icon"></i>
                         </div>
                     </div>
                     <div class="field">
                         <label>Count</label>
                         <div class="ui left icon input">
-                            <input type="number" name="Count" id="Count" placeholder="Count" required>
+                            <input type="number" name="Count" id="Count" placeholder="Count" min="1" required>
                             <i class="user icon"></i>
                         </div>
                     </div>

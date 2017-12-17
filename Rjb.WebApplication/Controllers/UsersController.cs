@@ -10,7 +10,6 @@ namespace Rjb.WebApplication.Controllers
     {
         public ActionResult Login()
         {
-            CurrentUser.User = null;
             return View();
         }
 
@@ -81,6 +80,12 @@ namespace Rjb.WebApplication.Controllers
                 return View("RegisterCompany", company);
             }
 
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult Logout()
+        {
+            CurrentUser.User = null;
             return RedirectToAction("Login");
         }
     }
