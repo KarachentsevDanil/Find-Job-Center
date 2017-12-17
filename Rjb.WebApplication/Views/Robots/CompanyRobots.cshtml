@@ -4,8 +4,19 @@
 @{
     ViewBag.Title = "Company Robots";
 }
-<div class="raw" style="margin-top: 55px;">
+
+<div class="row">
     <h2>Robots of @CurrentUser.User.Name</h2>
 
     @Html.Partial("_Robots", Model)
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   
+    <script>
+        $(document).ready(function () {
+            $("#MyRobotsNavTab").addClass('active');
+        });
+    </script>
+}

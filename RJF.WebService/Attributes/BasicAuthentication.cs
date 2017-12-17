@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Web.Mvc;
-using Newtonsoft.Json;
 using RJB.BLL.Models;
 using RJB.BLL.Users.Contracts;
 
@@ -36,7 +35,7 @@ namespace RJF.WebService.Attributes
                         var clientService = DependencyResolver.Current.GetService(typeof(IClientService)) as IClientService;
                         var client = clientService.GetClientByUsername(parsedCredentials.Name);
 
-                        if (client.Password == parsedCredentials.Password)
+                        if (client != null && client.Password == parsedCredentials.Password)
                         {
                             return;
                         }

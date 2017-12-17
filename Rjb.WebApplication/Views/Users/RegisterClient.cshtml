@@ -3,14 +3,12 @@
     ViewBag.Title = "Register Client";
 }
 
-<h2>@ViewBag.Title.</h2>
-
 @using (Html.BeginForm("RegisterClient", "Users", FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
-    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 15px;">
+    <div class="col-sm-6 col-sm-offset-3">
         <div class="column" style="margin-top: 5px;">
             <div class="ui raised segment">
                 <div class="ui blue right ribbon label">
@@ -52,4 +50,10 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $("#LoginNavTab").addClass('active');
+        });
+    </script>
 }

@@ -3,10 +3,8 @@
     ViewBag.Title = "Rent a robots";
 }
 
-<h2>@ViewBag.Title.</h2>
-
 <div class="form-horizontal">
-    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 15px; margin-bottom:20px;">
+    <div class="col-sm-6 col-sm-offset-3" style="margin-bottom:20px;">
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="column" style="margin-top: 5px;">
             <div class="ui raised segment">
@@ -51,15 +49,17 @@
     </div>
 </div>
 <div class="row robots-block-container hide">
-    <div class="robots-block">
 
-    </div>
-    <div class="form-group" style="margin-top: 10px;">
+    <div class="form-group">
         <div class="col-md-offset-5 col-md-4">
-            <a href="javascript:;" class="compact ui button add-lease">
+            <a href="javascript:;" class="compact ui button add-lease" style="margin-bottom: 10px;">
                 Create Lease
             </a>
         </div>
+    </div>
+
+    <div class="robots-block">
+
     </div>
 </div>
 
@@ -67,4 +67,10 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.blockUI.js"></script>
     <script src="~/Scripts/service/httpService.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#AddLeaseNavTab").addClass('active');
+        });
+    </script>
 }

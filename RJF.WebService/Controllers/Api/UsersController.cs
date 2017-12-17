@@ -30,7 +30,7 @@ namespace RJF.WebService.Controllers.Api
                 {
                     var user = new CurrentUserViewModel
                     {
-                        Name = client.FullName,
+                        Name = client.Username,
                         IsClient = true,
                         Role = client.Role,
                         UserId = client.ClientId,
@@ -78,7 +78,7 @@ namespace RJF.WebService.Controllers.Api
                 {
                     var user = new CurrentUserViewModel
                     {
-                        Name = company.Name,
+                        Name = company.Email,
                         IsClient = false,
                         UserId = company.CompanyId,
                         Password = company.Password

@@ -9,7 +9,7 @@
 {
     <input id="CompanyId" name="CompanyId" value="@CurrentUser.User.UserId" type="hidden" />
 
-    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 55px;">
+    <div class="col-sm-6 col-sm-offset-3">
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="column" style="margin-top: 5px;">
             <div class="ui raised segment">
@@ -63,4 +63,10 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $("#AddRobotNavTab").addClass('active');
+        });
+    </script>
 }

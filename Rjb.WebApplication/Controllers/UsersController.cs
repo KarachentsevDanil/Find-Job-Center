@@ -8,7 +8,6 @@ namespace Rjb.WebApplication.Controllers
 {
     public class UsersController : Controller
     {
-
         public ActionResult Login()
         {
             CurrentUser.User = null;

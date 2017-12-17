@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Robot detils";
 }
-<div class="row" style="margin-top: 55px;">
+
+<div class="row">
 
     <h2>Robot #@(Model.RobotId)</h2>
 
@@ -55,3 +56,14 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $("#MyRobotsNavTab").addClass('active');
+        });
+    </script>
+}

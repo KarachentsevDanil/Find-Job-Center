@@ -1,54 +1,63 @@
 ﻿@using Rjb.WebApplication.Models
 @model IEnumerable<FJB.Domain.Entities.Leases.Lease>
-<div class="row" style="margin-top: 55px;">
-    
+<div class="row">
+
     <h2>Leases of @CurrentUser.User.Name</h2>
 
     <table class="ui celled table">
         <thead>
-        <tr>
-            <th>Number</th>
-            <th>Robots</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Feedback</th>
-            <th>Rating</th>
-            <th>Total Price</th>
-            <th style="width: 10%;"></th>
-        </tr>
+            <tr>
+                <th>Number</th>
+                <th>Robots</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Feedback</th>
+                <th>Rating</th>
+                <th>Total Price</th>
+                <th style="width: 10%;"></th>
+            </tr>
         </thead>
         <tbody>
-  
-        @foreach (var lease in Model)
-        {
 
-            <tr>
-                @{
-                    var rentDays = (lease.EndDate - lease.StartDate).Days;
-                    var totalPrice = rentDays * (int)lease.RobotLeases.Sum(r => r.Robot.PricePerDay);
-                }
+            @foreach (var lease in Model)
+            {
 
-                <td>#@lease.LeaseId</td>
-                <td>
-                    @foreach (var robot in lease.RobotLeases.Select(x => x.Robot))
-                    {
-                        <p>Company: @robot.Company.Name</p>
-                        <p>Model: @robot.RobotModel.Name</p>
-                        <p>Price: @robot.PricePerDay</p>
+                <tr>
+                    @{
+                        var rentDays = (lease.EndDate - lease.StartDate).Days;
+                        var totalPrice = rentDays * (int)lease.RobotLeases.Sum(r => r.Robot.PricePerDay);
                     }
-                </td>
-                <td>@lease.StartDate.ToShortDateString()</td>
-                <td>@lease.EndDate.ToShortDateString()</td>
-                <td>@lease.Feedback</td>
-                <td>@lease.Rating.ToString()</td>
-                <td>@totalPrice</td>
-                <td>
-                    <a href="@Url.Action("LeaseDetails", new {leaseId = lease.LeaseId})" class="compact ui button">
-                        Details
-                    </a>
-                </td>
-            </tr>
-        }
+
+                    <td>#@lease.LeaseId</td>
+                    <td>
+                        @foreach (var robot in lease.RobotLeases.Select(x => x.Robot))
+                        {
+                            <p>Company: @robot.Company.Name</p>
+                            <p>Model: @robot.RobotModel.Name</p>
+                            <p>Price: @robot.PricePerDay</p>
+                        }
+                    </td>
+                    <td>@lease.StartDate.ToShortDateString()</td>
+                    <td>@lease.EndDate.ToShortDateString()</td>
+                    <td>@lease.Feedback</td>
+                    <td>@lease.Rating.ToString()</td>
+                    <td>@totalPrice</td>
+                    <td>
+                        <a href="@Url.Action("LeaseDetails", new {leaseId = lease.LeaseId})" class="compact ui button">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#MyLeasesNavTab").addClass('active');
+        });
+    </script>
+}

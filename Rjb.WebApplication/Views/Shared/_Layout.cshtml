@@ -12,41 +12,43 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <span class="navbar-brand">Robot Job Finder</span>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (CurrentUser.User == null)
-                    {
-                        <li class="pull-right">@Html.ActionLink("Login", "Login", "Users")</li>
-                    }
-                    else
-                    {
-                        if (CurrentUser.User.IsClient)
-                        {
-                            <li>@Html.ActionLink("Search for robots", "AddLease", "Leases")</li>
-                            <li>@Html.ActionLink("My Leases", "MyLeases", "Leases")</li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("My robots", "CompanyRobots", "Robots")</li>
-                            <li>@Html.ActionLink("Add robot", "AddRobot", "Robots")</li>
-                            <li>@Html.ActionLink("Add robot model", "AddRobotModel", "Robots")</li>
-                        }
+    <div class="ui secondary pointing menu">
+        @if (CurrentUser.User == null)
+        {
+            <a id="LoginNavTab" href="@Url.Action("Login", "Users")" class="item">
+                Login
+            </a>
+        }
+        else
+        {
+            if (CurrentUser.User.IsClient)
+            {
+                <a id="AddLeaseNavTab" href="@Url.Action("AddLease", "Leases")" class="item">
+                    Search for robots
+                </a>
+                <a id="MyLeasesNavTab" href="@Url.Action("MyLeases", "Leases")" class="item">
+                    My Leases
+                </a>
+            }
+            else
+            {
+                <a id="MyRobotsNavTab" href="@Url.Action("CompanyRobots", "Robots")" class="item">
+                    My Robots
+                </a>
+                <a id="AddRobotNavTab" href="@Url.Action("AddRobot", "Robots")" class="item">
+                    Add Robot
+                </a>
+                <a id="AddRobotModelNavTab" href="@Url.Action("AddRobotModel", "Robots")" class="item">
+                    Add Robot Model
+                </a>
+            }
 
-                        <li class="pull-right">@Html.ActionLink("Log off", "Login", "Users")</li>
-                    }
-                </ul>
+            <div class="right menu">
+                <a href="@Url.Action("Login", "Users")" class="ui item">
+                    Logout
+                </a>
             </div>
-        </div>
+        }
     </div>
     <div class="container body-content">
         @RenderBody()

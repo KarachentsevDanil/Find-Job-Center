@@ -4,11 +4,11 @@
 @{
     ViewBag.Title = "Lease detils";
 }
-<div class="row" style="margin-top: 55px;">
-    
+<div class="row">
+
     <h2>Lease #@(Model.LeaseId) detils</h2>
     <div class="form-horizontal">
-    
+
         <div class="form-group">
             <label class="col-md-2 col-md-offset-2 control-label">Robots</label>
             <div class="col-md-6 ">
@@ -54,9 +54,18 @@
         {
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-4">
-                    <a href="@Url.Action("EditLease", new { leaseId = Model.LeaseId })" class="form-control btn btn-default">Complete lease</a>
+                    <a href="@Url.Action("EditLease", new { leaseId = Model.LeaseId })" class="ui blue button">Complete lease</a>
                 </div>
             </div>
         }
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#MyLeasesNavTab").addClass('active');
+        });
+    </script>
+}

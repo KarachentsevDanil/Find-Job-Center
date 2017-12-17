@@ -9,7 +9,6 @@ using RJF.WebService.Attributes;
 
 namespace RJF.WebService.Controllers.Api
 {
-    [BasicAuthentication(false)]
     public class RobotController : ApiController
     {
         private readonly IRobotService _robotService;
@@ -22,6 +21,7 @@ namespace RJF.WebService.Controllers.Api
         }
 
         [HttpPost]
+        [BasicAuthentication(false)]
         public HttpResponseMessage AddRobot([FromBody] RobotViewModel robot)
         {
             try
@@ -36,6 +36,7 @@ namespace RJF.WebService.Controllers.Api
         }
 
         [HttpPost]
+        [BasicAuthentication(false)]
         public HttpResponseMessage AddRobotModel([FromBody] RobotModel robotModel)
         {
             try
@@ -49,6 +50,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
+        [BasicAuthentication(false)]
         public HttpResponseMessage GetRobotsModel()
         {
             try
@@ -63,6 +65,7 @@ namespace RJF.WebService.Controllers.Api
         }
 
         [HttpPost]
+        [BasicAuthentication(true)]
         public HttpResponseMessage GetRobotsOnSpecificDateRange([FromBody] SearchRobotModel model)
         {
             try
@@ -75,7 +78,8 @@ namespace RJF.WebService.Controllers.Api
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-        
+
+        [BasicAuthentication(false)]
         public HttpResponseMessage GetRobotsBySpecialization(string name)
         {
             try
@@ -89,12 +93,12 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
+        [BasicAuthentication(false)]
         public HttpResponseMessage GetRobotsByOfCompany(int companyId)
         {
             try
             {
-                int totalCount;
-                var robots = _robotService.GetRobotsOfCompany(companyId, out totalCount);
+                var robots = _robotService.GetRobotsOfCompany(companyId, out var totalCount);
                 var result = new CollectionResult<Robot>
                 {
                     Collection = robots,
@@ -109,6 +113,7 @@ namespace RJF.WebService.Controllers.Api
             }
         }
 
+        [BasicAuthentication(false)]
         public HttpResponseMessage GetRobotById(int robotId)
         {
             try

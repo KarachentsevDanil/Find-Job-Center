@@ -5,11 +5,10 @@
     ViewBag.Title = "Complete lease";
 }
 
-<h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("CompleateLease", "Leases", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 15px;">
+    <div class="col-sm-6 col-sm-offset-3">
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="column" style="margin-top: 5px;">
             <div class="ui raised segment">
@@ -52,4 +51,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#MyLeasesNavTab").addClass('active');
+        });
+    </script>
 }
