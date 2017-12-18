@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Add Specialization";
+}
+
+@using (Html.BeginForm("AddSpecialization", "Robots", FormMethod.Post, new { role = "form" }))
+{
+
+    <div class="col-sm-6 col-sm-offset-3">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="column" style="margin-top: 5px;">
+            <div class="ui raised segment">
+                <div class="ui blue right ribbon label">
+                    <i class="registered icon"></i> Create Specialization
+                </div>
+                <h3 style="margin-top: -20px;">Create a new specialization</h3>
+
+                <div class="ui form">
+                    <div class="field">
+                        <label>Name</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="Name" id="Name" placeholder="Specialization Name" required>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="margin-left-center">
+                        <button type="submit" class="ui blue submit button">Create Specialization</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $("#AddSpecializationNavTab").addClass('active');
+        });
+    </script>
+}

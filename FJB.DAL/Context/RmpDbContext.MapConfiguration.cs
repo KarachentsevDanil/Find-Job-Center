@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using FJB.Domain.Entities.Leases;
 using FJB.Domain.Entities.Robots;
 using FJB.Domain.Entities.Specializations;

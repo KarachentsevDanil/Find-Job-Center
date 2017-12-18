@@ -13,11 +13,9 @@ namespace FJB.Domain.Entities.Leases
         public int LeaseId { get; set; }
         
         public int ClientId { get; set; }
-
-        [Display(Name = "Lease_StartDate", ResourceType = typeof(Resourses.Entities))]
+        
         public DateTime StartDate { get; set; }
-
-        [Display(Name = "Lease_EndDate", ResourceType = typeof(Resourses.Entities))]
+        
         public DateTime EndDate { get; set; }
 
         public string Feedback { get; set; }

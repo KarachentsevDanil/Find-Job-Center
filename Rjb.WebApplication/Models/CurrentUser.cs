@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using HttpClientExtenctions.Helpers;
 using Newtonsoft.Json;
 using RJB.BLL.Models;
 
@@ -8,7 +7,7 @@ namespace Rjb.WebApplication.Models
 {
     public static class CurrentUser
     {
-        private static string CookiePathName = "userInfo";
+        private const string CookiePathName = "userInfo";
 
         public static CurrentUserViewModel User
         {

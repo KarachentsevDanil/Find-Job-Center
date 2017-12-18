@@ -375,6 +375,7 @@
     <Content Include="Views\Robots\_Robots.cshtml" />
     <Content Include="Views\Robots\RobotDetails.cshtml" />
     <Content Include="Views\Robots\_RobotLeases.cshtml" />
+    <Content Include="Views\Robots\AddSpecialization.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

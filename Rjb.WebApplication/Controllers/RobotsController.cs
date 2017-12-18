@@ -23,6 +23,11 @@ namespace Rjb.WebApplication.Controllers
             return View(robotModel);
         }
 
+        public ActionResult AddSpecialization()
+        {
+            return View();
+        }
+
         public ActionResult AddRobotModel()
         {
             var specializations = SpecializationClientService.GetAllSpecializations();
@@ -60,6 +65,20 @@ namespace Rjb.WebApplication.Controllers
             }
 
             return RedirectToAction("CompanyRobots", "Robots");
+        }
+
+        [HttpPost]
+        public ActionResult AddSpecialization(Specialization specialization)
+        {
+            var isSuccess = SpecializationClientService.AddSpecialization(specialization);
+
+            if (!isSuccess)
+            {
+                ModelState.AddModelError("AddSpecialization", "Add specialization failed.");
+                return View("AddSpecialization", specialization);
+            }
+
+            return RedirectToAction("AddRobotModel", "Robots");
         }
 
         [HttpPost]
