@@ -13,10 +13,6 @@ namespace FJB.Domain.Entities.Specializations
         [Required]
         public string Name { get; set; }
 
-        public int? ParentSpecializationId { get; set; }
-
-        public virtual Specialization ParentSpecialization { get; set; }
-
-        public ICollection<Specialization> SubSpecializations { get; set; }
+        public ICollection<RobotModelSpecialization> RobotModelSpecializations { get; set; }
     }
 }

@@ -1,130 +1,66 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using FJB.Domain.Entities.Robots;
 using RJB.BLL.Models;
+using RJB.BLL.Robots;
 using RJB.BLL.Robots.Contracts;
 using RJF.WebService.Attributes;
 
 namespace RJF.WebService.Controllers.Api
 {
+
+    [BasicAuthentication(false)]
     public class RobotController : ApiController
     {
         private readonly IRobotService _robotService;
         private readonly IRobotModelService _robotModelService;
 
-        public RobotController(IRobotService robotService, IRobotModelService robotModelService)
+        public RobotController()
         {
-            _robotService = robotService;
-            _robotModelService = robotModelService;
+            _robotService = new RobotService();
+            _robotModelService = new RobotModelService();
         }
 
         [HttpPost]
-        [BasicAuthentication(false)]
-        public HttpResponseMessage AddRobot([FromBody] RobotViewModel robot)
+        public void AddRobot([FromBody] RobotViewModel robot)
         {
-            try
-            {
-                _robotService.AddRobots(robot, robot.Count);
-                return Request.CreateResponse(HttpStatusCode.Created);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            _robotService.AddRobots(robot, robot.Count);
         }
 
         [HttpPost]
-        [BasicAuthentication(false)]
-        public HttpResponseMessage AddRobotModel([FromBody] RobotModel robotModel)
+        public void AddRobotModel([FromBody] RobotModel robotModel)
         {
-            try
+            _robotModelService.AddRobotModel(robotModel);
+        }
+
+        public List<RobotModel> GetRobotsModel()
+        {
+            return _robotModelService.GetRobotModels();
+        }
+
+        public List<Robot> GetRobotsByOfCompany(int companyId)
+        {
+            var robots = _robotService.GetRobotsOfCompany(companyId);
+            return robots;
+        }
+
+        public List<Robot> GetRobots()
+        {
+            var robots = _robotService.GetRobots();
+            return robots;
+        }
+
+        public void UpdateRobotsStatus(List<Robot> robots)
+        {
+            foreach (var robot in robots)
             {
-                _robotModelService.AddRobotModel(robotModel);
-                return Request.CreateResponse(HttpStatusCode.Created);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                _robotService.UpdateRobot(robot);
             }
         }
 
-        [BasicAuthentication(false)]
-        public HttpResponseMessage GetRobotsModel()
+        public Robot GetRobotById(int robotId)
         {
-            try
-            {
-                var robots = _robotModelService.GetRobotModels();
-                return Request.CreateResponse(HttpStatusCode.Created, robots);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [HttpPost]
-        [BasicAuthentication(true)]
-        public HttpResponseMessage GetRobotsOnSpecificDateRange([FromBody] SearchRobotModel model)
-        {
-            try
-            {
-                var robots = _robotService.GetAllAvailableRobots(model.StartDate, model.EndDate, model.SpecializationId);
-                return Request.CreateResponse(HttpStatusCode.Created, robots);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [BasicAuthentication(false)]
-        public HttpResponseMessage GetRobotsBySpecialization(string name)
-        {
-            try
-            {
-                var robots = _robotService.GetRobotsBySpecializationName(name);
-                return Request.CreateResponse(HttpStatusCode.OK, robots);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [BasicAuthentication(false)]
-        public HttpResponseMessage GetRobotsByOfCompany(int companyId)
-        {
-            try
-            {
-                var robots = _robotService.GetRobotsOfCompany(companyId, out var totalCount);
-                var result = new CollectionResult<Robot>
-                {
-                    Collection = robots,
-                    TotalCount = totalCount
-                };
-
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [BasicAuthentication(false)]
-        public HttpResponseMessage GetRobotById(int robotId)
-        {
-            try
-            {
-                var robot = _robotService.GetRobotById(robotId);
-                return Request.CreateResponse(HttpStatusCode.OK, robot);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            return _robotService.GetRobotById(robotId);
         }
     }
 }

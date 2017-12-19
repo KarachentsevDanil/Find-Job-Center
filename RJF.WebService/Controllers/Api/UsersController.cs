@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using FJB.Domain.Entities.Users;
 using RJB.BLL.Models;
+using RJB.BLL.Users;
 using RJB.BLL.Users.Contracts;
 
 namespace RJF.WebService.Controllers.Api
@@ -13,105 +12,77 @@ namespace RJF.WebService.Controllers.Api
         private readonly IClientService _clientService;
         private readonly ICompanyService _companyService;
 
-        public UsersController(IClientService clientService, ICompanyService companyService)
+        public UsersController()
         {
-            _clientService = clientService;
-            _companyService = companyService;
+            _clientService = new ClientService();
+            _companyService = new CompanyService();
         }
 
         [HttpPost]
-        public HttpResponseMessage ClientLogin([FromBody] UserLoginModel loginModel)
+        public CurrentUserViewModel ClientLogin([FromBody] UserLoginModel loginModel)
         {
-            try
-            {
-                var client = _clientService.GetClientByUsername(loginModel.UserName);
+            var client = _clientService.GetClientByUsername(loginModel.UserName);
 
-                if (loginModel.Password == client.Password)
+            if (client != null && loginModel.Password == client.Password)
+            {
+                var user = new CurrentUserViewModel
                 {
-                    var user = new CurrentUserViewModel
-                    {
-                        Name = client.Username,
-                        IsClient = true,
-                        Role = client.Role,
-                        UserId = client.ClientId,
-                        Password = client.Password
-                    };
+                    Name = client.Username,
+                    IsClient = true,
+                    Role = client.Role,
+                    UserId = client.ClientId,
+                    Password = client.Password
+                };
 
-                    return Request.CreateResponse(HttpStatusCode.OK, user);
-                }
+                return user;
+            }
 
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            throw new Exception("User does not exists or password is incorrect.");
         }
 
         [HttpPost]
-        public HttpResponseMessage RegisterClient([FromBody] Client client)
+        public void RegisterClient([FromBody] Client client)
         {
-            try
+            if (!_clientService.IsClientExist(client))
             {
-                if (!_clientService.IsClientExist(client))
-                {
-                    _clientService.AddClient(client);
-                    return Request.CreateResponse(HttpStatusCode.Created);
-                }
+                _clientService.AddClient(client);
+                return;
+            }
 
-                return Request.CreateResponse(HttpStatusCode.Conflict);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            throw new Exception("User already exists.");
         }
 
         [HttpPost]
-        public HttpResponseMessage CompanyLogin([FromBody] UserLoginModel loginModel)
+        public CurrentUserViewModel CompanyLogin([FromBody] UserLoginModel loginModel)
         {
-            try
-            {
-                var company = _companyService.GetCompanyByNameOrEmail(loginModel.UserName);
+            var company = _companyService.GetCompanyByNameOrEmail(loginModel.UserName);
 
-                if (loginModel.Password == company.Password)
+            if (company != null && loginModel.Password == company.Password)
+            {
+                var user = new CurrentUserViewModel
                 {
-                    var user = new CurrentUserViewModel
-                    {
-                        Name = company.Email,
-                        IsClient = false,
-                        UserId = company.CompanyId,
-                        Password = company.Password
-                    };
+                    Name = company.Email,
+                    IsClient = false,
+                    UserId = company.CompanyId,
+                    Password = company.Password
+                };
 
-                    return Request.CreateResponse(HttpStatusCode.OK, user);
-                }
+                return user;
+            }
 
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            throw new Exception("Company does not exists or password is incorrect.");
         }
 
         [HttpPost]
-        public HttpResponseMessage RegisterCompany([FromBody] Company company)
+        public void RegisterCompany([FromBody] Company company)
         {
-            try
+            if (!_companyService.IsCompanyExist(company))
             {
-                if (!_companyService.IsCompanyExist(company))
-                {
-                    _companyService.AddCompany(company);
-                    return Request.CreateResponse(HttpStatusCode.Created);
-                }
+                _companyService.AddCompany(company);
+                return;
+            }
 
-                return Request.CreateResponse(HttpStatusCode.Conflict);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            throw new Exception("Company already exists.");
         }
     }
 }

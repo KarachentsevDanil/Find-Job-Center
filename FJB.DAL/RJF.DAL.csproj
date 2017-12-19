@@ -53,21 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\RjbDbContext.cs" />
-    <Compile Include="Context\RjbDbInitializer.cs" />
-    <Compile Include="Context\RmpDbContext.MapConfiguration.cs" />
+    <Compile Include="Context\RobotJobFinderDbContext.cs" />
+    <Compile Include="Context\RobotJobFinderDbInitializer.cs" />
+    <Compile Include="Context\RobotJobFinderDbContext.MapConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IItemRepository.cs" />
-    <Compile Include="Repositories\IRepositoryBase.cs" />
     <Compile Include="Repositories\Leases\Contracts\ILeaseRepository.cs" />
     <Compile Include="Repositories\Leases\LeaseRepository.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\IRjbRepository.cs" />
-    <Compile Include="Repositories\RjbRepository.cs" />
-    <Compile Include="Repositories\Robots\Contracts\IRobotModelFeedbackRepository.cs" />
     <Compile Include="Repositories\Robots\Contracts\IRobotModelRepository.cs" />
     <Compile Include="Repositories\Robots\Contracts\IRobotRepository.cs" />
-    <Compile Include="Repositories\Robots\RobotModelFeedbackRepository.cs" />
     <Compile Include="Repositories\Robots\RobotModelRepository.cs" />
     <Compile Include="Repositories\Robots\RobotRepository.cs" />
     <Compile Include="Repositories\Specializations\Contracts\ISpecializationRepository.cs" />
@@ -76,10 +69,6 @@
     <Compile Include="Repositories\Users\CompanyRepository.cs" />
     <Compile Include="Repositories\Users\Contracts\IClientRepository.cs" />
     <Compile Include="Repositories\Users\Contracts\ICompanyRepository.cs" />
-    <Compile Include="UnitOfWork\Contracts\IRjbUnitOfWorkBase.cs" />
-    <Compile Include="UnitOfWork\Contracts\IUnitOfWorkBase.cs" />
-    <Compile Include="UnitOfWork\RjbUnitOfWorkBase.cs" />
-    <Compile Include="UnitOfWork\UnitOfWorkBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

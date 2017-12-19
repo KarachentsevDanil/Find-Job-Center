@@ -7,17 +7,7 @@ namespace RJB.BLL.Specializations.Contracts
     {
         void AddSpecialization(string name);
 
-        void AddSubSpecialization(int parentId, string name);
-
-        IEnumerable<Specialization> GetSpecializationsByName(string name);
-
-        Specialization GetSpecializationById(int id);
-
-        IEnumerable<Specialization> GetChildSpecializationsByParentId(int id);
-
-        IEnumerable<Specialization> GetSpecializationsByIds(int[] ids);
-
-        IEnumerable<Specialization> GetRootSpecializations();
+        List<Specialization> GetRobotSpecializations();
 
     }
 }

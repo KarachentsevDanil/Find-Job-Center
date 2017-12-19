@@ -1,43 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Linq.Expressions;
 using FJB.DAL.Context;
 using FJB.DAL.Repositories.Users.Contracts;
-using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Users;
 
 namespace FJB.DAL.Repositories.Users
 {
-    public class CompanyRepository : RjbRepository<Company>, ICompanyRepository
+    public class CompanyRepository : ICompanyRepository
     {
-        private RjbDbContext _dbContext;
+        private readonly RobotJobFinderDbContext _dbContext;
 
-        public CompanyRepository(RjbDbContext dbContext) : base(dbContext)
+        public CompanyRepository()
         {
-            _dbContext = dbContext;
+            _dbContext = new RobotJobFinderDbContext();
         }
 
-        public IEnumerable<Company> GetItemsByExpression(FilterParams<Company> filterParams)
+        public void AddCompany(Company company)
         {
-            return _dbContext.Companies.Where(filterParams.Expression).AsEnumerable();
+            _dbContext.Companies.Add(company);
+            _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Company> GetItemsByExpression(FilterParams<Company> filterParams, out int totalCount)
+        public Company GetCompanyByNameOrEmail(string name)
         {
-            var companies = _dbContext.Companies.Where(filterParams.Expression);
-            totalCount = companies.Count();
-
-            return companies
-                .OrderByDescending(x => x.CompanyId)
-                .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
-                .Take(filterParams.PageSize)
-                .ToList();
+          return  _dbContext.Companies.FirstOrDefault(x => x.Name == name || x.Email == name);
         }
 
-        public Company GetItemByExpression(Expression<Func<Company, bool>> expression)
+        public bool IsCompanyExist(Company company)
         {
-            return _dbContext.Companies.FirstOrDefault(expression);
+            return _dbContext.Companies.Any(x => x.Email == company.Email);
+        }
+
+        public void UpdateCompany(Company company)
+        {
+            _dbContext.Companies.AddOrUpdate(company);
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Rjb.WebApplication.Controllers
     {
         public ActionResult AddLease()
         {
-            var specializations = SpecializationClientService.GetAllSpecializations();
+            var specializations = HttpSpecializationService.GetAllSpecializations();
             var leaseModel = new LeaseViewModel
             {
                 Specializations = specializations
@@ -26,24 +26,20 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult EditLease(int leaseId)
         {
-            var lease = new LeaseViewModel()
-            {
-                LeaseId = leaseId
-            };
-
+            var lease = HttpLeaseService.GetLeaseDetails(leaseId);
             return View(lease);
         }
 
         public ActionResult MyLeases()
         {
-            var customerLease = LeaseClientService.GetLeaseOfClient(CurrentUser.User.UserId);
+            var customerLease = HttpLeaseService.GetLeaseOfClient(CurrentUser.User.UserId);
 
-            return View("ClientLeases", customerLease.Collection);
+            return View("ClientLeases", customerLease);
         }
 
         public ActionResult LeaseDetails(int leaseId)
         {
-            var customerLease = LeaseClientService.GetLeaseDetails(leaseId);
+            var customerLease = HttpLeaseService.GetLeaseDetails(leaseId);
             var rentDays = (customerLease.EndDate - customerLease.StartDate).Days;
             customerLease.TotalPrice = rentDays * (int)customerLease.RobotLeases.Sum(r => r.Robot.PricePerDay);
 
@@ -66,12 +62,12 @@ namespace Rjb.WebApplication.Controllers
                 RobotId = x
             }));
 
-            var isSuccess = LeaseClientService.CreateLease(lease);
+            var isSuccess = HttpLeaseService.CreateLease(lease);
 
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddLease", "Add lease failed.");
-                var specializations = SpecializationClientService.GetAllSpecializations();
+                var specializations = HttpSpecializationService.GetAllSpecializations();
                 leaseModel.Specializations = specializations;
 
                 return View("AddLease", leaseModel);
@@ -81,9 +77,9 @@ namespace Rjb.WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult CompleateLease(LeaseViewModel lease)
+        public ActionResult CompleateLease(Lease lease)
         {
-            var isSuccess = LeaseClientService.CompleateLease(lease);
+            var isSuccess = HttpLeaseService.CompleateLease(lease);
 
             if (!isSuccess)
             {

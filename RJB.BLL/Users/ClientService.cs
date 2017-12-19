@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using FJB.DAL.UnitOfWork.Contracts;
+﻿using FJB.DAL.Repositories.Users;
+using FJB.DAL.Repositories.Users.Contracts;
 using FJB.Domain.Entities.Users;
 using RJB.BLL.Users.Contracts;
 
@@ -7,33 +7,31 @@ namespace RJB.BLL.Users
 {
     public class ClientService : IClientService
     {
-        private readonly IRjbUnitOfWorkBase _unitOfWork;
+        private readonly IClientRepository _clientRepository;
 
-        public ClientService(IRjbUnitOfWorkBase unitOfWork)
+        public ClientService()
         {
-            _unitOfWork = unitOfWork;
+            _clientRepository = new ClientRepository();
         }
 
         public void AddClient(Client client)
         {
-            _unitOfWork.Clients.Add(client);
-            _unitOfWork.Commit();
+            _clientRepository.AddClient(client);
         }
 
         public void UpdateClient(Client client)
         {
-            _unitOfWork.Clients.Update(client);
-            _unitOfWork.Commit();
+            _clientRepository.UpdateClient(client);
         }
 
         public bool IsClientExist(Client client)
         {
-            return _unitOfWork.Clients.GetAll().Any(x => x.Username == client.Username);
+            return _clientRepository.IsClientExist(client.Username);
         }
 
         public Client GetClientByUsername(string username)
         {
-            return _unitOfWork.Clients.GetItemByExpression(x => x.Username == username);
+            return _clientRepository.GetClientByUsername(username);
         }
     }
 }

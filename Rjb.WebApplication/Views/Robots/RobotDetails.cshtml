@@ -42,7 +42,7 @@
     </div>
 
     <div class="row">
-        @if (Model.RobotLeases.Any())
+        @if (Model.RobotLeases != null && Model.RobotLeases.Any())
         {
             @Html.Partial("_RobotLeases", Model)
         }

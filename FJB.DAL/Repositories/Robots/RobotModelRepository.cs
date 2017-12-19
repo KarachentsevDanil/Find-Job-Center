@@ -1,50 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Linq.Expressions;
 using FJB.DAL.Context;
 using FJB.DAL.Repositories.Robots.Contracts;
-using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Robots;
 
 namespace FJB.DAL.Repositories.Robots
 {
-    public class RobotModelRepository : RjbRepository<RobotModel>, IRobotModelRepository
+    public class RobotModelRepository : IRobotModelRepository
     {
-        private readonly RjbDbContext _dbContext;
+        private readonly RobotJobFinderDbContext _dbContext;
 
-        public RobotModelRepository(RjbDbContext dbContext) : base(dbContext)
+        public RobotModelRepository()
         {
-            _dbContext = dbContext;
+            _dbContext = new RobotJobFinderDbContext();
         }
 
-        public IEnumerable<RobotModel> GetItemsByExpression(FilterParams<RobotModel> filterParams)
+        public List<RobotModel> GetRobotModels()
         {
-            return _dbContext.RobotModels.Where(filterParams.Expression).AsEnumerable();
-        }
-
-        public IEnumerable<RobotModel> GetItemsByExpression(FilterParams<RobotModel> filterParams, out int totalCount)
-        {
-            var robots = _dbContext.RobotModels.Where(filterParams.Expression);
-            totalCount = robots.Count();
-
-            return robots
+            return _dbContext.RobotModels
+                .Include(x => x.RobotModelSpecializations.Select(p => p.Specialization))
                 .OrderBy(x => x.Name)
-                .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
-                .Take(filterParams.PageSize)
                 .ToList();
         }
 
-        public RobotModel GetItemByExpression(Expression<Func<RobotModel, bool>> expression)
+        public void AddRobotModel(RobotModel robotModel)
         {
-            return _dbContext.RobotModels.FirstOrDefault(expression);
+            _dbContext.RobotModels.Add(robotModel);
+            _dbContext.SaveChanges();
         }
 
-        public IEnumerable<RobotModel> GetModels()
+        public void UpdateRobotModel(RobotModel robotModel)
         {
-            return _dbContext.RobotModels.Include(x => x.RobotModelSpecializations.Select(p => p.Specialization))
-                .ToList();
+            _dbContext.RobotModels.AddOrUpdate(robotModel);
+            _dbContext.SaveChanges();
         }
     }
 }

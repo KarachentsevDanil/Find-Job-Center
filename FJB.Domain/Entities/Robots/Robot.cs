@@ -32,6 +32,8 @@ namespace FJB.Domain.Entities.Robots
 
         public bool IsDeleted { get; set; }
 
+        public bool? IsOnWork { get; set; }
+
         public virtual Company Company { get; set; }
 
         public virtual RobotModel RobotModel { get; set; }

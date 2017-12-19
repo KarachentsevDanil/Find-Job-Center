@@ -14,7 +14,7 @@ namespace Rjb.WebApplication.Controllers
     {
         public ActionResult AddRobot()
         {
-            var robotModels = RobotClientService.GetRobotsModel();
+            var robotModels = HttpRobotService.GetRobotsModel();
             var robotModel = new RobotViewModel()
             {
                 RobotModels = robotModels
@@ -30,7 +30,7 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult AddRobotModel()
         {
-            var specializations = SpecializationClientService.GetAllSpecializations();
+            var specializations = HttpSpecializationService.GetAllSpecializations();
             var robotModel = new RobotModelViewModel
             {
                 Specializations = specializations
@@ -40,25 +40,25 @@ namespace Rjb.WebApplication.Controllers
 
         public ActionResult CompanyRobots()
         {
-            var robots = RobotClientService.GetRobotsByOfCompany(CurrentUser.User.UserId);
-            return View(robots.Collection);
+            var robots = HttpRobotService.GetRobotsByOfCompany(CurrentUser.User.UserId);
+            return View(robots);
         }
 
         public ActionResult RobotDetails(int robotId)
         {
-            var robot = RobotClientService.GetRobotById(robotId);
+            var robot = HttpRobotService.GetRobotById(robotId);
             return View(robot);
         }
 
         [HttpPost]
         public ActionResult AddRobot(RobotViewModel robot)
         {
-            var isSuccess = RobotClientService.AddRobot(robot);
+            var isSuccess = HttpRobotService.AddRobot(robot);
 
             if (!isSuccess)
             {
                 ModelState.AddModelError("AddRobot", "Add robot failed.");
-                var robotModels = RobotClientService.GetRobotsModel();
+                var robotModels = HttpRobotService.GetRobotsModel();
                 robot.RobotModels = robotModels;
 
                 return View("AddRobot", robot);
@@ -70,7 +70,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddSpecialization(Specialization specialization)
         {
-            var isSuccess = SpecializationClientService.AddSpecialization(specialization);
+            var isSuccess = HttpSpecializationService.AddSpecialization(specialization);
 
             if (!isSuccess)
             {
@@ -93,11 +93,11 @@ namespace Rjb.WebApplication.Controllers
                 }
             };
 
-            var isSuccess = RobotClientService.AddRobotModel(robotModel);
+            var isSuccess = HttpRobotService.AddRobotModel(robotModel);
 
             if (!isSuccess)
             {
-                var specializations = SpecializationClientService.GetAllSpecializations();
+                var specializations = HttpSpecializationService.GetAllSpecializations();
                 robotModel.Specializations = specializations;
 
                 ModelState.AddModelError("AddRobot", "Add robot model failed.");
@@ -108,16 +108,9 @@ namespace Rjb.WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetRobotsBySpecialization(string specialization)
-        {
-            var robots = RobotClientService.GetRobotsBySpecialization(specialization);
-            return PartialView("_Robots", robots);
-        }
-
-        [HttpPost]
         public ActionResult GetRobotsOnSpecificDate(SearchRobotModel searchRobotModel)
         {
-            var robots = RobotClientService.GetRobotsOnSpecificDateRange(searchRobotModel);
+            var robots = HttpRobotService.GetRobotsOnSpecificDateRange(searchRobotModel);
             ViewBag.IsSearchView = true;
 
             return PartialView("_Robots", robots);

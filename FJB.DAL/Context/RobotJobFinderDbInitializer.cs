@@ -4,9 +4,9 @@ using FJB.Domain.Entities.Specializations;
 
 namespace FJB.DAL.Context
 {
-    public class RjbDbInitializer : DropCreateDatabaseIfModelChanges<RjbDbContext>
+    public class RobotJobFinderDbInitializer : DropCreateDatabaseIfModelChanges<RobotJobFinderDbContext>
     {
-        protected override void Seed(RjbDbContext context)
+        protected override void Seed(RobotJobFinderDbContext context)
         {
             IList<Specialization> defaultSpecializations = new List<Specialization>();
 

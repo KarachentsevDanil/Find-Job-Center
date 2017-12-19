@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using FJB.DAL.UnitOfWork.Contracts;
-using FJB.Domain.Entities.Params;
+using FJB.DAL.Repositories.Robots;
+using FJB.DAL.Repositories.Robots.Contracts;
 using FJB.Domain.Entities.Robots;
 using RJB.BLL.Robots.Contracts;
 
@@ -10,11 +9,11 @@ namespace RJB.BLL.Robots
 {
     public class RobotService : IRobotService
     {
-        private readonly IRjbUnitOfWorkBase _unitOfWork;
+        private readonly IRobotRepository _robotRepository;
 
-        public RobotService(IRjbUnitOfWorkBase unitOfWork)
+        public RobotService()
         {
-            _unitOfWork = unitOfWork;
+            _robotRepository = new RobotRepository();
         }
 
         public void AddRobots(Robot robot, int count)
@@ -26,47 +25,32 @@ namespace RJB.BLL.Robots
                 robots.Add(new Robot(robot));
             }
 
-            robots.ForEach(x => _unitOfWork.Robots.Add(x));
-            _unitOfWork.Commit();
+            robots.ForEach(x => _robotRepository.AddRobot(x));
         }
 
         public void UpdateRobot(Robot robot)
         {
-            _unitOfWork.Robots.Update(robot);
-            _unitOfWork.Commit();
+            _robotRepository.UpdateRobot(robot);
         }
 
         public Robot GetRobotById(int robotId)
         {
-            return _unitOfWork.Robots.GetItemByExpression(x => x.RobotId == robotId);
+            return _robotRepository.GetRobotById(robotId);
         }
 
-        public IEnumerable<Robot> GetRobotsBySpecializationIds(int[] specializationIds)
+        public List<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId)
         {
-            var robotFilterParams = new FilterParams<Robot>(x => x.RobotModel.RobotModelSpecializations.Any(s => specializationIds.Contains(s.SpecializationId)));
-            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
+            return _robotRepository.GetAllAvailableRobots(startDate, endDate, specializationId);
         }
 
-        public IEnumerable<Robot> GetRobotsBySpecializationName(string specialization)
+        public List<Robot> GetRobotsOfCompany(int companyId)
         {
-            var robotFilterParams = new FilterParams<Robot>(x => x.RobotModel.RobotModelSpecializations.Any(s => string.Equals(s.Specialization.Name, specialization, StringComparison.CurrentCultureIgnoreCase)));
-            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
+            return _robotRepository.GetRobotsOfCompany(companyId);
         }
 
-        public IEnumerable<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId)
+        public List<Robot> GetRobots()
         {
-            var robotFilterParams = new FilterParams<Robot>(x =>
-                x.RobotModel.RobotModelSpecializations.Any(p=> p.SpecializationId == specializationId) && 
-                !x.RobotLeases.Any(s => s.Lease.StartDate < startDate && s.Lease.StartDate < endDate
-                && s.Lease.EndDate >= startDate && s.Lease.EndDate >= endDate));
-
-            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams);
-        }
-
-        public IEnumerable<Robot> GetRobotsOfCompany(int companyId, out int totalCount)
-        {
-            var robotFilterParams = new FilterParams<Robot>(x => x.CompanyId == companyId);
-            return _unitOfWork.Robots.GetItemsByExpression(robotFilterParams, out totalCount);
+            return _robotRepository.GetAllRobots();
         }
     }
 }

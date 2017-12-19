@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FJB.Domain.Entities.Leases;
+using FJB.Domain.Entities.Robots;
+using RJB.BLL.Leases;
 using RJB.BLL.Leases.Contracts;
 using RJB.BLL.Models;
+using RJB.BLL.Robots;
+using RJB.BLL.Robots.Contracts;
 using RJF.WebService.Attributes;
 
 namespace RJF.WebService.Controllers.Api
@@ -13,76 +18,49 @@ namespace RJF.WebService.Controllers.Api
     public class LeaseController : ApiController
     {
         private readonly ILeaseService _leaseService;
+        private readonly IRobotService _robotService;
 
-        public LeaseController(ILeaseService leaseService)
+        public LeaseController()
         {
-            _leaseService = leaseService;
+            _robotService = new RobotService();
+            _leaseService = new LeaseService();
         }
 
         [HttpPost]
-        public HttpResponseMessage CreateLease([FromBody] Lease lease)
+        public void CreateLease([FromBody] Lease lease)
         {
-            try
-            {
-                _leaseService.AddLease(lease);
-                return Request.CreateResponse(HttpStatusCode.Created);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            _leaseService.AddLease(lease);
         }
 
         [HttpPost]
-        public HttpResponseMessage CompleateLease([FromBody] LeaseViewModel leaseModel)
+        public void CompleateLease([FromBody] Lease leaseModel)
         {
-            try
-            {
-                var lease = _leaseService.GetLeaseDetailById(leaseModel.LeaseId);
-                lease.Feedback = leaseModel.Feedback;
-                lease.Rating = leaseModel.Rating;
-                lease.Status = LeaseStatus.Finished;
-                _leaseService.UpdateLease(lease);
+            var lease = _leaseService.GetLeaseDetailById(leaseModel.LeaseId);
 
-                return Request.CreateResponse(HttpStatusCode.OK);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-        
-        public HttpResponseMessage GetLeaseDetails(int leaseId)
-        {
-            try
-            {
-                var lease = _leaseService.GetLeaseDetailById(leaseId);
-                return Request.CreateResponse(HttpStatusCode.OK, lease);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            lease.Feedback = leaseModel.Feedback;
+            lease.Rating = leaseModel.Rating;
+            lease.Status = LeaseStatus.Finished;
+
+            _leaseService.UpdateLease(lease);
         }
 
-        public HttpResponseMessage GetLeaseOfClient(int clientId)
+        [HttpPost]
+        public List<Robot> GetRobotsOnSpecificDateRange([FromBody] SearchRobotModel model)
         {
-            try
-            {
-                int totalCount;
-                var lease = _leaseService.GetLeasesOfClient(clientId, out totalCount);
-                var result = new CollectionResult<Lease>
-                {
-                    Collection = lease,
-                    TotalCount = totalCount
-                };
+            var robots = _robotService.GetAllAvailableRobots(model.StartDate, model.EndDate, model.SpecializationId);
+            return robots;
+        }
 
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+        public Lease GetLeaseDetails(int leaseId)
+        {
+            var lease = _leaseService.GetLeaseDetailById(leaseId);
+            return lease;
+        }
+
+        public List<Lease> GetLeaseOfClient(int clientId)
+        {
+            var lease = _leaseService.GetLeasesOfClient(clientId);
+            return lease;
         }
     }
 }

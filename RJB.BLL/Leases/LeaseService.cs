@@ -1,42 +1,38 @@
 ﻿using System.Collections.Generic;
-using FJB.DAL.UnitOfWork.Contracts;
+using FJB.DAL.Repositories.Leases;
+using FJB.DAL.Repositories.Leases.Contracts;
 using FJB.Domain.Entities.Leases;
-using FJB.Domain.Entities.Params;
 using RJB.BLL.Leases.Contracts;
 
 namespace RJB.BLL.Leases
 {
     public class LeaseService : ILeaseService
     {
-        private readonly IRjbUnitOfWorkBase _unitOfWork;
+        private readonly ILeaseRepository _leaseRepository;
 
-        public LeaseService(IRjbUnitOfWorkBase unitOfWork)
+        public LeaseService()
         {
-            _unitOfWork = unitOfWork;
+            _leaseRepository = new LeaseRepository();
         }
 
-        public int AddLease(Lease lease)
+        public void AddLease(Lease lease)
         {
-            _unitOfWork.Leases.Add(lease);
-            _unitOfWork.Commit();
-            return lease.LeaseId;
+            _leaseRepository.AddLease(lease);
         }
 
         public Lease GetLeaseDetailById(int leaseId)
         {
-            return _unitOfWork.Leases.GetItemByExpression(x => x.LeaseId == leaseId);
+            return _leaseRepository.GetLeaseById(leaseId);
         }
 
-        public IEnumerable<Lease> GetLeasesOfClient(int clientId, out int totalCount)
+        public List<Lease> GetLeasesOfClient(int clientId)
         {
-            var leaseFilterParams = new FilterParams<Lease>(x => x.ClientId == clientId);
-            return _unitOfWork.Leases.GetItemsByExpression(leaseFilterParams, out totalCount);
+            return _leaseRepository.GetLeasesOfClient(clientId);
         }
 
         public void UpdateLease(Lease lease)
         {
-            _unitOfWork.Leases.Update(lease);
-            _unitOfWork.Commit();
+            _leaseRepository.UpdateLease(lease);
         }
     }
 }

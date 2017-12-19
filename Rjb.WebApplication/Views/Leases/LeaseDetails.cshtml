@@ -13,11 +13,14 @@
             <label class="col-md-2 col-md-offset-2 control-label">Robots</label>
             <div class="col-md-6 ">
                 <div class="form-control-static">
-                    @foreach (var robot in Model.RobotLeases.Select(x => x.Robot))
+                    @if (Model.RobotLeases != null && Model.RobotLeases.Any())
                     {
-                        <p>Company: @robot.Company.Name</p>
-                        <p>Model: @robot.RobotModel.Name</p>
-                        <p>Price: @robot.PricePerDay</p>
+                        foreach (var robot in Model.RobotLeases.Select(x => x.Robot))
+                        {
+                            <p>Company: @robot.Company.Name</p>
+                            <p>Model: @robot.RobotModel.Name</p>
+                            <p>Price: @robot.PricePerDay</p>
+                        }
                     }
                 </div>
             </div>

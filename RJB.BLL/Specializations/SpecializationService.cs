@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FJB.DAL.UnitOfWork.Contracts;
-using FJB.Domain.Entities.Params;
+﻿using System.Collections.Generic;
+using FJB.DAL.Repositories.Specializations;
+using FJB.DAL.Repositories.Specializations.Contracts;
 using FJB.Domain.Entities.Specializations;
 using RJB.BLL.Specializations.Contracts;
 
@@ -10,52 +8,22 @@ namespace RJB.BLL.Specializations
 {
     public class SpecializationService : ISpecializationService
     {
-        private readonly IRjbUnitOfWorkBase _unitOfWork;
+        private readonly ISpecializationRepository _specializationRepository;
 
-        public SpecializationService(IRjbUnitOfWorkBase unitOfWork)
+        public SpecializationService()
         {
-            _unitOfWork = unitOfWork;
+            _specializationRepository = new SpecializationRepository();
         }
 
         public void AddSpecialization(string name)
         {
-            _unitOfWork.Specializations.Add(new Specialization { Name = name });
-            _unitOfWork.Commit();
+            _specializationRepository.AddSpecialization(new Specialization { Name = name });
         }
+        
 
-        public void AddSubSpecialization(int parentId, string name)
+        public List<Specialization> GetRobotSpecializations()
         {
-            _unitOfWork.Specializations.Add(new Specialization { Name = name, ParentSpecializationId = parentId});
-            _unitOfWork.Commit();
-        }
-
-        public IEnumerable<Specialization> GetSpecializationsByName(string name)
-        {
-            var filterParams = new FilterParams<Specialization>(x => string.Equals(x.Name, name, StringComparison.CurrentCultureIgnoreCase));
-            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
-        }
-
-        public Specialization GetSpecializationById(int id)
-        {
-            return _unitOfWork.Specializations.GetItemByExpression(x => x.SpecializationId == id);
-        }
-
-        public IEnumerable<Specialization> GetChildSpecializationsByParentId(int id)
-        {
-            var filterParams = new FilterParams<Specialization>(x => x.ParentSpecializationId == id);
-            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
-        }
-
-        public IEnumerable<Specialization> GetSpecializationsByIds(int[] ids)
-        {
-            var filterParams = new FilterParams<Specialization>(x => ids.Contains(x.SpecializationId));
-            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
-        }
-
-        public IEnumerable<Specialization> GetRootSpecializations()
-        {
-            var filterParams = new FilterParams<Specialization>(x => !x.ParentSpecializationId.HasValue);
-            return _unitOfWork.Specializations.GetItemsByExpression(filterParams);
+            return _specializationRepository.GetRobotSpecializations();
         }
     }
 }

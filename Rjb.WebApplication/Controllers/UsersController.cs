@@ -26,11 +26,11 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult LoginClient(UserLoginModel loginModel)
         {
-            var userViewModel = UserClientService.ClientLogin(loginModel);
+            var userViewModel = HttpUserService.ClientLogin(loginModel);
 
             if (userViewModel == null || !ModelState.IsValid)
             {
-                ModelState.AddModelError("Login", "Login failed.");
+                ModelState.AddModelError("Login", "User does not exists or password is incorrect.");
                 return View("Login", loginModel);
             }
 
@@ -42,7 +42,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult RegisterClient(Client client)
         {
-            var isSuccess = UserClientService.RegisterClient(client);
+            var isSuccess = HttpUserService.RegisterClient(client);
 
             if (!isSuccess)
             {
@@ -56,11 +56,11 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult LoginCompany(UserLoginModel loginModel)
         {
-            var userViewModel = UserClientService.CompanyLogin(loginModel);
+            var userViewModel = HttpUserService.CompanyLogin(loginModel);
 
             if (userViewModel == null)
             {
-                ModelState.AddModelError("Login", "Login failed.");
+                ModelState.AddModelError("Login", "Company does not exists or password is incorrect.");
                 return View("Login", loginModel);
             }
 
@@ -72,7 +72,7 @@ namespace Rjb.WebApplication.Controllers
         [HttpPost]
         public ActionResult RegisterCompany(Company company)
         {
-            var isSuccess = UserClientService.RegisterCompany(company);
+            var isSuccess = HttpUserService.RegisterCompany(company);
 
             if (!isSuccess)
             {

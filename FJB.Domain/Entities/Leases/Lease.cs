@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using FJB.Domain.Entities.Robots;
 using FJB.Domain.Entities.Users;
 using Newtonsoft.Json;

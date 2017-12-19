@@ -1,48 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Linq.Expressions;
 using FJB.DAL.Context;
 using FJB.DAL.Repositories.Leases.Contracts;
 using FJB.Domain.Entities.Leases;
-using FJB.Domain.Entities.Params;
 
 namespace FJB.DAL.Repositories.Leases
 {
-    public class LeaseRepository : RjbRepository<Lease>, ILeaseRepository
+    public class LeaseRepository : ILeaseRepository
     {
-        private readonly RjbDbContext _dbContext;
+        private readonly RobotJobFinderDbContext _dbContext;
 
-        public LeaseRepository(RjbDbContext dbContext) : base(dbContext)
+        public LeaseRepository()
         {
-            _dbContext = dbContext;
+            _dbContext = new RobotJobFinderDbContext();
         }
 
-        public IEnumerable<Lease> GetItemsByExpression(FilterParams<Lease> filterParams)
+        public void AddLease(Lease lease)
         {
-            return _dbContext.Lease.Where(filterParams.Expression).AsEnumerable();
+            _dbContext.Lease.Add(lease);
+            _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Lease> GetItemsByExpression(FilterParams<Lease> filterParams, out int totalCount)
+        public Lease GetLeaseById(int leaseId)
         {
-            var items = _dbContext.Lease.Where(filterParams.Expression);
-            totalCount = items.Count();
-
-            return items
-                .Include(x=> x.RobotLeases)
-                .Include(x => x.RobotLeases.Select(p=> p.Robot))
-                .Include(x => x.RobotLeases.Select(p => p.Robot.Company))
-                .Include(x => x.RobotLeases.Select(p => p.Robot.RobotModel))
-                .OrderByDescending(x => x.LeaseId)
-                .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
-                .Take(filterParams.PageSize)
-                .ToList();
+            return _dbContext.Lease.FirstOrDefault(x => x.LeaseId == leaseId);
         }
 
-        public Lease GetItemByExpression(Expression<Func<Lease, bool>> expression)
+        public List<Lease> GetLeasesOfClient(int clientId)
         {
-            return _dbContext.Lease.FirstOrDefault(expression);
+            return _dbContext.Lease.Where(x => x.ClientId == clientId).OrderByDescending(x => x.LeaseId).ToList();
+        }
+
+        public void UpdateLease(Lease lease)
+        {
+            _dbContext.Lease.AddOrUpdate(lease);
+            _dbContext.SaveChanges();
         }
     }
 }

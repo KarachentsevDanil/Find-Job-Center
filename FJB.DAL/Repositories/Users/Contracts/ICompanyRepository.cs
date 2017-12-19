@@ -2,7 +2,11 @@
 
 namespace FJB.DAL.Repositories.Users.Contracts
 {
-    public interface ICompanyRepository : IRjbRepository<Company>, IItemRepository<Company>
+    public interface ICompanyRepository
     {
+        void AddCompany(Company company);
+        Company GetCompanyByNameOrEmail(string name);
+        bool IsCompanyExist(Company company);
+        void UpdateCompany(Company company);
     }
 }

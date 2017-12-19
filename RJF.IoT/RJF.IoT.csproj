@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8463DDFC-096C-4822-B01C-FD4BF272DF05}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HttpClientExtenctions</RootNamespace>
-    <AssemblyName>HttpClientExtenctions</AssemblyName>
+    <ProjectGuid>{0A642401-074C-4749-82BC-32AC397C939C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RJF.IoT</RootNamespace>
+    <AssemblyName>RJF.IoT</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,20 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,32 +43,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Helpers\HttpClientHelper.cs" />
-    <Compile Include="RequestHelpers\HttpLeaseService.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestHelpers\HttpRobotService.cs" />
-    <Compile Include="RequestHelpers\HttpSpecializationService.cs" />
-    <Compile Include="RequestHelpers\HttpUserService.cs" />
+    <Compile Include="Service\RobotService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FJB.DAL\RJF.DAL.csproj">
-      <Project>{289ac48c-b1b3-4336-be04-2ff4568fbbda}</Project>
-      <Name>RJF.DAL</Name>
-    </ProjectReference>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FJB.Domain\RJF.Domain.csproj">
       <Project>{274c4614-8d28-41ca-bdfd-bbdcdb2a83bb}</Project>
       <Name>RJF.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HttpClientExtenctions\HttpClientExtenctions.csproj">
+      <Project>{8463ddfc-096c-4822-b01c-fd4bf272df05}</Project>
+      <Name>HttpClientExtenctions</Name>
     </ProjectReference>
     <ProjectReference Include="..\RJB.BLL\RJF.BLL.csproj">
       <Project>{3d276651-7744-49cc-8e09-e3053f8c0ee9}</Project>
       <Name>RJF.BLL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,9 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using System.Web.Mvc;
 using RJB.BLL.Models;
-using RJB.BLL.Users.Contracts;
+using RJB.BLL.Users;
 
 namespace RJF.WebService.Attributes
 {
@@ -21,7 +20,7 @@ namespace RJF.WebService.Attributes
         public override void OnAuthorization(HttpActionContext filterContext)
         {
             var request = filterContext.Request;
-            var authorizationCredentials = request.Headers.Authorization.Parameter;
+            var authorizationCredentials = request.Headers?.Authorization?.Parameter;
 
             if (!string.IsNullOrEmpty(authorizationCredentials))
             {
@@ -32,7 +31,7 @@ namespace RJF.WebService.Attributes
                 {
                     if (IsUser)
                     {
-                        var clientService = DependencyResolver.Current.GetService(typeof(IClientService)) as IClientService;
+                        var clientService = new ClientService();
                         var client = clientService.GetClientByUsername(parsedCredentials.Name);
 
                         if (client != null && client.Password == parsedCredentials.Password)
@@ -42,17 +41,17 @@ namespace RJF.WebService.Attributes
                     }
                     else
                     {
-                        var companyService = DependencyResolver.Current.GetService(typeof(ICompanyService)) as ICompanyService;
+                        var companyService = new CompanyService();
                         var company = companyService.GetCompanyByNameOrEmail(parsedCredentials.Name);
 
-                        if (company.Password == parsedCredentials.Password)
+                        if (company != null && company.Password == parsedCredentials.Password)
                         {
                             return;
                         }
                     }
                 }
             }
-            
+
             filterContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
         }
     }

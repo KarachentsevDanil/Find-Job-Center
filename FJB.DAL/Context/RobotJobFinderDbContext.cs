@@ -6,18 +6,14 @@ using FJB.Domain.Entities.Users;
 
 namespace FJB.DAL.Context
 {
-    public partial class RjbDbContext : DbContext
+    public partial class RobotJobFinderDbContext : DbContext
     {
-        //TODO Move connection string to app config
-        public RjbDbContext()
+        public RobotJobFinderDbContext()
             : base(@"data source=.\SQLEXPRESS;
-                        initial catalog=RobotJobFinderDb;
+                        initial catalog=RobotJobFinderDataBase;
                         integrated security=True;MultipleActiveResultSets=True;
                         App=EntityFramework")
         {
-            Configuration.ProxyCreationEnabled = false;
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.AutoDetectChangesEnabled = true;
         }
 
         public DbSet<Lease> Lease { get; set; }
@@ -27,8 +23,6 @@ namespace FJB.DAL.Context
         public DbSet<Robot> Robots { get; set; }
 
         public DbSet<RobotModel> RobotModels { get; set; }
-
-        public DbSet<RobotModelFeedback> RobotFeedbacks { get; set; }
 
         public DbSet<RobotModelSpecialization> RobotModelSpecializations { get; set; }
 
@@ -40,7 +34,7 @@ namespace FJB.DAL.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new RjbDbInitializer());
+            Database.SetInitializer(new RobotJobFinderDbInitializer());
 
             base.OnModelCreating(modelBuilder);
 

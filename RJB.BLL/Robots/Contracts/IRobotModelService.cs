@@ -5,7 +5,7 @@ namespace RJB.BLL.Robots.Contracts
 {
     public interface IRobotModelService
     {
-        IEnumerable<RobotModel> GetRobotModels();
+        List<RobotModel> GetRobotModels();
 
         void AddRobotModel(RobotModel robotModel);
 

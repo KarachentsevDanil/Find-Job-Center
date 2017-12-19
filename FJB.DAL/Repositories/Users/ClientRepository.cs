@@ -1,43 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Linq.Expressions;
 using FJB.DAL.Context;
 using FJB.DAL.Repositories.Users.Contracts;
-using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Users;
 
 namespace FJB.DAL.Repositories.Users
 {
-    public class ClientRepository : RjbRepository<Client>, IClientRepository
+    public class ClientRepository : IClientRepository
     {
-        private RjbDbContext _dbContext;
+        private readonly RobotJobFinderDbContext _dbContext;
 
-        public ClientRepository(RjbDbContext dbContext) : base(dbContext)
+        public ClientRepository()
         {
-            _dbContext = dbContext;
+            _dbContext = new RobotJobFinderDbContext();
         }
 
-        public IEnumerable<Client> GetItemsByExpression(FilterParams<Client> filterParams)
+        public void UpdateClient(Client client)
         {
-            return _dbContext.Clients.Where(filterParams.Expression).AsEnumerable();
+            _dbContext.Clients.AddOrUpdate(client);
+            _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Client> GetItemsByExpression(FilterParams<Client> filterParams, out int totalCount)
+        public void AddClient(Client client)
         {
-            var clients = _dbContext.Clients.Where(filterParams.Expression);
-            totalCount = clients.Count();
-
-            return clients
-                .OrderByDescending(x => x.ClientId)
-                .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
-                .Take(filterParams.PageSize)
-                .ToList();
+            _dbContext.Clients.Add(client);
+            _dbContext.SaveChanges();
         }
 
-        public Client GetItemByExpression(Expression<Func<Client, bool>> expression)
+        public Client GetClientByUsername(string username)
         {
-            return _dbContext.Clients.FirstOrDefault(expression);
+            return _dbContext.Clients.FirstOrDefault(x => x.Username == username || x.FullName == username);
+        }
+
+        public bool IsClientExist(string clientUsername)
+        {
+            return _dbContext.Clients.Any(x => x.Username == clientUsername || x.FullName == clientUsername);
         }
     }
 }

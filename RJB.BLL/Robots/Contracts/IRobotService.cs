@@ -12,12 +12,10 @@ namespace RJB.BLL.Robots.Contracts
 
         Robot GetRobotById(int robotId);
 
-        IEnumerable<Robot> GetRobotsBySpecializationIds(int[] specializationIds);
+        List<Robot> GetRobotsOfCompany(int companyId);
 
-        IEnumerable<Robot> GetRobotsBySpecializationName(string specialization);
+        List<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId);
 
-        IEnumerable<Robot> GetRobotsOfCompany(int companyId, out int totalCount);
-
-        IEnumerable<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId);
+        List<Robot> GetRobots();
     }
 }

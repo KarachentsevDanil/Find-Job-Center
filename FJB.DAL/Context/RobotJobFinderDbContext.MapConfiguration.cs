@@ -6,7 +6,7 @@ using FJB.Domain.Entities.Users;
 
 namespace FJB.DAL.Context
 {
-    public partial class RjbDbContext
+    public partial class RobotJobFinderDbContext
     {
         public void MapRobot(DbModelBuilder modelBuilder)
         {
@@ -33,21 +33,8 @@ namespace FJB.DAL.Context
 
             modelBuilder.Entity<RobotModelSpecialization>()
                 .HasRequired(x => x.Specialization)
-                .WithMany()
+                .WithMany(x=> x.RobotModelSpecializations)
                 .HasForeignKey(x => x.SpecializationId);
-
-            modelBuilder.Entity<RobotModelFeedback>()
-                .HasKey(x => x.RobotFeedbackId);
-
-            modelBuilder.Entity<RobotModelFeedback>()
-                .HasRequired(x => x.RobotModel)
-                .WithMany(x => x.RobotModelFeedbacks)
-                .HasForeignKey(x => x.RobotModelId);
-
-            modelBuilder.Entity<RobotModelFeedback>()
-                .HasRequired(x => x.Client)
-                .WithMany()
-                .HasForeignKey(x => x.ClientId);
         }
 
         public void MapLeases(DbModelBuilder modelBuilder)
@@ -78,11 +65,6 @@ namespace FJB.DAL.Context
         {
             modelBuilder.Entity<Specialization>()
                 .HasKey(x => x.SpecializationId);
-
-            modelBuilder.Entity<Specialization>()
-                .HasOptional(x => x.ParentSpecialization)
-                .WithMany(x=> x.SubSpecializations)
-                .HasForeignKey(x=> x.ParentSpecializationId);
         }
 
         public void MapUser(DbModelBuilder modelBuilder)

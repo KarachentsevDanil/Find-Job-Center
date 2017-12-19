@@ -1,6 +1,6 @@
 ﻿@using FJB.Domain.Entities.Robots
 @using Rjb.WebApplication.Models
-@model RJB.BLL.Models.LeaseViewModel
+@model FJB.Domain.Entities.Leases.Lease
 @{
     ViewBag.Title = "Complete lease";
 }
@@ -15,10 +15,31 @@
                 <div class="ui blue right ribbon label">
                     <i class="registered icon"></i>Complete Lease
                 </div>
-                <h3 style="margin-top: -20px;">Complete Lease</h3>
-                
-                <input id="LeaseId" name="LeaseId" value="@Model.LeaseId" type="hidden" />
+                <h3 style="margin-top: -20px;">Complete Lease #@Model.LeaseId</h3>
 
+                <input id="LeaseId" name="LeaseId" value="@Model.LeaseId" type="hidden" />
+                <div class="inline fields margin-bottom-5">
+                    <label>Start Date:</label>
+                    <span>
+                        @Model.StartDate.ToShortDateString()
+                    </span>
+                </div>
+                <div class="inline fields margin-bottom-5">
+                    <label>End Date:</label>
+                    <span>
+                        @Model.EndDate.ToShortDateString()
+                    </span>
+                </div>
+                <div class="inline fields margin-bottom-5">
+                    <label>Total Price:</label>
+                    <span>
+                        @if (Model.RobotLeases != null && Model.RobotLeases.Any())
+                        {
+                            var days = Model.EndDate - Model.StartDate;
+                            @Model.RobotLeases.Sum(x => x.Robot.PricePerDay * days.Days)
+                        }
+                    </span>
+                </div>
                 <div class="ui form">
                     <div class="field">
                         <label>Rating</label>

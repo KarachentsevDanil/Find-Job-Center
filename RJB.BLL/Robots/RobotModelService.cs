@@ -1,38 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FJB.DAL.UnitOfWork.Contracts;
+using FJB.DAL.Repositories.Leases;
+using FJB.DAL.Repositories.Robots;
+using FJB.DAL.Repositories.Robots.Contracts;
 using FJB.Domain.Entities.Robots;
 using RJB.BLL.Robots.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RJB.BLL.Robots
 {
     public class RobotModelService : IRobotModelService
     {
-        private readonly IRjbUnitOfWorkBase _unitOfWork;
+        private readonly IRobotModelRepository _robotModelRepository;
 
-        public RobotModelService(IRjbUnitOfWorkBase unitOfWork)
+        public RobotModelService()
         {
-            _unitOfWork = unitOfWork;
+            _robotModelRepository = new RobotModelRepository();
         }
 
-        public IEnumerable<RobotModel> GetRobotModels()
+        public List<RobotModel> GetRobotModels()
         {
-            return _unitOfWork.RobotModels.GetModels().ToList();
+            return _robotModelRepository.GetRobotModels();
         }
 
         public void AddRobotModel(RobotModel robotModel)
         {
-            _unitOfWork.RobotModels.Add(robotModel);
-            _unitOfWork.Commit();
+            _robotModelRepository.AddRobotModel(robotModel);
         }
 
         public void UpdateRobotModel(RobotModel robotModel)
         {
-            _unitOfWork.RobotModels.Update(robotModel);
-            _unitOfWork.Commit();
+            _robotModelRepository.UpdateRobotModel(robotModel);
         }
     }
 }

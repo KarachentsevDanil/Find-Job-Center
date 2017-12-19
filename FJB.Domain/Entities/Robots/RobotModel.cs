@@ -22,7 +22,5 @@ namespace FJB.Domain.Entities.Robots
         public virtual ICollection<Robot> Robots { get; set; }
 
         public virtual ICollection<RobotModelSpecialization> RobotModelSpecializations { get; set; }
-
-        public virtual ICollection<RobotModelFeedback> RobotModelFeedbacks { get; set; }
     }
 }

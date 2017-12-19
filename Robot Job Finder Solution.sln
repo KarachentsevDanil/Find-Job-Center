@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJF.Domain", "FJB.Domain\RJF.Domain.csproj", "{274C4614-8D28-41CA-BDFD-BBDCDB2A83BB}"
 EndProject
@@ -26,6 +26,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Extensions", "6. Extensions", "{B526A45C-13E5-493A-9D1D-458F72AFDC18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientExtenctions", "HttpClientExtenctions\HttpClientExtenctions.csproj", "{8463DDFC-096C-4822-B01C-FD4BF272DF05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. IoT", "7. IoT", "{5F242088-E9B4-4A64-A5EE-50CEC95F0D4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJF.IoT", "RJF.IoT\RJF.IoT.csproj", "{0A642401-074C-4749-82BC-32AC397C939C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{8463DDFC-096C-4822-B01C-FD4BF272DF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8463DDFC-096C-4822-B01C-FD4BF272DF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8463DDFC-096C-4822-B01C-FD4BF272DF05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A642401-074C-4749-82BC-32AC397C939C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A642401-074C-4749-82BC-32AC397C939C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A642401-074C-4749-82BC-32AC397C939C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A642401-074C-4749-82BC-32AC397C939C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 		{F412EDBD-75F0-44B2-9B4A-3460D6C5EDAF} = {3FCF09C9-48A2-45BD-942F-64398498649B}
 		{91726CDA-D272-45BE-8F78-0029DCB42E87} = {E0FAE28B-CB32-49D3-9CE7-0522FE1214F6}
 		{8463DDFC-096C-4822-B01C-FD4BF272DF05} = {B526A45C-13E5-493A-9D1D-458F72AFDC18}
+		{0A642401-074C-4749-82BC-32AC397C939C} = {5F242088-E9B4-4A64-A5EE-50CEC95F0D4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6D414EEE-9874-4D41-98AE-E4F22A922E71}

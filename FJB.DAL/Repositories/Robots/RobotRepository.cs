@@ -1,58 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Data.Entity;
 using FJB.DAL.Context;
 using FJB.DAL.Repositories.Robots.Contracts;
-using FJB.Domain.Entities.Params;
 using FJB.Domain.Entities.Robots;
 
 namespace FJB.DAL.Repositories.Robots
 {
-    public class RobotRepository : RjbRepository<Robot>, IRobotRepository
+    public class RobotRepository : IRobotRepository
     {
-        private readonly RjbDbContext _dbContext;
+        private readonly RobotJobFinderDbContext _dbContext;
 
-        public RobotRepository(RjbDbContext dbContext) : base(dbContext)
+        public RobotRepository()
         {
-            _dbContext = dbContext;
+            _dbContext = new RobotJobFinderDbContext();
         }
 
-        public IEnumerable<Robot> GetItemsByExpression(FilterParams<Robot> filterParams)
+        public void AddRobot(Robot robot)
+        {
+            _dbContext.Robots.Add(robot);
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateRobot(Robot robot)
+        {
+            _dbContext.Robots.AddOrUpdate(robot);
+            _dbContext.SaveChanges();
+        }
+
+        public List<Robot> GetAllRobots()
+        {
+            return _dbContext.Robots.ToList();
+        }
+
+        public Robot GetRobotById(int robotId)
         {
             return _dbContext.Robots
-                .Include(x => x.RobotModel)
-                .Include(x => x.RobotModel.RobotModelSpecializations)
                 .Include(x => x.RobotModel.RobotModelSpecializations.Select(p => p.Specialization))
-                .Where(filterParams.Expression).ToList();
+                .FirstOrDefault(x => x.RobotId == robotId);
         }
 
-        public IEnumerable<Robot> GetItemsByExpression(FilterParams<Robot> filterParams, out int totalCount)
+        public List<Robot> GetAllAvailableRobots(DateTime startDate, DateTime endDate, int specializationId)
         {
-            var robots = _dbContext.Robots.Where(filterParams.Expression);
-            totalCount = robots.Count();
-
-            return robots
-                .Include(x => x.RobotModel)
-                .Include(x => x.RobotModel.RobotModelSpecializations)
+            return _dbContext.Robots.Where(x =>
+                x.RobotModel.RobotModelSpecializations.Any(p => p.SpecializationId == specializationId) &&
+                !x.RobotLeases.Any(s => s.Lease.StartDate < startDate && s.Lease.StartDate < endDate
+                                        && s.Lease.EndDate >= startDate && s.Lease.EndDate >= endDate))
                 .Include(x => x.RobotModel.RobotModelSpecializations.Select(p => p.Specialization))
-                .OrderByDescending(x => x.RobotId)
-                .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
-                .Take(filterParams.PageSize)
                 .ToList();
         }
 
-        public Robot GetItemByExpression(Expression<Func<Robot, bool>> expression)
+        public List<Robot> GetRobotsOfCompany(int companyId)
         {
             return _dbContext.Robots
-                .Include(x => x.RobotModel)
-                .Include(x => x.RobotModel.RobotModelSpecializations)
                 .Include(x => x.RobotModel.RobotModelSpecializations.Select(p => p.Specialization))
-                .Include(x => x.RobotLeases)
-                .Include(x => x.RobotLeases.Select(p => p.Lease))
-                .Include(x => x.RobotLeases.Select(p => p.Lease.Client))
-                .FirstOrDefault(expression);
+                .Where(x => x.CompanyId == companyId)
+                .OrderByDescending(x => x.RobotId)
+                .ToList();
         }
     }
 }
